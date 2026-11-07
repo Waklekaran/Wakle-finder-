@@ -211,6 +211,86 @@ function calculateMatchScore(lost, found) {
   return Math.round(total);
 }
 
+// DISPLAY POSSIBLE MATCHES
+
+function displayPossibleMatches(reports) {
+  const matchesList = document.getElementById("possibleMatchesList");
+
+  matchesList.innerHTML = "";
+
+  const lostReports = reports.filter(r => r.type === "Lost");
+  const foundReports = reports.filter(r => r.type === "Found");
+
+  const matches = [];
+
+  lostReports.forEach(lost => {
+    foundReports.forEach(found => {
+      const score = calculateMatchScore(lost, found);
+
+      if (score >= 70) {
+        matches.push({
+          lost,
+          found,
+          score
+        });
+      }
+    });
+  });
+
+  matches.sort((a, b) => b.score - a.score);
+
+  if (matches.length === 0) {
+    matchesList.textContent =
+      "No strong possible matches found yet.";
+    return;
+  }
+
+  matches.forEach(match => {
+    const card = document.createElement("div");
+    card.className = "report-card";
+
+    const heading = document.createElement("h3");
+    heading.textContent = "Possible Match";
+
+    const score = document.createElement("h2");
+    score.textContent = match.score + "% Similarity";
+
+    const lostInfo = document.createElement("p");
+    lostInfo.textContent =
+      "Lost: " + match.lost.name +
+      " | Location: " + match.lost.location;
+
+    const foundInfo = document.createElement("p");
+    foundInfo.textContent =
+      "Found: " + match.found.name +
+      " | Location: " + match.found.location;
+
+    const lostButton = document.createElement("button");
+    lostButton.textContent = "View Lost Report";
+    lostButton.addEventListener("click", () => {
+      showReportDetails(match.lost);
+    });
+
+    const foundButton = document.createElement("button");
+    foundButton.textContent = "View Found Report";
+    foundButton.addEventListener("click", () => {
+      showReportDetails(match.found);
+    });
+
+    card.append(
+      heading,
+      score,
+      lostInfo,
+      foundInfo,
+      lostButton,
+      foundButton
+    );
+
+    matchesList.appendChild(card);
+  });
+}
+
+
 
 // Create report card
 function createReportCard(report, index) {
@@ -269,6 +349,7 @@ async function displayReports() {
 
   try {
     const reports = await getOnlineReports();
+    displayPossibleMatches(reports);
 
     lostReportsList.innerHTML = "";
     foundReportsList.innerHTML = "";
