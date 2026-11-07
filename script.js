@@ -298,4 +298,18 @@ searchInput.addEventListener("input", displayReports);
 displayReports();
 
 console.log("Wakle-Finder is running!");
+// Test Supabase Connection
 
+supabaseClient
+  .from("reports")
+  .select("id")
+  .limit(1)
+  .then(({ data, error }) => {
+    if (error) {
+      alert("Connection Error: " + error.message);
+      console.error(error);
+    } else {
+      alert("Supabase Connected Successfully! 🎉");
+      console.log(data);
+    }
+  });
