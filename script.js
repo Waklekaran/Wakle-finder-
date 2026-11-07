@@ -370,7 +370,7 @@ photoPreview.innerHTML = "";
   displayReports();
   showScreen(reportsScreen);
 
-  alert("Report submitted successfully!");
+  
 });
 
 // Instant search
