@@ -65,4 +65,49 @@ button {
 button:hover {
   background: #1045b5;
 }
+/* Wakle-Finder Form Design */
 
+#reportForm {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8faff;
+  border-radius: 15px;
+  border: 1px solid #dbe5f5;
+}
+
+#reportForm h2 {
+  margin-bottom: 22px;
+  color: #155eef;
+}
+
+#itemForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#itemForm label {
+  font-weight: bold;
+  margin-top: 8px;
+  color: #172b4d;
+}
+
+#itemForm input,
+#itemForm select,
+#itemForm textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 9px;
+  font-size: 15px;
+  background: white;
+}
+
+#itemForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#itemForm button {
+  margin-top: 15px;
+}
