@@ -453,6 +453,7 @@ function showReportDetails(report) {
   reportDetails.style.background = "#ffffff";
   reportDetails.style.boxShadow =
     "0 4px 18px rgba(0,0,0,0.10)";
+  
 
   // Item Name
   const title = document.createElement("h2");
