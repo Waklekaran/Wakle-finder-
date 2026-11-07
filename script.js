@@ -258,8 +258,6 @@ if (report.photo) {
   showScreen(detailsScreen);
 }
 
-// Submit report
-itemForm.addEventListener("submit", function(event) {
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
   event.preventDefault();
