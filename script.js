@@ -1,4 +1,4 @@
-
+alert("JavaScript is running!");
 // Wakle-Finder App
 // Supabase Connection
 
