@@ -210,7 +210,33 @@ function calculateMatchScore(lost, found) {
 
   return Math.round(total);
 }
+function getMatchReasons(lost, found) {
+  const reasons = [];
 
+  if (textSimilarity(lost.name, found.name) >= 70) {
+    reasons.push("Item Name");
+  }
+
+  if (textSimilarity(
+    lost.description,
+    found.description
+  ) >= 70) {
+    reasons.push("Description");
+  }
+
+  if (textSimilarity(
+    lost.location,
+    found.location
+  ) >= 70) {
+    reasons.push("Location");
+  }
+
+  if (dateSimilarity(lost.date, found.date) >= 75) {
+    reasons.push("Date");
+  }
+
+  return reasons;
+}
 // DISPLAY POSSIBLE MATCHES
 
 function displayPossibleMatches(reports) {
@@ -254,6 +280,26 @@ function displayPossibleMatches(reports) {
 
     const score = document.createElement("h2");
     score.textContent = match.score + "% Similarity";
+    const reasons = document.createElement("p");
+
+const matchedDetails = getMatchReasons(
+  match.lost,
+  match.found
+);
+
+reasons.textContent =
+  "Matched Details: " +
+  (matchedDetails.length
+    ? matchedDetails.join(", ")
+    : "No strong detail match");
+
+const note = document.createElement("p");
+
+note.textContent =
+  "Note: This is a possible match. Please verify before claiming.";
+
+note.style.fontSize = "13px";
+note.style.color = "#777";
 
     const lostInfo = document.createElement("p");
     lostInfo.textContent =
@@ -278,8 +324,10 @@ function displayPossibleMatches(reports) {
     });
 
     card.append(
-      heading,
-      score,
+  heading,
+  score,
+  reasons,
+  note,
       lostInfo,
       foundInfo,
       lostButton,
