@@ -125,6 +125,20 @@ function getReports() {
 function createReportCard(report, index) {
   const card = document.createElement("div");
   card.className = "report-card";
+  
+if (report.photo) {
+  const image = document.createElement("img");
+  image.src = report.photo;
+  image.alt = "Reported item";
+  image.style.width = "100%";
+  image.style.maxHeight = "180px";
+  image.style.objectFit = "contain";
+  image.style.borderRadius = "12px";
+  image.style.marginBottom = "12px";
+
+  card.appendChild(image);
+}
+
   card.style.cursor = "pointer";
 
   const title = document.createElement("h3");
@@ -196,6 +210,19 @@ function displayReports() {
 function showReportDetails(report) {
   selectedReport = report;
   reportDetails.innerHTML = "";
+  
+if (report.photo) {
+  const image = document.createElement("img");
+  image.src = report.photo;
+  image.alt = "Item photo";
+  image.style.width = "100%";
+  image.style.maxWidth = "350px";
+  image.style.borderRadius = "14px";
+  image.style.marginBottom = "20px";
+
+  reportDetails.appendChild(image);
+}
+
 
   const fields = [
     ["Item Name", report.name],
