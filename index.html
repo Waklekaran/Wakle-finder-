@@ -77,15 +77,35 @@
         Create Account
       </button>
     </form>
+    
+<form id="emailLoginForm" style="display:none;">
+
+  <div class="login-field">
+    <label>Email Address</label>
+    <input type="email" id="emailLogin"
+      placeholder="Enter your email" required>
+  </div>
+
+  <div class="login-field">
+    <label>Password</label>
+    <input type="password" id="passwordLogin"
+      placeholder="Enter your password" required>
+  </div>
+
+  <button type="submit" class="login-btn">
+    Login to Account
+  </button>
+</form>
+
 
     <p class="signup-text">
       Already have an account?
     </p>
 
     <button type="button" class="signup-btn"
-      onclick="showLoginForm()">
-      Login
-    </button>
+  onclick="showLoginForm()">
+  Login
+  </button>
 
     <button onclick="showHome()" class="back-btn">
       ← Back to Home
