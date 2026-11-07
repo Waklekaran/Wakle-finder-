@@ -137,6 +137,7 @@ async function getOnlineReports() {
     .order("created_at", { ascending: false });
 
   if (error) {
+    alert("SUPABASE ERROR: " + error.message);
     console.error("Online reports error:", error);
     throw error;
   }
@@ -150,9 +151,12 @@ function createReportCard(report, index) {
   const card = document.createElement("div");
   card.className = "report-card";
   
+
+const photoSource = report.photo_url || report.photo;
+
 if (photoSource) {
   const image = document.createElement("img");
-  image.src = report.photo;
+  image.src = photoSource;
   image.alt = "Reported item";
   image.style.width = "100%";
   image.style.maxHeight = "180px";
@@ -162,6 +166,7 @@ if (photoSource) {
 
   card.appendChild(image);
 }
+
 
   card.style.cursor = "pointer";
 
@@ -247,9 +252,12 @@ function showReportDetails(report) {
   selectedReport = report;
   reportDetails.innerHTML = "";
   
-if (report.photo) {
+
+const photoSource = report.photo_url || report.photo;
+
+if (photoSource) {
   const image = document.createElement("img");
-  image.src = report.photo;
+  image.src = photoSource;
   image.alt = "Item photo";
   image.style.width = "100%";
   image.style.maxWidth = "350px";
@@ -258,6 +266,7 @@ if (report.photo) {
 
   reportDetails.appendChild(image);
 }
+
 
 
   const fields = [
