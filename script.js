@@ -446,21 +446,74 @@ async function displayReports() {
 function showReportDetails(report) {
   selectedReport = report;
   reportDetails.innerHTML = "";
-  
 
-const photoSource = report.photo_url || report.photo;
+  // Main card styling
+  reportDetails.style.padding = "20px";
+  reportDetails.style.borderRadius = "18px";
+  reportDetails.style.background = "#ffffff";
+  reportDetails.style.boxShadow =
+    "0 4px 18px rgba(0,0,0,0.10)";
 
-if (photoSource) {
-  const image = document.createElement("img");
-  image.src = photoSource;
-  image.alt = "Item photo";
-  image.style.width = "100%";
-  image.style.maxWidth = "350px";
-  image.style.borderRadius = "14px";
-  image.style.marginBottom = "20px";
+  // Item Name
+  const title = document.createElement("h2");
+  title.textContent = report.name;
+  title.style.marginBottom = "12px";
+  reportDetails.appendChild(title);
 
-  reportDetails.appendChild(image);
-}
+  // Lost / Found Badge
+  const badge = document.createElement("span");
+  badge.textContent = report.type;
+  badge.style.padding = "7px 16px";
+  badge.style.borderRadius = "20px";
+  badge.style.color = "#ffffff";
+  badge.style.background =
+    report.type === "Lost" ? "#e74c3c" : "#27ae60";
+
+  reportDetails.appendChild(badge);
+
+  // Item Photo
+  const photoSource = report.photo_url || report.photo;
+
+  if (photoSource) {
+    const image = document.createElement("img");
+    image.src = photoSource;
+    image.alt = "Reported item";
+    image.style.width = "100%";
+    image.style.maxHeight = "260px";
+    image.style.objectFit = "contain";
+    image.style.borderRadius = "14px";
+    image.style.marginTop = "18px";
+
+    reportDetails.appendChild(image);
+  }
+
+  // Report Information
+  const fields = [
+    ["Description", report.description],
+    ["Location", report.location],
+    ["Date", report.date]
+  ];
+
+  fields.forEach(function(field) {
+    const row = document.createElement("div");
+    row.style.padding = "12px 0";
+    row.style.borderBottom = "1px solid #eeeeee";
+
+    const label = document.createElement("h4");
+    label.textContent = field[0];
+    label.style.margin = "0 0 5px";
+    label.style.color = "#777777";
+
+    const value = document.createElement("p");
+    value.textContent = field[1] || "Not provided";
+    value.style.margin = "0";
+
+    row.append(label, value);
+    reportDetails.appendChild(row);
+  });
+
+  showScreen(detailsScreen);
+                              }
 
 
 
