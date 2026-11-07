@@ -354,22 +354,6 @@ itemForm.addEventListener("submit", async function(event) {
 });
   };
 
-  const reports = getReports();
-  reports.unshift(report);
-
-  localStorage.setItem(
-    "wakleReports",
-    JSON.stringify(reports)
-  );
-
-  itemForm.reset();
-  selectedPhotoData = "";
-photoPreview.innerHTML = "";
-
-  searchInput.value = "";
-  displayReports();
-  showScreen(reportsScreen);
-
   
 });
 
