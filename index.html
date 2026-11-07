@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>waklefinder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>waklefinder 🔍</h1>
+    <p>Find it. Verify it. Get it back.</p>
+  </header>
+
+  <main>
+    <h2>Welcome to waklefinder</h2>
+    <p>Your campus Lost & Found platform.</p>
+
+    <button onclick="reportLostItem()">Report Lost Item</button>
+
+    <button onclick="reportFoundItem()">Report Found Item</button>
+    
+
+    <h2>How it works</h2>
+    <p>Report an item, find a match,
+    and verify ownership.</p>
+    <section id="reportForm" style="display: none;">
+  <h2>Report an Item</h2>
+
+  <form id="itemForm">
+    <label>Item Name</label>
+    <input type="text" id="itemName" placeholder="Example: College ID" required>
+
+    <label>Report Type</label>
+    <select id="itemType" required>
+      <option value="">Select type</option>
+      <option value="Lost">Lost</option>
+      <option value="Found">Found</option>
+    </select>
+
+    <label>Description</label>
+    <textarea id="itemDescription" placeholder="Describe the item" required></textarea>
+
+    <label>Location</label>
+    <input type="text" id="itemLocation" placeholder="Where was it lost/found?" required>
+
+    <label>Date</label>
+    <input type="date" id="itemDate" required>
+
+    <button type="submit">Submit Report</button>
+  </form>
+    </section>
+  </main>
+<script src="script.js"></script>
+</body>
+</html>
