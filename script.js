@@ -766,3 +766,44 @@ async function resendVerificationEmail() {
 
   message.textContent = "New verification email sent! Check your inbox.";
 }
+
+// USER SESSION MANAGEMENT
+
+async function updateAuthUI() {
+  const { data } = await supabaseClient.auth.getSession();
+  const user = data.session?.user;
+
+  const panel = document.getElementById("userPanel");
+  const welcome = document.getElementById("welcomeUser");
+
+  if (user) {
+    panel.style.display = "block";
+
+    const name = user.user_metadata?.full_name || user.email;
+
+    welcome.textContent = "Welcome, " + name + "!";
+  } else {
+    panel.style.display = "none";
+  }
+}
+
+// Check login whenever authentication changes
+supabaseClient.auth.onAuthStateChange(() => {
+  updateAuthUI();
+});
+
+// Check existing session on page load
+updateAuthUI();
+
+// LOGOUT
+async function logoutUser() {
+  const { error } = await supabaseClient.auth.signOut();
+
+  if (error) {
+    alert("Logout failed: " + error.message);
+    return;
+  }
+
+  alert("You have logged out successfully!");
+  showHome();
+}
