@@ -738,6 +738,7 @@ document.getElementById("emailLoginForm").addEventListener(
     }
 
     alert("Login successful! Welcome to Wakle-Finder.");
+    await updateAuthUI();
 
     document.getElementById("emailLoginForm").reset();
     showHome();
