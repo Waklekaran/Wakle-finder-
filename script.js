@@ -258,8 +258,8 @@ itemForm.addEventListener("submit", function(event) {
     type: itemType.value,
     description: document.getElementById("itemDescription").value.trim(),
     location: document.getElementById("itemLocation").value.trim(),
-    date: document.getElementById("itemDate").value
-    ,photo: selectedPhotoData
+    date: document.getElementById("itemDate").value,
+photo: selectedPhotoData 
   };
 
   const reports = getReports();
