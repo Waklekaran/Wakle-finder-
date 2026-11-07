@@ -1,7 +1,6 @@
 
 // Wakle-Finder App
 // Supabase Connection
-alert("TEST 123");
 const SUPABASE_URL = "https://auzgtqyxgwrdwluayhso.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ClnYGYLlmD3T1yXqys9W0Q_GKwc8Dr4";
