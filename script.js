@@ -10,6 +10,68 @@ const itemForm = document.getElementById("itemForm");
 const itemType = document.getElementById("itemType");
 const searchInput = document.getElementById("searchInput");
 
+const itemPhoto = document.getElementById("itemPhoto");
+const photoPreview = document.getElementById("photoPreview");
+
+let selectedPhotoData = "";
+
+// Photo upload and preview
+itemPhoto.addEventListener("change", function() {
+  const file = itemPhoto.files[0];
+
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please select an image.");
+    itemPhoto.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    const image = new Image();
+
+    image.onload = function() {
+      const canvas = document.createElement("canvas");
+      const maxSize = 900;
+
+      const scale = Math.min(
+        1,
+        maxSize / Math.max(image.width, image.height)
+      );
+
+      canvas.width = image.width * scale;
+      canvas.height = image.height * scale;
+
+      const context = canvas.getContext("2d");
+      context.drawImage(
+        image, 0, 0, canvas.width, canvas.height
+      );
+
+      selectedPhotoData = canvas.toDataURL(
+        "image/jpeg", 0.7
+      );
+
+      photoPreview.innerHTML = "";
+
+      const previewImage = document.createElement("img");
+      previewImage.src = selectedPhotoData;
+      previewImage.alt = "Selected item photo";
+      previewImage.style.width = "100%";
+      previewImage.style.maxWidth = "250px";
+      previewImage.style.borderRadius = "12px";
+
+      photoPreview.appendChild(previewImage);
+    };
+
+    image.src = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+});
+
+
 const lostReportsList = document.getElementById("lostReportsList");
 const foundReportsList = document.getElementById("foundReportsList");
 const reportDetails = document.getElementById("reportDetails");
@@ -170,6 +232,7 @@ itemForm.addEventListener("submit", function(event) {
     description: document.getElementById("itemDescription").value.trim(),
     location: document.getElementById("itemLocation").value.trim(),
     date: document.getElementById("itemDate").value
+    ,photo: selectedPhotoData
   };
 
   const reports = getReports();
@@ -181,6 +244,8 @@ itemForm.addEventListener("submit", function(event) {
   );
 
   itemForm.reset();
+  selectedPhotoData = "";
+photoPreview.innerHTML = "";
 
   searchInput.value = "";
   displayReports();
