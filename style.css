@@ -253,4 +253,6 @@ button:hover {
     font-size: 26px;
   }
 }
-
+header {
+  background: red !important;
+}
