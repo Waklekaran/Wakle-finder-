@@ -743,3 +743,26 @@ document.getElementById("emailLoginForm").addEventListener(
     showHome();
   }
 );
+async function resendVerificationEmail() {
+  const email = document.getElementById("signupEmail").value.trim();
+  const message = document.getElementById("authMessage");
+
+  if (!email) {
+    message.textContent = "Please enter your registered email first.";
+    return;
+  }
+
+  message.textContent = "Sending verification email...";
+
+  const { error } = await supabaseClient.auth.resend({
+    type: "signup",
+    email: email
+  });
+
+  if (error) {
+    message.textContent = "Error: " + error.message;
+    return;
+  }
+
+  message.textContent = "New verification email sent! Check your inbox.";
+}
