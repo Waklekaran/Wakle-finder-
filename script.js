@@ -150,7 +150,7 @@ function createReportCard(report, index) {
   const card = document.createElement("div");
   card.className = "report-card";
   
-if (report.photo) {
+if (photoSource) {
   const image = document.createElement("img");
   image.src = report.photo;
   image.alt = "Reported item";
