@@ -514,33 +514,6 @@ function showReportDetails(report) {
   });
 
   showScreen(detailsScreen);
-                              }
-
-
-
-  const fields = [
-    ["Item Name", report.name],
-    ["Report Type", report.type],
-    ["Description", report.description],
-    ["Location", report.location],
-    ["Date", report.date]
-  ];
-
-  fields.forEach(function(field) {
-    const row = document.createElement("div");
-    row.className = "detail-row";
-
-    const label = document.createElement("h3");
-    label.textContent = field[0];
-
-    const value = document.createElement("p");
-    value.textContent = field[1];
-
-    row.append(label, value);
-    reportDetails.appendChild(row);
-  });
-
-  showScreen(detailsScreen);
 }
 
   // Submit report to Supabase
