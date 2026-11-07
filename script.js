@@ -130,6 +130,21 @@ function getReports() {
   }
 }
 
+async function getOnlineReports() {
+  const { data, error } = await supabaseClient
+    .from("reports")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Online reports error:", error);
+    throw error;
+  }
+
+  return data || [];
+}
+
+
 // Create report card
 function createReportCard(report, index) {
   const card = document.createElement("div");
@@ -174,46 +189,58 @@ if (report.photo) {
 }
 
 // Display separate Lost and Found folders
-function displayReports() {
-  const query = searchInput.value.toLowerCase();
 
-  lostReportsList.innerHTML = "";
-  foundReportsList.innerHTML = "";
+async function displayReports() {
+  const query = searchInput.value.toLowerCase().trim();
 
-  const reports = getReports();
+  lostReportsList.innerHTML = "Loading reports...";
+  foundReportsList.innerHTML = "Loading reports...";
 
-  const filtered = reports.filter(function(report) {
-    return (
-      report.name.toLowerCase().includes(query) ||
-      report.description.toLowerCase().includes(query) ||
-      report.location.toLowerCase().includes(query) ||
-      report.type.toLowerCase().includes(query)
-    );
-  });
+  try {
+    const reports = await getOnlineReports();
 
-  const lost = filtered.filter(r => r.type === "Lost");
-  const found = filtered.filter(r => r.type === "Found");
+    lostReportsList.innerHTML = "";
+    foundReportsList.innerHTML = "";
 
-  if (lost.length === 0) {
-    lostReportsList.textContent = "No lost reports found.";
+    const filtered = reports.filter(function(report) {
+      return (
+        (report.name || "").toLowerCase().includes(query) ||
+        (report.description || "").toLowerCase().includes(query) ||
+        (report.location || "").toLowerCase().includes(query) ||
+        (report.type || "").toLowerCase().includes(query)
+      );
+    });
+
+    const lost = filtered.filter(r => r.type === "Lost");
+    const found = filtered.filter(r => r.type === "Found");
+
+    if (lost.length === 0) {
+      lostReportsList.textContent = "No lost reports found.";
+    }
+
+    if (found.length === 0) {
+      foundReportsList.textContent = "No found reports found.";
+    }
+
+    lost.forEach(function(report, index) {
+      lostReportsList.appendChild(
+        createReportCard(report, index)
+      );
+    });
+
+    found.forEach(function(report, index) {
+      foundReportsList.appendChild(
+        createReportCard(report, index)
+      );
+    });
+
+  } catch (error) {
+    console.error("Display reports error:", error);
+    lostReportsList.textContent = "Could not load reports.";
+    foundReportsList.textContent = "Could not load reports.";
   }
-
-  if (found.length === 0) {
-    foundReportsList.textContent = "No found reports found.";
-  }
-
-  lost.forEach(function(report, index) {
-    lostReportsList.appendChild(
-      createReportCard(report, index)
-    );
-  });
-
-  found.forEach(function(report, index) {
-    foundReportsList.appendChild(
-      createReportCard(report, index)
-    );
-  });
 }
+
 
 // Show individual report details
 function showReportDetails(report) {
