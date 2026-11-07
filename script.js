@@ -145,6 +145,72 @@ async function getOnlineReports() {
   return data || [];
 }
 
+// SMART MATCHING ENGINE
+
+function normalizeText(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function textSimilarity(first, second) {
+  const a = normalizeText(first);
+  const b = normalizeText(second);
+
+  if (a.length === 0 || b.length === 0) return 0;
+
+  const setA = new Set(a);
+  const setB = new Set(b);
+
+  const common = [...setA].filter(word => setB.has(word));
+
+  return (common.length / new Set([...a, ...b]).size) * 100;
+}
+
+function dateSimilarity(date1, date2) {
+  if (!date1 || !date2) return 0;
+
+  const first = new Date(date1);
+  const second = new Date(date2);
+
+  if (isNaN(first) || isNaN(second)) return 0;
+
+  const days = Math.abs(first - second) / 86400000;
+
+  if (days === 0) return 100;
+  if (days <= 1) return 90;
+  if (days <= 3) return 75;
+  if (days <= 7) return 55;
+  if (days <= 14) return 30;
+
+  return 0;
+}
+
+function calculateMatchScore(lost, found) {
+  const nameScore =
+    textSimilarity(lost.name, found.name);
+
+  const descriptionScore =
+    textSimilarity(lost.description, found.description);
+
+  const locationScore =
+    textSimilarity(lost.location, found.location);
+
+  const dateScore =
+    dateSimilarity(lost.date, found.date);
+
+  const total =
+    (nameScore * 0.35) +
+    (descriptionScore * 0.25) +
+    (locationScore * 0.25) +
+    (dateScore * 0.15);
+
+  return Math.round(total);
+}
+
 
 // Create report card
 function createReportCard(report, index) {
