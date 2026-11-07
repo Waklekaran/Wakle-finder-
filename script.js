@@ -665,3 +665,81 @@ function showSignupForm() {
 
   document.getElementById("authMessage").textContent = "";
 }
+
+// SIGN UP FORM SUBMISSION
+document.getElementById("signupForm").addEventListener(
+  "submit",
+  async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirm = document.getElementById("confirmPassword").value;
+    const message = document.getElementById("authMessage");
+
+    if (password !== confirm) {
+      message.textContent = "Passwords do not match!";
+      return;
+    }
+
+    if (password.length < 6) {
+      message.textContent = "Password must be at least 6 characters.";
+      return;
+    }
+
+    message.textContent = "Creating your account...";
+
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: { full_name: name }
+      }
+    });
+
+    if (error) {
+      message.textContent = "Sign Up failed: " + error.message;
+      return;
+    }
+
+    if (data.session) {
+      message.textContent = "Account created successfully!";
+    } else {
+      message.textContent =
+        "Account created! Please verify your email.";
+    }
+
+    document.getElementById("signupForm").reset();
+  }
+);
+
+
+// LOGIN FORM SUBMISSION
+document.getElementById("emailLoginForm").addEventListener(
+  "submit",
+  async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("emailLogin").value.trim();
+    const password = document.getElementById("passwordLogin").value;
+    const message = document.getElementById("authMessage");
+
+    message.textContent = "Logging in...";
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      message.textContent = "Login failed: " + error.message;
+      return;
+    }
+
+    alert("Login successful! Welcome to Wakle-Finder.");
+
+    document.getElementById("emailLoginForm").reset();
+    showHome();
+  }
+);
