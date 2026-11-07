@@ -626,11 +626,42 @@ displayReports();
 console.log("Wakle-Finder is running!");
 function showLoginForm() {
   document.getElementById("signupForm").style.display = "none";
-
   document.getElementById("emailLoginForm").style.display = "block";
 
   document.getElementById("authTitle").textContent = "Welcome Back!";
-
   document.getElementById("authSubtitle").textContent =
     "Login to your Wakle-Finder account";
+
+  document.getElementById("authSwitchText").textContent =
+    "New to Wakle-Finder?";
+
+  document.getElementById("authSwitchButton").textContent =
+    "Create Account";
+
+  document.getElementById("authSwitchButton").onclick =
+    showSignupForm;
+
+  document.getElementById("authMessage").textContent = "";
+}
+
+function showSignupForm() {
+  document.getElementById("emailLoginForm").style.display = "none";
+  document.getElementById("signupForm").style.display = "block";
+
+  document.getElementById("authTitle").textContent =
+    "Create Your Account";
+
+  document.getElementById("authSubtitle").textContent =
+    "Join the Wakle-Finder community";
+
+  document.getElementById("authSwitchText").textContent =
+    "Already have an account?";
+
+  document.getElementById("authSwitchButton").textContent =
+    "Login";
+
+  document.getElementById("authSwitchButton").onclick =
+    showLoginForm;
+
+  document.getElementById("authMessage").textContent = "";
 }
