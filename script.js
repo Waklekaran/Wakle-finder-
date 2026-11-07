@@ -260,15 +260,100 @@ if (report.photo) {
 
 // Submit report
 itemForm.addEventListener("submit", function(event) {
+  // Submit report to Supabase
+itemForm.addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const report = {
-    name: document.getElementById("itemName").value.trim(),
-    type: itemType.value,
-    description: document.getElementById("itemDescription").value.trim(),
-    location: document.getElementById("itemLocation").value.trim(),
-    date: document.getElementById("itemDate").value,
-photo: selectedPhotoData 
+  if (itemPhoto.files.length > 0 && !selectedPhotoData) {
+    alert("Please wait for the photo preview to load.");
+    return;
+  }
+
+  const submitButton = itemForm.querySelector(
+    'button[type="submit"]'
+  );
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Submitting...";
+
+  try {
+    let photoUrl = "";
+
+    // Upload photo to Supabase Storage
+    if (selectedPhotoData) {
+      const photoBlob = await (
+        await fetch(selectedPhotoData)
+      ).blob();
+
+      const photoPath =
+        Date.now() + "-" +
+        Math.random().toString(36).slice(2) +
+        ".jpg";
+
+      const { error: uploadError } =
+        await supabaseClient.storage
+          .from("report-photos")
+          .upload(photoPath, photoBlob, {
+            contentType: "image/jpeg"
+          });
+
+      if (uploadError) throw uploadError;
+
+      const { data: photoData } =
+        supabaseClient.storage
+          .from("report-photos")
+          .getPublicUrl(photoPath);
+
+      photoUrl = photoData.publicUrl;
+    }
+
+    const report = {
+      name: document.getElementById("itemName").value.trim(),
+      type: itemType.value,
+      description: document.getElementById("itemDescription").value.trim(),
+      location: document.getElementById("itemLocation").value.trim(),
+      date: document.getElementById("itemDate").value || null,
+      photo_url: photoUrl || null
+    };
+
+    const { error } = await supabaseClient
+      .from("reports")
+      .insert([report]);
+
+    if (error) throw error;
+
+    alert("Report saved online successfully! 🎉");
+
+    // Keep local copy temporarily
+    const localReport = {
+      ...report,
+      photo: selectedPhotoData
+    };
+
+    const reports = getReports();
+    reports.unshift(localReport);
+
+    localStorage.setItem(
+      "wakleReports",
+      JSON.stringify(reports)
+    );
+
+    itemForm.reset();
+    selectedPhotoData = "";
+    photoPreview.innerHTML = "";
+
+    searchInput.value = "";
+    displayReports();
+    showScreen(reportsScreen);
+
+  } catch (error) {
+    console.error("Report submission error:", error);
+    alert("Could not save report: " + error.message);
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit Report";
+  }
+});
   };
 
   const reports = getReports();
