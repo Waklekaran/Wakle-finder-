@@ -29,9 +29,56 @@
         Report Found Item
       </button>
       <button onclick="showReports()">
-  View Recent Reports
+        View Recent Reports
       </button>
+      <button onclick="showLogin()">
+        Login / Sign Up
+      </button>
+      
     </section>
+    <!-- LOGIN SCREEN -->
+<section id="loginScreen" style="display:none;">
+
+  <h2>Welcome Back!</h2>
+  <p>Login to your Wakle-Finder account.</p>
+
+  <form id="loginForm">
+
+    <label>Email Address</label>
+    <input
+      type="email"
+      id="loginEmail"
+      placeholder="Enter your email"
+      required
+    >
+
+    <label>Password</label>
+    <input
+      type="password"
+      id="loginPassword"
+      placeholder="Enter your password"
+      required
+    >
+
+    <button type="submit">
+      Login
+    </button>
+
+  </form>
+
+  <p>Don't have an account?</p>
+
+  <button onclick="signUpUser()">
+    Create Account
+  </button>
+
+  <button onclick="showHome()">
+    Back to Home
+  </button>
+
+  <p id="authMessage"></p>
+
+</section>
 
     <!-- REPORT FORM SCREEN -->
     <section id="reportScreen" style="display:none;">
