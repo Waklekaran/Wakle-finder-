@@ -1,66 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>waklefinder</title>
-  <link rel="stylesheet" href="style.css? v=2">
+  <title>Wakle-Finder</title>
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
   <header>
-    <h1>waklefinder 🔍</h1>
+    <h1>Wakle-Finder 🔍</h1>
     <p>Find it. Verify it. Get it back.</p>
   </header>
 
   <main>
-    <h2>Welcome to waklefinder</h2>
-    <p>Your campus Lost & Found platform.</p>
 
-    <button onclick="reportLostItem()">Report Lost Item</button>
+    <!-- HOME SCREEN -->
+    <section id="homeScreen">
+      <h2>Welcome to Wakle-Finder</h2>
+      <p>Your Campus Lost & Found Platform.</p>
 
-    <button onclick="reportFoundItem()">Report Found Item</button>
-    
+      <button onclick="reportLostItem()">
+        Report Lost Item
+      </button>
 
-    <h2>How it works</h2>
-    <p>Report an item, find a match,
-    and verify ownership.</p>
-    <section id="reportsSection">
-  <h2>Recent Reports</h2>
-  <input
-    type="text"
-    id="searchInput"
-    placeholder="Search items..."
-  >
-  <div id="reportsList"></div>
+      <button onclick="reportFoundItem()">
+        Report Found Item
+      </button>
     </section>
-    <section id="reportForm" style="display: none;">
-  <h2>Report an Item</h2>
 
-  <form id="itemForm">
-    <label>Item Name</label>
-    <input type="text" id="itemName" placeholder="Example: College ID" required>
+    <!-- REPORT FORM SCREEN -->
+    <section id="reportScreen" style="display:none;">
+      <h2>Report an Item</h2>
 
-    <label>Report Type</label>
-    <select id="itemType" required>
-      <option value="">Select type</option>
-      <option value="Lost">Lost</option>
-      <option value="Found">Found</option>
-    </select>
+      <form id="itemForm">
+        <label>Item Name</label>
+        <input type="text" id="itemName"
+          placeholder="Example: College ID" required>
 
-    <label>Description</label>
-    <textarea id="itemDescription" placeholder="Describe the item" required></textarea>
+        <label>Report Type</label>
+        <select id="itemType" required>
+          <option value="">Select type</option>
+          <option value="Lost">Lost</option>
+          <option value="Found">Found</option>
+        </select>
 
-    <label>Location</label>
-    <input type="text" id="itemLocation" placeholder="Where was it lost/found?" required>
+        <label>Description</label>
+        <textarea id="itemDescription"
+          placeholder="Describe the item" required></textarea>
 
-    <label>Date</label>
-    <input type="date" id="itemDate" required>
+        <label>Location</label>
+        <input type="text" id="itemLocation"
+          placeholder="Where was it lost/found?" required>
 
-    <button type="submit">Submit Report</button>
-  </form>
+        <label>Date</label>
+        <input type="date" id="itemDate" required>
+
+        <button type="submit">Submit Report</button>
+      </form>
+
+      <button onclick="showHome()">Back to Home</button>
     </section>
+
+    <!-- RECENT REPORTS SCREEN -->
+    <section id="reportsScreen" style="display:none;">
+      <h2>Recent Reports</h2>
+
+      <input type="text" id="searchInput"
+        placeholder="Search reports...">
+
+      <h3>Lost Reports</h3>
+      <div id="lostReportsList"></div>
+
+      <h3>Found Reports</h3>
+      <div id="foundReportsList"></div>
+
+      <button onclick="showHome()">Back to Home</button>
+    </section>
+
+    <!-- REPORT DETAILS SCREEN -->
+    <section id="detailsScreen" style="display:none;">
+      <h2>Report Details</h2>
+      <div id="reportDetails"></div>
+
+      <button onclick="showReports()">
+        Back to Recent Reports
+      </button>
+    </section>
+
   </main>
-<script src="script.js"></script>
+
+  <script src="script.js"></script>
 </body>
 </html>
+
