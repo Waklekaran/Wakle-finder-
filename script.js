@@ -624,4 +624,13 @@ searchInput.addEventListener("input", displayReports);
 displayReports();
 
 console.log("Wakle-Finder is running!");
+function showLoginForm() {
+  document.getElementById("signupForm").style.display = "none";
 
+  document.getElementById("emailLoginForm").style.display = "block";
+
+  document.getElementById("authTitle").textContent = "Welcome Back!";
+
+  document.getElementById("authSubtitle").textContent =
+    "Login to your Wakle-Finder account";
+}
