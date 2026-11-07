@@ -351,10 +351,8 @@ itemForm.addEventListener("submit", async function(event) {
     submitButton.disabled = false;
     submitButton.textContent = "Submit Report";
   }
-});
-  };
+}); 
 
-  
 });
 
 // Instant search
