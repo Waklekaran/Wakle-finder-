@@ -160,3 +160,97 @@ button:hover {
   background: #dcfce7;
   color: #15803d;
   }
+
+/* PROFESSIONAL DETAILS SCREEN */
+
+#reportDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.detail-row {
+  padding: 16px;
+  background: #f8faff;
+  border: 1px solid #dbe5f5;
+  border-radius: 12px;
+}
+
+.detail-row h3 {
+  color: #155eef;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.detail-row p {
+  color: #172b4d;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* SUBMITTED REPORT PREVIEW */
+
+#submittedReportPreview {
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8faff;
+  border: 1px solid #dbe5f5;
+  border-radius: 14px;
+}
+
+#submittedReportPreview h3 {
+  color: #155eef;
+  margin-bottom: 14px;
+}
+
+#submittedReportPreview p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+/* REPORT FOLDER HEADINGS */
+
+#reportsScreen h3 {
+  margin-top: 24px;
+  margin-bottom: 14px;
+  color: #155eef;
+}
+
+/* REPORT CARD IMPROVEMENTS */
+
+.report-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-card:active {
+  transform: scale(0.98);
+}
+
+/* SEARCH FOCUS */
+
+#searchInput:focus,
+#itemForm input:focus,
+#itemForm textarea:focus,
+#itemForm select:focus {
+  outline: 2px solid #155eef;
+  border-color: #155eef;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  main {
+    padding: 17px;
+  }
+
+  header h1 {
+    font-size: 26px;
+  }
+}
+
