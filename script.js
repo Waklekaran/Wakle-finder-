@@ -1,5 +1,15 @@
 
 // Wakle-Finder App
+// Supabase Connection
+
+const SUPABASE_URL = "https://auzgtqyxgwrdwluayhso.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ClnYGYLlmD3T1yXqys9W0Q_GKwc8Dr4";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 const homeScreen = document.getElementById("homeScreen");
 const reportScreen = document.getElementById("reportScreen");
