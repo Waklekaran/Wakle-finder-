@@ -15,6 +15,8 @@ const reportScreen = document.getElementById("reportScreen");
 const reportsScreen = document.getElementById("reportsScreen");
 const detailsScreen = document.getElementById("detailsScreen");
 const loginScreen = document.getElementById("loginScreen");
+const myReportsScreen =
+  document.getElementById("myReportsScreen");
 
 const itemForm = document.getElementById("itemForm");
 const itemType = document.getElementById("itemType");
@@ -95,6 +97,7 @@ function showScreen(screen) {
   reportsScreen.style.display = "none";
   detailsScreen.style.display = "none";
   loginScreen.style.display = "none";
+  myReportsScreen.style.display = "none";
 
   screen.style.display = "block";
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -102,6 +105,9 @@ function showScreen(screen) {
 
 function showHome() {
   showScreen(homeScreen);
+}
+function showMyReports() {
+  showScreen(myReportsScreen);
 }
 function showLogin() {
   showScreen(loginScreen);
