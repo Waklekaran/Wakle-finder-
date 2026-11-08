@@ -170,7 +170,7 @@ async function showMyReports() {
     } else {
       foundReports.forEach((report, index) => {
         foundList.appendChild(
-          createReportCard(report, index)
+          createReportCard(report, index,true)
         );
       });
     }
@@ -427,27 +427,25 @@ note.style.color = "#777";
 
 
 
-// Create report card
-function createReportCard(report, index) {
+// Create report 
+
+function createReportCard(report, index, isMine = false) {
   const card = document.createElement("div");
   card.className = "report-card";
-  
 
-const photoSource = report.photo_url || report.photo;
+  const photoSource = report.photo_url || report.photo;
 
-if (photoSource) {
-  const image = document.createElement("img");
-  image.src = photoSource;
-  image.alt = "Reported item";
-  image.style.width = "100%";
-  image.style.maxHeight = "180px";
-  image.style.objectFit = "contain";
-  image.style.borderRadius = "12px";
-  image.style.marginBottom = "12px";
-
-  card.appendChild(image);
-}
-
+  if (photoSource) {
+    const image = document.createElement("img");
+    image.src = photoSource;
+    image.alt = "Reported item";
+    image.style.width = "100%";
+    image.style.maxHeight = "180px";
+    image.style.objectFit = "contain";
+    image.style.borderRadius = "12px";
+    image.style.marginBottom = "12px";
+    card.appendChild(image);
+  }
 
   card.style.cursor = "pointer";
 
@@ -462,10 +460,32 @@ if (photoSource) {
   const location = document.createElement("p");
   location.textContent = "Location: " + report.location;
 
-  const button = document.createElement("button");
-  button.textContent = "View Details";
+  const viewButton = document.createElement("button");
+  viewButton.textContent = "View Details";
 
-  card.append(title, badge, location, button);
+  card.append(title, badge, location, viewButton);
+
+  if (isMine) {
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.style.margin = "5px";
+
+    editButton.addEventListener("click", function(event) {
+      event.stopPropagation();
+      editMyReport(report);
+    });
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.style.margin = "5px";
+
+    deleteButton.addEventListener("click", function(event) {
+      event.stopPropagation();
+      deleteMyReport(report);
+    });
+
+    card.append(editButton, deleteButton);
+  }
 
   card.addEventListener("click", function() {
     showReportDetails(report);
@@ -473,6 +493,7 @@ if (photoSource) {
 
   return card;
 }
+
 
 // Display separate Lost and Found folders
 
@@ -906,3 +927,89 @@ async function logoutUser() {
   alert("You have logged out successfully!");
   showHome();
 }
+async function editMyReport(report) {
+  const { data: authData, error: authError } =
+    await supabaseClient.auth.getUser();
+
+  if (authError || !authData.user) {
+    alert("Please login first.");
+    return;
+  }
+
+  const name = prompt("Enter item name:", report.name);
+  if (name === null) return;
+
+  const description = prompt(
+    "Enter description:",
+    report.description || ""
+  );
+  if (description === null) return;
+
+  const location = prompt(
+    "Enter location:",
+    report.location || ""
+  );
+  if (location === null) return;
+
+  const date = prompt(
+    "Enter date (YYYY-MM-DD):",
+    report.date || ""
+  );
+  if (date === null) return;
+
+  if (!name.trim()) {
+    alert("Item name cannot be empty.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("reports")
+    .update({
+      name: name.trim(),
+      description: description.trim(),
+      location: location.trim(),
+      date: date.trim() || null
+    })
+    .eq("id", report.id)
+    .eq("user_id", authData.user.id);
+
+  if (error) {
+    alert("Update failed: " + error.message);
+    return;
+  }
+
+  alert("Report updated successfully!");
+  showMyReports();
+}
+
+
+async function deleteMyReport(report) {
+  const confirmed = confirm(
+    "Are you sure you want to delete this report?"
+  );
+
+  if (!confirmed) return;
+
+  const { data: authData, error: authError } =
+    await supabaseClient.auth.getUser();
+
+  if (authError || !authData.user) {
+    alert("Please login first.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("reports")
+    .delete()
+    .eq("id", report.id)
+    .eq("user_id", authData.user.id);
+
+  if (error) {
+    alert("Delete failed: " + error.message);
+    return;
+  }
+
+  alert("Report deleted successfully!");
+  showMyReports();
+}
+
