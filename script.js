@@ -197,28 +197,7 @@ async function showMyReports() {
       });
     }
 
-    // Display Found Reports
-    foundList.innerHTML = "";
-
-    if (foundReports.length === 0) {
-      foundList.textContent = "You have not submitted any Found Reports yet.";
-    } else {
-      foundReports.forEach((report, index) => {
-        foundList.appendChild(
-          createReportCard(report, index,true)
-        );
-      });
-    }
-
-  } catch (error) {
-    console.error("My Reports Error:", error);
-
-    lostList.textContent = "Could not load your reports.";
-    foundList.textContent = "Could not load your reports.";
-
-    alert("Error loading My Reports: " + error.message);
-  }
-}
+    
 
 function showLogin() {
   showScreen(loginScreen);
