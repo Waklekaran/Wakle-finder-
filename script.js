@@ -580,6 +580,19 @@ if (!user) {
   throw new Error("Please login before submitting a report.");
 }
 
+// Get logged-in user
+const { data: authData, error: authError } =
+  await supabaseClient.auth.getUser();
+
+if (authError) throw authError;
+
+const user = authData.user;
+
+if (!user) {
+  throw new Error("Please login before submitting a report.");
+}
+
+// Create report
 const report = {
   user_id: user.id,
   name: document.getElementById("itemName").value.trim(),
