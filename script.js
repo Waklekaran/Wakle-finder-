@@ -568,14 +568,27 @@ itemForm.addEventListener("submit", async function(event) {
       photoUrl = photoData.publicUrl;
     }
 
-    const report = {
-      name: document.getElementById("itemName").value.trim(),
-      type: itemType.value,
-      description: document.getElementById("itemDescription").value.trim(),
-      location: document.getElementById("itemLocation").value.trim(),
-      date: document.getElementById("itemDate").value || null,
-      photo_url: photoUrl || null
-    };
+    // Get currently logged-in user
+const { data: authData, error: authError } =
+  await supabaseClient.auth.getUser();
+
+if (authError) throw authError;
+
+const user = authData.user;
+
+if (!user) {
+  throw new Error("Please login before submitting a report.");
+}
+
+const report = {
+  user_id: user.id,
+  name: document.getElementById("itemName").value.trim(),
+  type: itemType.value,
+  description: document.getElementById("itemDescription").value.trim(),
+  location: document.getElementById("itemLocation").value.trim(),
+  date: document.getElementById("itemDate").value || null,
+  photo_url: photoUrl || null
+};
 
     const { error } = await supabaseClient
       .from("reports")
