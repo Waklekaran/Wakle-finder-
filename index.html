@@ -31,6 +31,9 @@
       <button onclick="showReports()">
         View Recent Reports
       </button>
+      <button onclick="showMyReports()">
+  📂 My Reports
+      </button>
       <button onclick="showLogin()">
         Login / Sign Up
       </button>
@@ -222,6 +225,24 @@
 
       <button onclick="showHome()">Back to Home</button>
     </section>
+    <!-- MY REPORTS SCREEN -->
+<section id="myReportsScreen" style="display:none;">
+
+  <h2>📂 My Reports</h2>
+
+  <p>Manage your submitted reports.</p>
+
+  <h3>My Lost Reports</h3>
+  <div id="myLostReportsList"></div>
+
+  <h3>My Found Reports</h3>
+  <div id="myFoundReportsList"></div>
+
+  <button onclick="showHome()">
+    Back to Home
+  </button>
+
+</section>
 
     <!-- REPORT DETAILS SCREEN -->
     <section id="detailsScreen" style="display:none;">
