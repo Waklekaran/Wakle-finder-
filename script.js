@@ -142,18 +142,15 @@ async function showMyReports() {
     const myReports = data || [];
 
     const lostReports = myReports.filter(
-      report => report.type === "Lost"
-    );
-    console.log("LOST REPORTS:", lostReports);
-console.log("FOUND REPORTS:", foundReports);
-console.log(
-  "LOST REPORT TYPE:",
-  lostReports.map(r => r.type)
+  report => report.type === "Lost"
 );
 
-    const foundReports = myReports.filter(
-      report => report.type === "Found"
-    );
+const foundReports = myReports.filter(
+  report => report.type === "Found"
+);
+
+console.log("LOST REPORTS:", lostReports);
+console.log("FOUND REPORTS:", foundReports);
 
     // Display Lost Reports
     lostList.innerHTML = "";
