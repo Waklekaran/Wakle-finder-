@@ -144,6 +144,12 @@ async function showMyReports() {
     const lostReports = myReports.filter(
       report => report.type === "Lost"
     );
+    console.log("LOST REPORTS:", lostReports);
+console.log("FOUND REPORTS:", foundReports);
+console.log(
+  "LOST REPORT TYPE:",
+  lostReports.map(r => r.type)
+);
 
     const foundReports = myReports.filter(
       report => report.type === "Found"
