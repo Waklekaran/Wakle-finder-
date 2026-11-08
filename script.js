@@ -157,7 +157,7 @@ async function showMyReports() {
     } else {
       lostReports.forEach((report, index) => {
         lostList.appendChild(
-          createReportCard(report, index)
+          createReportCard(report, index,true)
         );
       });
     }
