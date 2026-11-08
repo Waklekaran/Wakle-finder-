@@ -106,9 +106,85 @@ function showScreen(screen) {
 function showHome() {
   showScreen(homeScreen);
 }
-function showMyReports() {
+
+async function showMyReports() {
+  const lostList = document.getElementById("myLostReportsList");
+  const foundList = document.getElementById("myFoundReportsList");
+
+  // Check logged-in user
+  const { data: authData, error: authError } =
+    await supabaseClient.auth.getUser();
+
+  if (authError || !authData.user) {
+    alert("Please login to view your reports.");
+    showLogin();
+    return;
+  }
+
+  const user = authData.user;
+
+  // Open My Reports screen
   showScreen(myReportsScreen);
+
+  lostList.textContent = "Loading your lost reports...";
+  foundList.textContent = "Loading your found reports...";
+
+  try {
+    // Fetch only current user's reports
+    const { data, error } = await supabaseClient
+      .from("reports")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    const myReports = data || [];
+
+    const lostReports = myReports.filter(
+      report => report.type === "Lost"
+    );
+
+    const foundReports = myReports.filter(
+      report => report.type === "Found"
+    );
+
+    // Display Lost Reports
+    lostList.innerHTML = "";
+
+    if (lostReports.length === 0) {
+      lostList.textContent = "You have not submitted any Lost Reports yet.";
+    } else {
+      lostReports.forEach((report, index) => {
+        lostList.appendChild(
+          createReportCard(report, index)
+        );
+      });
+    }
+
+    // Display Found Reports
+    foundList.innerHTML = "";
+
+    if (foundReports.length === 0) {
+      foundList.textContent = "You have not submitted any Found Reports yet.";
+    } else {
+      foundReports.forEach((report, index) => {
+        foundList.appendChild(
+          createReportCard(report, index)
+        );
+      });
+    }
+
+  } catch (error) {
+    console.error("My Reports Error:", error);
+
+    lostList.textContent = "Could not load your reports.";
+    foundList.textContent = "Could not load your reports.";
+
+    alert("Error loading My Reports: " + error.message);
+  }
 }
+
 function showLogin() {
   showScreen(loginScreen);
 }
