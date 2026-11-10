@@ -184,18 +184,7 @@ async function showMyReports() {
 
 
 
-    // Display Lost Reports
-    lostList.innerHTML = "";
-
-    if (lostReports.length === 0) {
-      lostList.textContent = "You have not submitted any Lost Reports yet.";
-    } else {
-      lostReports.forEach((report, index) => {
-        lostList.appendChild(
-          createReportCard(report, index,true)
-        );
-      });
-    }
+    
 
     
 
