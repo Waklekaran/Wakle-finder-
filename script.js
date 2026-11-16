@@ -683,6 +683,8 @@ const { data: authData, error: authError } =
 if (authError) throw authError;
 
 const user = authData.user;
+    console.log("Logged-in User ID:", user?.id);
+console.log("Report User ID:", report?.user_id);
 
 if (!user) {
   throw new Error("Please login before submitting a report.");
