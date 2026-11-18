@@ -1019,3 +1019,41 @@ async function deleteMyReport(report) {
   showMyReports();
 }
 
+async function deleteReport(reportId) {
+  const confirmDelete = confirm(
+    "Are you sure you want to delete this report?"
+  );
+
+  if (!confirmDelete) return;
+
+  try {
+    const { data: authData, error: authError } =
+      await supabaseClient.auth.getUser();
+
+    if (authError) throw authError;
+
+    const user = authData.user;
+
+    if (!user) {
+      alert("Please login first.");
+      return;
+    }
+
+    const { error } = await supabaseClient
+      .from("reports")
+      .delete()
+      .eq("id", reportId)
+      .eq("user_id", user.id);
+
+    if (error) throw error;
+
+    alert("Report deleted successfully!");
+
+    await showMyReports();
+
+  } catch (error) {
+    console.error("Delete error:", error);
+    alert("Delete failed: " + error.message);
+  }
+}
+
