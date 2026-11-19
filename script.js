@@ -690,6 +690,14 @@ if (!user) {
 }
 
 // Create report
+
+const rewardInput = document.getElementById("rewardAmount");
+
+const rewardAmount =
+  itemType.value === "Lost" && rewardInput.value
+    ? Number(rewardInput.value)
+    : null;
+
 const report = {
   user_id: user.id,
   name: document.getElementById("itemName").value.trim(),
@@ -697,8 +705,10 @@ const report = {
   description: document.getElementById("itemDescription").value.trim(),
   location: document.getElementById("itemLocation").value.trim(),
   date: document.getElementById("itemDate").value || null,
-  photo_url: photoUrl || null
+  photo_url: photoUrl || null,
+  reward_amount: rewardAmount
 };
+
 
     const { error } = await supabaseClient
       .from("reports")
