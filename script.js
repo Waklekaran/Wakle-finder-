@@ -1440,4 +1440,55 @@ async function deleteReport(reportId) {
     alert("Delete failed: " + error.message);
   }
 }
+// GET TAGGED PIN MAP
 
+const getTaggedPinBtn = document.getElementById("getTaggedPin");
+const pinMapSection = document.getElementById("pinMapSection");
+const selectedPinLocation = document.getElementById("selectedPinLocation");
+
+let pinMap = null;
+let selectedMarker = null;
+let selectedPinCoords = null;
+
+getTaggedPinBtn.addEventListener("click", function () {
+  pinMapSection.style.display = "block";
+
+  if (!pinMap) {
+    pinMap = L.map("pinMap").setView([20.5937, 78.9629], 5);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(pinMap);
+
+    pinMap.on("click", function (event) {
+      setSelectedPin(event.latlng);
+    });
+  }
+
+  setTimeout(function () {
+    pinMap.invalidateSize();
+  }, 200);
+});
+
+function setSelectedPin(latlng) {
+  selectedPinCoords = {
+    latitude: latlng.lat,
+    longitude: latlng.lng
+  };
+
+  if (selectedMarker) {
+    selectedMarker.setLatLng(latlng);
+  } else {
+    selectedMarker = L.marker(latlng, {
+      draggable: true
+    }).addTo(pinMap);
+
+    selectedMarker.on("dragend", function () {
+      setSelectedPin(selectedMarker.getLatLng());
+    });
+  }
+
+  selectedPinLocation.textContent =
+    "📍 " + latlng.lat.toFixed(6) +
+    ", " + latlng.lng.toFixed(6);
+}
