@@ -792,88 +792,105 @@ window.addEventListener("online", syncOfflineReports);
 async function syncOfflineReports() {
   if (!navigator.onLine) return;
 
-  const pendingReports = await getOfflineReports();
-  const { data: sessionData, error: sessionError } =
-  await supabaseClient.auth.getSession();
+  try {
+    const pendingReports = await getOfflineReports();
 
-if (sessionError) throw sessionError;
+    if (pendingReports.length === 0) return;
 
-const currentUser = sessionData.session?.user;
+    const { data: sessionData, error: sessionError } =
+      await supabaseClient.auth.getSession();
 
-if (!currentUser) {
-  console.log("Please login to sync offline reports.");
-  return;
-}
+    if (sessionError) throw sessionError;
 
-  if (pendingReports.length === 0) return;
+    const currentUser = sessionData.session?.user;
 
-  console.log("Syncing offline reports:", pendingReports.length);
-
-  for (const report of pendingReports) {
-    if (report.user_id !== currentUser.id) {
-  console.log("Skipping report from another user:", report.localId);
-  continue;
-      await updateOfflineStatus();
+    if (!currentUser) {
+      console.log("Please login to sync offline reports.");
+      return;
     }
-    try {
-      const syncedReport = {
-  user_id: report.user_id,
-  name: report.name,
-  type: report.type,
-  description: report.description,
-  location: report.location,
-  date: report.date,
-  reward_amount: report.reward_amount,
-  photo_url: photoUrl,
-  offline_id: report.localId
-};
 
-const { error: insertError } = await supabaseClient
-  .from("reports")
-  .upsert([syncedReport], {
-    onConflict: "offline_id"
-  });
+    console.log("Syncing offline reports:", pendingReports.length);
 
-if (insertError) throw insertError;
+    for (const report of pendingReports) {
+      if (report.user_id !== currentUser.id) {
+        console.log("Skipping report from another user:", report.localId);
+        continue;
+      }
 
-await deleteOfflineReport(report.localId);
+      try {
+        let photoUrl = null;
 
-console.log("Report synced successfully:", report.localId);
-      let photoUrl = null;
+        // Upload offline photo
+        if (report.offline_photo_data) {
+          const photoBlob = await (
+            await fetch(report.offline_photo_data)
+          ).blob();
 
-if (report.offline_photo_data) {
-  const photoBlob = await (
-    await fetch(report.offline_photo_data)
-  ).blob();
+          const photoPath =
+            "offline-" +
+            report.localId.replace(/[^a-zA-Z0-9-]/g, "") +
+            ".jpg";
 
-  const photoPath =
-    "offline-" + report.localId.replace(/[^a-zA-Z0-9-]/g, "") + ".jpg";
+          const { error: uploadError } =
+            await supabaseClient.storage
+              .from("report-photos")
+              .upload(photoPath, photoBlob, {
+                upsert: true,
+                contentType: "image/jpeg"
+              });
 
-  const { error: uploadError } =
-    await supabaseClient.storage
-      .from("report-photos")
-      .upload(photoPath, photoBlob, {
-        upsert: true,
-        contentType: "image/jpeg"
-      });
+          if (uploadError) throw uploadError;
 
-  if (uploadError) throw uploadError;
+          const { data: photoData } =
+            supabaseClient.storage
+              .from("report-photos")
+              .getPublicUrl(photoPath);
 
-  const { data: photoData } =
-    supabaseClient.storage
-      .from("report-photos")
-      .getPublicUrl(photoPath);
+          photoUrl = photoData.publicUrl;
+        }
 
-  photoUrl = photoData.publicUrl;
-}
+        // Prepare report
+        const syncedReport = {
+          user_id: report.user_id,
+          name: report.name,
+          type: report.type,
+          description: report.description,
+          location: report.location,
+          date: report.date,
+          reward_amount: report.reward_amount,
+          photo_url: photoUrl,
+          offline_id: report.localId
+        };
 
-console.log("Photo ready for sync:", report.localId);
+        // Save to Supabase
+        const { error: insertError } =
+          await supabaseClient
+            .from("reports")
+            .upsert([syncedReport], {
+              onConflict: "offline_id"
+            });
+
+        if (insertError) throw insertError;
+
+        // Remove from local queue only after successful save
+        await deleteOfflineReport(report.localId);
+
+        console.log("Report synced successfully:", report.localId);
+
+      } catch (error) {
+        console.error(
+          "Offline sync error:",
+          report.localId,
+          error
+        );
+      }
     }
+
+    await updateOfflineStatus();
+
+  } catch (error) {
+    console.error("Offline sync process failed:", error);
   }
-}
-updateOfflineStatus();
-if (navigator.onLine) {
-  syncOfflineReports();
 }
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
