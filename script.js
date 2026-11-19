@@ -958,6 +958,10 @@ if (!user) {
 // Create report
 
 const rewardInput = document.getElementById("rewardAmount");
+    const rewardAmount =
+  itemType.value === "Lost" && rewardInput.value
+    ? Number(rewardInput.value)
+    : null;
 
 const report = {
   user_id: user.id,
