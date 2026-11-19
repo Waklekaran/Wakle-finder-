@@ -871,6 +871,9 @@ console.log("Photo ready for sync:", report.localId);
   }
 }
 updateOfflineStatus();
+if (navigator.onLine) {
+  syncOfflineReports();
+}
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
   event.preventDefault();
