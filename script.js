@@ -1097,12 +1097,15 @@ if (report.type === "Found") {
     const { error } = await supabaseClient
       .from("reports")
       .update({
-        name: name.trim(),
-        description: description.trim(),
-        location: location.trim(),
-        date: date.trim() || null,
-        photo_url: photoUrl
-      })
+  name: name.trim(),
+  description: description.trim(),
+  location: location.trim(),
+  date: date.trim() || null,
+  reward_amount:
+    report.type === "Lost" && rewardAmount !== ""
+      ? Number(rewardAmount)
+      : null
+})
       .eq("id", report.id)
       .eq("user_id", authData.user.id);
 
