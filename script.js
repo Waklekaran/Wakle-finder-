@@ -212,12 +212,14 @@ function showReports() {
 function reportLostItem() {
   itemForm.reset();
   itemType.value = "Lost";
+  updateRewardVisibility();
   showScreen(reportScreen);
 }
 
 function reportFoundItem() {
   itemForm.reset();
   itemType.value = "Found";
+  updateRewardVisibility();
   showScreen(reportScreen);
 }
 
