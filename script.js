@@ -786,7 +786,26 @@ async function updateOfflineStatus() {
 
 window.addEventListener("online", updateOfflineStatus);
 window.addEventListener("offline", updateOfflineStatus);
+// AUTO SYNC OFFLINE REPORTS
 
+async function syncOfflineReports() {
+  if (!navigator.onLine) return;
+
+  const pendingReports = await getOfflineReports();
+
+  if (pendingReports.length === 0) return;
+
+  console.log("Syncing offline reports:", pendingReports.length);
+
+  for (const report of pendingReports) {
+    try {
+      // Sync process will be added next
+      console.log("Preparing report:", report.localId);
+    } catch (error) {
+      console.error("Offline sync error:", error);
+    }
+  }
+}
 updateOfflineStatus();
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
