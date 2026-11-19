@@ -814,10 +814,35 @@ if (!currentUser) {
   continue;
     }
     try {
-      // Sync process will be added next
-      console.log("Preparing report:", report.localId);
-    } catch (error) {
-      console.error("Offline sync error:", error);
+      let photoUrl = null;
+
+if (report.offline_photo_data) {
+  const photoBlob = await (
+    await fetch(report.offline_photo_data)
+  ).blob();
+
+  const photoPath =
+    "offline-" + report.localId.replace(/[^a-zA-Z0-9-]/g, "") + ".jpg";
+
+  const { error: uploadError } =
+    await supabaseClient.storage
+      .from("report-photos")
+      .upload(photoPath, photoBlob, {
+        upsert: true,
+        contentType: "image/jpeg"
+      });
+
+  if (uploadError) throw uploadError;
+
+  const { data: photoData } =
+    supabaseClient.storage
+      .from("report-photos")
+      .getPublicUrl(photoPath);
+
+  photoUrl = photoData.publicUrl;
+}
+
+console.log("Photo ready for sync:", report.localId);
     }
   }
 }
