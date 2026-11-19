@@ -657,7 +657,98 @@ function showReportDetails(report) {
 
   showScreen(detailsScreen);
 }
+// OFFLINE REPORT STORAGE
 
+function openOfflineDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open("WakleFinderOfflineDB", 1);
+
+    request.onupgradeneeded = function(event) {
+      const db = event.target.result;
+
+      if (!db.objectStoreNames.contains("pendingReports")) {
+        db.createObjectStore("pendingReports", {
+          keyPath: "localId"
+        });
+      }
+    };
+
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveOfflineReport(report) {
+  const db = await openOfflineDB();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(
+      "pendingReports",
+      "readwrite"
+    );
+
+    transaction.objectStore("pendingReports").put(report);
+
+    transaction.oncomplete = () => {
+      db.close();
+      resolve(true);
+    };
+
+    transaction.onerror = () => {
+      db.close();
+      reject(transaction.error);
+    };
+  });
+}
+
+async function getOfflineReports() {
+  const db = await openOfflineDB();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(
+      "pendingReports",
+      "readonly"
+    );
+
+    const request = transaction
+      .objectStore("pendingReports")
+      .getAll();
+
+    request.onsuccess = () => {
+      const result = request.result || [];
+      db.close();
+      resolve(result);
+    };
+
+    request.onerror = () => {
+      db.close();
+      reject(request.error);
+    };
+  });
+}
+
+async function deleteOfflineReport(localId) {
+  const db = await openOfflineDB();
+
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(
+      "pendingReports",
+      "readwrite"
+    );
+
+    transaction.objectStore("pendingReports").delete(localId);
+
+    transaction.oncomplete = () => {
+      db.close();
+      resolve(true);
+    };
+
+    transaction.onerror = () => {
+      db.close();
+      reject(transaction.error);
+    };
+  });
+      }
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
   event.preventDefault();
