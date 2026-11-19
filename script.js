@@ -871,7 +871,19 @@ const report = {
   } : {})
 };
 
+    if (isOffline) {
+  await saveOfflineReport(report);
 
+  alert("📴 Report saved on your device! It will sync when internet is available.");
+
+  itemForm.reset();
+  selectedPhotoData = null;
+  photoPreview.innerHTML = "";
+
+  await updateOfflineStatus();
+
+  return;
+    }
     const { error } = await supabaseClient
       .from("reports")
       .insert([report]);
