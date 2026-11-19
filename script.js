@@ -792,6 +792,17 @@ async function syncOfflineReports() {
   if (!navigator.onLine) return;
 
   const pendingReports = await getOfflineReports();
+  const { data: sessionData, error: sessionError } =
+  await supabaseClient.auth.getSession();
+
+if (sessionError) throw sessionError;
+
+const currentUser = sessionData.session?.user;
+
+if (!currentUser) {
+  console.log("Please login to sync offline reports.");
+  return;
+}
 
   if (pendingReports.length === 0) return;
 
