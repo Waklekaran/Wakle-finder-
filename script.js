@@ -1296,17 +1296,26 @@ if (report.type === "Found") {
 
     if (changePhoto) {
       const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.accept = "image/jpeg,image/png,image/webp";
 
-      const file = await new Promise(resolve => {
-        fileInput.onchange = () =>
-          resolve(fileInput.files[0] || null);
+fileInput.type = "file";
+fileInput.accept = "image/jpeg,image/png,image/webp";
+fileInput.style.display = "none";
 
-        fileInput.oncancel = () => resolve(null);
+document.body.appendChild(fileInput);
 
-        fileInput.click();
-      });
+const file = await new Promise(resolve => {
+  file.addEventListener("change", function() {
+    resolve(fileInput.files[0] || null);
+    fileInput.remove();
+  }, { once: true });
+
+  file.addEventListener("cancel", function() {
+    resolve(null);
+    fileInput.remove();
+  }, { once: true });
+
+  file.click();
+});
 
       if (file) {
         if (!file.type.startsWith("image/")) {
