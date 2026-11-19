@@ -595,7 +595,6 @@ function showReportDetails(report) {
   reportDetails.style.background = "#ffffff";
   reportDetails.style.boxShadow =
     "0 4px 18px rgba(0,0,0,0.10)";
-  
 
   // Item Name
   const title = document.createElement("h2");
@@ -654,6 +653,55 @@ function showReportDetails(report) {
     row.append(label, value);
     reportDetails.appendChild(row);
   });
+
+  // 360 Degree Street View
+  const streetViewBtn = document.createElement("button");
+  streetViewBtn.textContent = "🌎 Explore 360° Street View";
+  streetViewBtn.style.width = "100%";
+  streetViewBtn.style.padding = "14px";
+  streetViewBtn.style.marginTop = "16px";
+  streetViewBtn.style.border = "none";
+  streetViewBtn.style.borderRadius = "12px";
+  streetViewBtn.style.background = "#2878e8";
+  streetViewBtn.style.color = "#ffffff";
+  streetViewBtn.style.fontSize = "16px";
+  streetViewBtn.style.fontWeight = "bold";
+  streetViewBtn.style.cursor = "pointer";
+
+  streetViewBtn.addEventListener("click", function() {
+    const location = (report.location || "").trim();
+
+    // Check if location contains latitude and longitude
+    const coordinates = location.match(
+      /(-?\d{1,3}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/
+    );
+
+    if (coordinates) {
+      const latitude = Number(coordinates[1]);
+      const longitude = Number(coordinates[2]);
+
+      if (
+        latitude >= -90 && latitude <= 90 &&
+        longitude >= -180 && longitude <= 180
+      ) {
+        const streetViewUrl =
+          "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" +
+          latitude + "," + longitude;
+
+        window.open(streetViewUrl, "_blank");
+        return;
+      }
+    }
+
+    // Fallback for text-based locations
+    const searchUrl =
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(location);
+
+    window.open(searchUrl, "_blank");
+  });
+
+  reportDetails.appendChild(streetViewBtn);
 
   showScreen(detailsScreen);
 }
