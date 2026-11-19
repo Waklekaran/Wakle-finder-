@@ -167,16 +167,43 @@
   accept="image/*"
 >
 <div 
-  <label>Location</label>
-<input type="text" id="itemLocation"
-  placeholder="Where was it lost/found?" required>
+  <label>Item Photo</label>
+<input
+  type="file"
+  id="itemPhoto"
+  accept="image/*"
+>
+
+<div id="photoPreview"></div>
+
+<label>Location</label>
+<input
+  type="text"
+  id="itemLocation"
+  placeholder="Where was it lost/found?"
+  required
+>
 
 <button type="button" id="getTaggedPin">
   📍 Get Tagged Pin
 </button>
-  <div id="pinMapSection" style="display:none;">
 
-  <div id="pinMap" style="height:350px; width:100%; margin-top:10px; border-radius:12px;"></div>
+<div id="pinMapSection" style="display:none;">
+
+  <div
+    id="pinMap"
+    style="height:350px; width:100%; margin-top:10px; border-radius:12px;">
+  </div>
+
+  <p id="selectedPinLocation">
+    Map par location select karo.
+  </p>
+
+  <button type="button" id="confirmTaggedPin">
+    ✅ Confirm Location
+  </button>
+
+</div>
 
   <p id="selectedPinLocation">
     Map par location select karo.
