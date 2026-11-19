@@ -809,6 +809,10 @@ if (!currentUser) {
   console.log("Syncing offline reports:", pendingReports.length);
 
   for (const report of pendingReports) {
+    if (report.user_id !== currentUser.id) {
+  console.log("Skipping report from another user:", report.localId);
+  continue;
+    }
     try {
       // Sync process will be added next
       console.log("Preparing report:", report.localId);
