@@ -1254,21 +1254,29 @@ async function editMyReport(report) {
       "Enter date (YYYY-MM-DD):", report.date || ""
     );
     if (date === null) return;
-    let rewardAmount = report.reward_amount || "";
+    let rewardAmount = report.reward_amount ?? "";
 
-let rewardBadge = null;
+if (report.type === "Lost") {
+  const newReward = prompt(
+    "Enter reward amount (₹). Leave empty for no reward:",
+    rewardAmount
+  );
 
-if (report.type === "Lost" && Number(report.reward_amount) > 0) {
-  rewardBadge = document.createElement("p");
+  if (newReward === null) return;
 
-  rewardBadge.textContent =
-    "🎁 Reward Offered: ₹" + report.reward_amount;
+  if (
+    newReward.trim() !== "" &&
+    (!Number.isFinite(Number(newReward)) ||
+      Number(newReward) < 0)
+  ) {
+    alert("Please enter a valid reward amount.");
+    return;
+  }
 
-  rewardBadge.style.color = "#16803c";
-  rewardBadge.style.fontWeight = "bold";
-  rewardBadge.style.background = "#e8f5e9";
-  rewardBadge.style.padding = "8px 12px";
-  rewardBadge.style.borderRadius = "10px";
+  rewardAmount =
+    newReward.trim() === ""
+      ? null
+      : Number(newReward);
 }
 
 if (report.type === "Found") {
