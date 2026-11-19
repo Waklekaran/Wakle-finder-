@@ -813,6 +813,7 @@ if (!currentUser) {
     if (report.user_id !== currentUser.id) {
   console.log("Skipping report from another user:", report.localId);
   continue;
+      await updateOfflineStatus();
     }
     try {
       const syncedReport = {
