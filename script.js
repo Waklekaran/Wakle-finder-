@@ -463,6 +463,23 @@ function createReportCard(report, index, isMine = false) {
   const location = document.createElement("p");
   location.textContent = "Location: " + report.location;
 
+  
+if (report.type === "Lost" && Number(report.reward_amount) > 0) {
+  const rewardBadge = document.createElement("p");
+
+  rewardBadge.textContent =
+    "🎁 Reward Offered: ₹" + report.reward_amount;
+
+  rewardBadge.style.color = "#16803c";
+  rewardBadge.style.fontWeight = "bold";
+  rewardBadge.style.background = "#e8f5e9";
+  rewardBadge.style.padding = "8px 12px";
+  rewardBadge.style.borderRadius = "10px";
+
+  card.appendChild(rewardBadge);
+}
+
+
   const viewButton = document.createElement("button");
   viewButton.textContent = "View Details";
 
