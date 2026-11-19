@@ -1303,6 +1303,13 @@ if (changePhoto) {
   fileInput.style.display = "none";
 
   document.body.appendChild(fileInput);
+  const fileInput = document.createElement("input");
+
+fileInput.type = "file";
+fileInput.accept = "image/jpeg,image/png,image/webp";
+fileInput.style.display = "none";
+
+document.body.appendChild(fileInput);
 
   const file = await new Promise(resolve => {
     fileInput.addEventListener("change", function() {
