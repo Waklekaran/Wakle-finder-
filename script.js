@@ -1492,3 +1492,25 @@ function setSelectedPin(latlng) {
     "📍 " + latlng.lat.toFixed(6) +
     ", " + latlng.lng.toFixed(6);
 }
+// CONFIRM TAGGED PIN
+
+const confirmTaggedPinBtn =
+  document.getElementById("confirmTaggedPin");
+
+confirmTaggedPinBtn.addEventListener("click", function () {
+  if (!selectedPinCoords) {
+    alert("Please select a location on the map first.");
+    return;
+  }
+
+  const locationText =
+    selectedPinCoords.latitude.toFixed(6) +
+    ", " +
+    selectedPinCoords.longitude.toFixed(6);
+
+  document.getElementById("itemLocation").value = locationText;
+
+  pinMapSection.style.display = "none";
+
+  alert("📍 Location tagged successfully!");
+});
