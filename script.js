@@ -786,6 +786,7 @@ async function updateOfflineStatus() {
 
 window.addEventListener("online", updateOfflineStatus);
 window.addEventListener("offline", updateOfflineStatus);
+window.addEventListener("online", syncOfflineReports);
 // AUTO SYNC OFFLINE REPORTS
 
 async function syncOfflineReports() {
