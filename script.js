@@ -1225,6 +1225,7 @@ async function logoutUser() {
   showHome();
 }
 
+
 async function editMyReport(report) {
   try {
     const { data: authData, error: authError } =
@@ -1241,131 +1242,79 @@ async function editMyReport(report) {
     if (name === null) return;
 
     const description = prompt(
-      "Enter description:", report.description || ""
+      "Enter description:",
+      report.description || ""
     );
     if (description === null) return;
 
     const location = prompt(
-      "Enter location:", report.location || ""
+      "Enter location:",
+      report.location || ""
     );
     if (location === null) return;
 
     const date = prompt(
-      "Enter date (YYYY-MM-DD):", report.date || ""
+      "Enter date (YYYY-MM-DD):",
+      report.date || ""
     );
     if (date === null) return;
+
     let rewardAmount = report.reward_amount ?? "";
 
-if (report.type === "Lost") {
-  const newReward = prompt(
-    "Enter reward amount (₹). Leave empty for no reward:",
-    rewardAmount
-  );
+    if (report.type === "Lost") {
+      const newReward = prompt(
+        "Enter reward amount (₹). Leave empty for no reward:",
+        rewardAmount
+      );
 
-  if (newReward === null) return;
+      if (newReward === null) return;
 
-  if (
-    newReward.trim() !== "" &&
-    (!Number.isFinite(Number(newReward)) ||
-      Number(newReward) < 0)
-  ) {
-    alert("Please enter a valid reward amount.");
-    return;
-  }
+      if (
+        newReward.trim() !== "" &&
+        (!Number.isFinite(Number(newReward)) ||
+          Number(newReward) < 0)
+      ) {
+        alert("Please enter a valid reward amount.");
+        return;
+      }
 
-  rewardAmount =
-    newReward.trim() === ""
-      ? null
-      : Number(newReward);
-}
+      rewardAmount =
+        newReward.trim() === ""
+          ? null
+          : Number(newReward);
+    }
 
-if (report.type === "Found") {
-  rewardAmount = null;
-}
+    if (report.type === "Found") {
+      rewardAmount = null;
+    }
 
     if (!name.trim()) {
       alert("Item name cannot be empty.");
       return;
     }
 
-    
-let photoUrl = report.photo_url || null;
+    let photoUrl = report.photo_url || null;
 
-const changePhoto = confirm(
-  "Do you want to change the report photo?"
-);
+    const changePhoto = confirm(
+      "Do you want to change the report photo?"
+    );
 
-if (changePhoto) {
-  const fileInput = document.createElement("input");
+    if (changePhoto) {
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/jpeg,image/png,image/webp";
 
-  fileInput.type = "file";
-  fileInput.accept = "image/jpeg,image/png,image/webp";
-  fileInput.style.display = "none";
+      const file = await new Promise(resolve => {
+        fileInput.addEventListener("change", function() {
+          resolve(fileInput.files[0] || null);
+        }, { once: true });
 
-  document.body.appendChild(fileInput);
-  const fileInput = document.createElement("input");
+        fileInput.addEventListener("cancel", function() {
+          resolve(null);
+        }, { once: true });
 
-fileInput.type = "file";
-fileInput.accept = "image/jpeg,image/png,image/webp";
-fileInput.style.display = "none";
-
-document.body.appendChild(fileInput);
-
-  const file = await new Promise(resolve => {
-    fileInput.addEventListener("change", function() {
-      resolve(fileInput.files[0] || null);
-      fileInput.remove();
-    }, { once: true });
-
-    fileInput.addEventListener("cancel", function() {
-      resolve(null);
-      fileInput.remove();
-    }, { once: true });
-
-    fileInput.click();
-  });
-
-  if (file) {
-    if (!file.type.startsWith("image/")) {
-      alert("Please select a valid image.");
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Photo must be smaller than 5 MB.");
-      return;
-    }
-
-    const extension = file.name.split(".").pop().toLowerCase();
-
-    if (!["jpg", "jpeg", "png", "webp"].includes(extension)) {
-      alert("Only JPG, JPEG, PNG and WEBP are allowed.");
-      return;
-    }
-
-    const photoPath =
-      Date.now() + "-" +
-      Math.random().toString(36).slice(2) +
-      "." + extension;
-
-    const { error: uploadError } =
-      await supabaseClient.storage
-        .from("report-photos")
-        .upload(photoPath, file, {
-          contentType: file.type
-        });
-
-    if (uploadError) throw uploadError;
-
-    const { data: photoData } =
-      supabaseClient.storage
-        .from("report-photos")
-        .getPublicUrl(photoPath);
-
-    photoUrl = photoData.publicUrl;
-  }
-}
-
+        fileInput.click();
+      });
 
       if (file) {
         if (!file.type.startsWith("image/")) {
@@ -1385,7 +1334,6 @@ document.body.appendChild(fileInput);
           return;
         }
 
-        
         const photoPath =
           Date.now() + "-" +
           Math.random().toString(36).slice(2) +
@@ -1411,26 +1359,23 @@ document.body.appendChild(fileInput);
 
     const { error } = await supabaseClient
       .from("reports")
-      
-.update({
-  name: name.trim(),
-  description: description.trim(),
-  location: location.trim(),
-  date: date.trim() || null,
-  reward_amount:
-    report.type === "Lost" && rewardAmount !== ""
-      ? Number(rewardAmount)
-      : null,
-  photo_url: photoUrl
-})
-
+      .update({
+        name: name.trim(),
+        description: description.trim(),
+        location: location.trim(),
+        date: date.trim() || null,
+        reward_amount:
+          report.type === "Lost" && rewardAmount !== ""
+            ? Number(rewardAmount)
+            : null,
+        photo_url: photoUrl
+      })
       .eq("id", report.id)
       .eq("user_id", authData.user.id);
 
     if (error) throw error;
 
     alert("Report updated successfully!");
-
     await showMyReports();
 
   } catch (error) {
@@ -1438,6 +1383,7 @@ document.body.appendChild(fileInput);
     alert("Update failed: " + error.message);
   }
 }
+
 
 
 
