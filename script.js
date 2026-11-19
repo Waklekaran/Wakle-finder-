@@ -1004,6 +1004,29 @@ async function editMyReport(report) {
       "Enter date (YYYY-MM-DD):", report.date || ""
     );
     if (date === null) return;
+    let rewardAmount = report.reward_amount || "";
+
+if (report.type === "Lost") {
+  rewardAmount = prompt(
+    "Enter reward amount (leave blank for no reward):",
+    report.reward_amount || ""
+  );
+
+  if (rewardAmount === null) return;
+
+  if (
+    rewardAmount.trim() !== "" &&
+    (!Number.isFinite(Number(rewardAmount)) ||
+      Number(rewardAmount) <= 0)
+  ) {
+    alert("Please enter a valid positive reward amount.");
+    return;
+  }
+}
+
+if (report.type === "Found") {
+  rewardAmount = null;
+}
 
     if (!name.trim()) {
       alert("Item name cannot be empty.");
