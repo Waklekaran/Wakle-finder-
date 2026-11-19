@@ -856,21 +856,19 @@ if (!user) {
 const rewardInput = document.getElementById("rewardAmount");
 
 const report = {
-  localId: isOffline
-    ? Date.now() + "-" + Math.random().toString(36).slice(2)
-    : undefined,
-
   user_id: user.id,
   name: document.getElementById("itemName").value.trim(),
   type: itemType.value,
   description: document.getElementById("itemDescription").value.trim(),
   location: document.getElementById("itemLocation").value.trim(),
   date: document.getElementById("itemDate").value || null,
-
   photo_url: photoUrl || null,
-  offline_photo_data: isOffline ? selectedPhotoData : null,
+  reward_amount: rewardAmount,
 
-  reward_amount: rewardAmount
+  ...(isOffline ? {
+    localId: Date.now() + "-" + Math.random().toString(36).slice(2),
+    offline_photo_data: selectedPhotoData || null
+  } : {})
 };
 
 
