@@ -26,6 +26,18 @@ const itemPhoto = document.getElementById("itemPhoto");
 const photoPreview = document.getElementById("photoPreview");
 
 let selectedPhotoData = "";
+function updateRewardVisibility() {
+  const rewardField = document.getElementById("rewardField");
+
+  if (!rewardField) return;
+
+  rewardField.style.display =
+    itemType.value === "Lost" ? "block" : "none";
+}
+
+itemType.addEventListener("change", updateRewardVisibility);
+updateRewardVisibility();
+
 
 // Photo upload and preview
 itemPhoto.addEventListener("change", function() {
