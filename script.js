@@ -814,6 +814,29 @@ if (!currentUser) {
   continue;
     }
     try {
+      const syncedReport = {
+  user_id: report.user_id,
+  name: report.name,
+  type: report.type,
+  description: report.description,
+  location: report.location,
+  date: report.date,
+  reward_amount: report.reward_amount,
+  photo_url: photoUrl,
+  offline_id: report.localId
+};
+
+const { error: insertError } = await supabaseClient
+  .from("reports")
+  .upsert([syncedReport], {
+    onConflict: "offline_id"
+  });
+
+if (insertError) throw insertError;
+
+await deleteOfflineReport(report.localId);
+
+console.log("Report synced successfully:", report.localId);
       let photoUrl = null;
 
 if (report.offline_photo_data) {
