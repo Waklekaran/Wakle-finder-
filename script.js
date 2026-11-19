@@ -809,7 +809,7 @@ itemForm.addEventListener("submit", async function(event) {
     let photoUrl = "";
 
     // Upload photo to Supabase Storage
-    if (selectedPhotoData) {
+    if (selectedPhotoData && isOffline) {
       const photoBlob = await (
         await fetch(selectedPhotoData)
       ).blob();
