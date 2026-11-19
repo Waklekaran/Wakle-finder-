@@ -805,6 +805,7 @@ itemForm.addEventListener("submit", async function(event) {
   submitButton.textContent = "Submitting...";
 
   try {
+    const isOffline = !navigator.onLine;
     let photoUrl = "";
 
     // Upload photo to Supabase Storage
