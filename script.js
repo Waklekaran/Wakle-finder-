@@ -749,6 +749,45 @@ async function deleteOfflineReport(localId) {
     };
   });
       }
+// OFFLINE STATUS DISPLAY
+
+const offlineStatusBox = document.createElement("div");
+
+offlineStatusBox.style.padding = "10px";
+offlineStatusBox.style.margin = "10px";
+offlineStatusBox.style.borderRadius = "10px";
+offlineStatusBox.style.textAlign = "center";
+offlineStatusBox.style.fontWeight = "bold";
+
+document.body.prepend(offlineStatusBox);
+
+async function updateOfflineStatus() {
+  if (!navigator.onLine) {
+    offlineStatusBox.textContent =
+      "📴 Offline Mode — Reports will be saved on your device";
+    offlineStatusBox.style.background = "#fff3cd";
+    offlineStatusBox.style.color = "#856404";
+  } else {
+    offlineStatusBox.textContent =
+      "🟢 Online — Internet connected";
+    offlineStatusBox.style.background = "#e8f5e9";
+    offlineStatusBox.style.color = "#16803c";
+  }
+
+  try {
+    const pending = await getOfflineReports();
+
+    offlineStatusBox.textContent +=
+      " | Pending Reports: " + pending.length;
+  } catch (error) {
+    console.error("Offline status error:", error);
+  }
+}
+
+window.addEventListener("online", updateOfflineStatus);
+window.addEventListener("offline", updateOfflineStatus);
+
+updateOfflineStatus();
   // Submit report to Supabase
 itemForm.addEventListener("submit", async function(event) {
   event.preventDefault();
