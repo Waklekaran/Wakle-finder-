@@ -1288,34 +1288,77 @@ if (report.type === "Found") {
       return;
     }
 
-    let photoUrl = report.photo_url || null;
+    
+let photoUrl = report.photo_url || null;
 
-    const changePhoto = confirm(
-      "Do you want to change the report photo?"
-    );
+const changePhoto = confirm(
+  "Do you want to change the report photo?"
+);
 
-    if (changePhoto) {
-      const fileInput = document.createElement("input");
+if (changePhoto) {
+  const fileInput = document.createElement("input");
 
-fileInput.type = "file";
-fileInput.accept = "image/jpeg,image/png,image/webp";
-fileInput.style.display = "none";
+  fileInput.type = "file";
+  fileInput.accept = "image/jpeg,image/png,image/webp";
+  fileInput.style.display = "none";
 
-document.body.appendChild(fileInput);
+  document.body.appendChild(fileInput);
 
-const file = await new Promise(resolve => {
-  file.addEventListener("change", function() {
-    resolve(fileInput.files[0] || null);
-    fileInput.remove();
-  }, { once: true });
+  const file = await new Promise(resolve => {
+    fileInput.addEventListener("change", function() {
+      resolve(fileInput.files[0] || null);
+      fileInput.remove();
+    }, { once: true });
 
-  file.addEventListener("cancel", function() {
-    resolve(null);
-    fileInput.remove();
-  }, { once: true });
+    fileInput.addEventListener("cancel", function() {
+      resolve(null);
+      fileInput.remove();
+    }, { once: true });
 
-  file.click();
-});
+    fileInput.click();
+  });
+
+  if (file) {
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image.");
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Photo must be smaller than 5 MB.");
+      return;
+    }
+
+    const extension = file.name.split(".").pop().toLowerCase();
+
+    if (!["jpg", "jpeg", "png", "webp"].includes(extension)) {
+      alert("Only JPG, JPEG, PNG and WEBP are allowed.");
+      return;
+    }
+
+    const photoPath =
+      Date.now() + "-" +
+      Math.random().toString(36).slice(2) +
+      "." + extension;
+
+    const { error: uploadError } =
+      await supabaseClient.storage
+        .from("report-photos")
+        .upload(photoPath, file, {
+          contentType: file.type
+        });
+
+    if (uploadError) throw uploadError;
+
+    const { data: photoData } =
+      supabaseClient.storage
+        .from("report-photos")
+        .getPublicUrl(photoPath);
+
+    photoUrl = photoData.publicUrl;
+  }
+}
+
 
       if (file) {
         if (!file.type.startsWith("image/")) {
@@ -1335,6 +1378,7 @@ const file = await new Promise(resolve => {
           return;
         }
 
+        
         const photoPath =
           Date.now() + "-" +
           Math.random().toString(36).slice(2) +
