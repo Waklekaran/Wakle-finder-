@@ -944,11 +944,11 @@ itemForm.addEventListener("submit", async function(event) {
 
 // Get logged-in user
 const { data: authData, error: authError } =
-  await supabaseClient.auth.getUser();
+  await supabaseClient.auth.getSession();
 
 if (authError) throw authError;
 
-const user = authData.user;
+const user = authData.session?.user;
     alert("Logged-in User ID: " + user?.id);
 
 if (!user) {
