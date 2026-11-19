@@ -1006,22 +1006,19 @@ async function editMyReport(report) {
     if (date === null) return;
     let rewardAmount = report.reward_amount || "";
 
-if (report.type === "Lost") {
-  rewardAmount = prompt(
-    "Enter reward amount (leave blank for no reward):",
-    report.reward_amount || ""
-  );
+let rewardBadge = null;
 
-  if (rewardAmount === null) return;
+if (report.type === "Lost" && Number(report.reward_amount) > 0) {
+  rewardBadge = document.createElement("p");
 
-  if (
-    rewardAmount.trim() !== "" &&
-    (!Number.isFinite(Number(rewardAmount)) ||
-      Number(rewardAmount) <= 0)
-  ) {
-    alert("Please enter a valid positive reward amount.");
-    return;
-  }
+  rewardBadge.textContent =
+    "🎁 Reward Offered: ₹" + report.reward_amount;
+
+  rewardBadge.style.color = "#16803c";
+  rewardBadge.style.fontWeight = "bold";
+  rewardBadge.style.background = "#e8f5e9";
+  rewardBadge.style.padding = "8px 12px";
+  rewardBadge.style.borderRadius = "10px";
 }
 
 if (report.type === "Found") {
