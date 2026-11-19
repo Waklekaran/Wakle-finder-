@@ -163,15 +163,17 @@
   id="itemPhoto"
   accept="image/*"
 >
-<div id="photoPreview"></div>
+<div 
+  <label>Location</label>
+<input type="text" id="itemLocation"
+  placeholder="Where was it lost/found?" required>
 
+<button type="button" id="getTaggedPin">
+  📍 Get Tagged Pin
+</button>
 
-        <label>Location</label>
-        <input type="text" id="itemLocation"
-          placeholder="Where was it lost/found?" required>
-
-        <label>Date</label>
-        <input type="date" id="itemDate" required>
+<label>Date</label>
+<input type="date" id="itemDate" required>
         
 <div class="form-group" id="rewardField">
   <label for="rewardAmount">
