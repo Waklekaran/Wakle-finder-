@@ -500,6 +500,95 @@
     </div>
   </div>
 </div>
+  <script>
+function wfToggleChat() {
+  const chat = document.getElementById("wf-chat-window");
+  const toggle = document.getElementById("wf-chat-toggle");
+
+  const isOpen = chat.style.display !== "none";
+  chat.style.display = isOpen ? "none" : "block";
+  toggle.style.display = isOpen ? "block" : "none";
+}
+
+function wfAddMessage(text, type) {
+  const messages = document.getElementById("wf-chat-messages");
+  const msg = document.createElement("div");
+
+  msg.className = "wf-msg " + type;
+  msg.textContent = text;
+
+  messages.appendChild(msg);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function wfBotReply(text) {
+  const t = text.toLowerCase();
+  let reply = "";
+
+  if (
+    t.includes("report lost") ||
+    t === "lost" || t === "1" ||
+    t.includes("khoya") || t.includes("lost item")
+  ) {
+    reply = "🔍 Lost Item Report\n\nItem ka naam, last seen location aur approximate date note karo. App mein Report Lost section se apni report submit kar sakte ho.";
+  }
+  else if (
+    t.includes("report found") ||
+    t === "found" || t === "2" ||
+    t.includes("mila") || t.includes("found item")
+  ) {
+    reply = "📦 Found Item Report\n\nItem ka naam, jahan mila aur kab mila, note karo. App ke Report Found section se details submit kar sakte ho.";
+  }
+  else if (
+    t.includes("search") || t.includes("find item") ||
+    t === "3" || t.includes("dhund") ||
+    t.includes("shodh")
+  ) {
+    reply = "🧭 Item Search\n\nSearch section mein item ka naam, category aur location enter karke matching items check karo.";
+  }
+  else if (
+    t.includes("hello") || t.includes("hi") ||
+    t.includes("hey") || t.includes("namaste") ||
+    t.includes("namaskar")
+  ) {
+    reply = "👋 Hello! Welcome to Wakle-Finder.\n\nMain Lost & Found Assistant hoon. Main tumhe lost item report, found item report aur item search mein help kar sakta hoon.";
+  }
+  else if (
+    t.includes("help") || t.includes("madat") ||
+    t.includes("मदद")
+  ) {
+    reply = "Main tumhari 3 cheezon mein help kar sakta hoon:\n\n🔍 Lost item report\n📦 Found item report\n🧭 Item search\n\nNeeche diye buttons select karo!";
+  }
+  else {
+    reply = "Main Wakle-Finder ka Lost & Found Assistant hoon. 😊\n\nLost item report karne, found item report karne ya item search karne ke liye neeche buttons use karo. Abhi main basic automated assistant hoon.";
+  }
+
+  setTimeout(() => wfAddMessage(reply, "bot"), 350);
+}
+
+function wfSendMessage() {
+  const input = document.getElementById("wf-chat-input");
+  const text = input.value.trim();
+
+  if (!text) return;
+
+  wfAddMessage(text, "user");
+  input.value = "";
+  wfBotReply(text);
+}
+
+function wfSendQuick(text) {
+  wfAddMessage(text, "user");
+  wfBotReply(text);
+}
+
+document.getElementById("wf-chat-input")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      wfSendMessage();
+    }
+  });
+  </script>
 </body>
 </html>
 
