@@ -1698,7 +1698,7 @@ confirmTaggedPinBtn.addEventListener("click", function () {
 
   alert("📍 Location tagged successfully!");
 });
-// KHOJX - Live Database Search
+// KHOJX - Natural Language Smart Search
 window.khojxSearchItems = async function (searchTerm) {
   const term = searchTerm.trim();
 
@@ -1712,8 +1712,10 @@ window.khojxSearchItems = async function (searchTerm) {
   try {
     const { data, error } = await supabaseClient
       .from("reports")
-      .select("name, type")
-      .ilike("name", `%${term}%`)
+      .select("name, type, description, location")
+      .or(
+        `name.ilike.%${term}%,description.ilike.%${term}%,location.ilike.%${term}%`
+      )
       .limit(10);
 
     if (error) throw error;
@@ -1721,7 +1723,7 @@ window.khojxSearchItems = async function (searchTerm) {
     return {
       success: true,
       results: data || [],
-      message: data && data.length > 0
+      message: data?.length
         ? `Found ${data.length} matching reports.`
         : "No matching reports found."
     };
