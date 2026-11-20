@@ -1270,7 +1270,9 @@ async function logoutUser() {
   }
 
   alert("You have logged out successfully!");
-  showHomshowRepor
+  await updateAuthUI();
+  showHome();
+}
     asyns function editMyReport(report) {
   try {
     const { data: authData, error: authError } =
