@@ -1273,7 +1273,7 @@ async function logoutUser() {
   await updateAuthUI();
   showHome();
 }
-    asyns function editMyReport(report) {
+    async function editMyReport(report) {
   try {
     const { data: authData, error: authError } =
       await supabaseClient.auth.getUser();
