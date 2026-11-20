@@ -369,8 +369,21 @@ function calculateMatchScore(lost, found) {
   const descriptionScore =
     textSimilarity(lost.description, found.description);
 
-  const locationScore =
+  const textLocationScore =
     textSimilarity(lost.location, found.location);
+
+  const distanceKm =
+    calculateDistanceKm(lost.location, found.location);
+
+  const proximityScore =
+    calculateProximityScore(distanceKm);
+
+  // GPS available ho toh proximity ko priority do
+  const locationScore =
+    proximityScore !== null
+      ? (proximityScore * 0.8) +
+        (textLocationScore * 0.2)
+      : textLocationScore;
 
   const dateScore =
     dateSimilarity(lost.date, found.date);
@@ -383,6 +396,7 @@ function calculateMatchScore(lost, found) {
 
   return Math.round(total);
 }
+  
 function getMatchReasons(lost, found) {
   const reasons = [];
 
