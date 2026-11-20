@@ -538,10 +538,11 @@ if (distance !== null) {
   score,
   reasons,
   note,
-      lostInfo,
-      foundInfo,
-      lostButton,
-      foundButton
+  proximityInfo,
+  lostInfo,
+  foundInfo,
+  lostButton,
+  foundButton
     );
 
     matchesList.appendChild(card);
