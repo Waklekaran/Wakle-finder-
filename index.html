@@ -315,6 +315,40 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="script.js?v=22"></script>
+  <!-- Wakle-Finder AI Chatbot -->
+<div id="wf-chatbot">
+  <button id="wf-chat-toggle" onclick="wfToggleChat()">
+    💬 Chat with Wakle AI
+  </button>
+
+  <div id="wf-chat-window" style="display:none;">
+    <div id="wf-chat-header">
+      <div>
+        <strong>Wakle-Finder AI</strong>
+        <small>Lost & Found Assistant</small>
+      </div>
+      <button onclick="wfToggleChat()">✕</button>
+    </div>
+
+    <div id="wf-chat-messages">
+      <div class="wf-msg bot">
+        Hi! 👋 Welcome to Wakle-Finder.<br>
+        I can help you find lost items or report found items.
+      </div>
+    </div>
+
+    <div id="wf-chat-options">
+      <button onclick="wfSendQuick('Report Lost Item')">🔍 Report Lost</button>
+      <button onclick="wfSendQuick('Report Found Item')">📦 Report Found</button>
+      <button onclick="wfSendQuick('Search Items')">🧭 Search Items</button>
+    </div>
+
+    <div id="wf-chat-input-area">
+      <input id="wf-chat-input" type="text" placeholder="Type your message...">
+      <button onclick="wfSendMessage()">➤</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
 
