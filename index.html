@@ -654,18 +654,10 @@
     t.includes("shodh")
   ) {
     const term = t
-      .replace(/search/gi, "")
-      .replace(/find/gi, "")
-      .replace(/items/gi, "")
-      .replace(/item/gi, "")
-      .replace(/dhundho/gi, "")
-      .replace(/dhund/gi, "")
-      .replace(/shodh/gi, "")
-      .replace(/please/gi, "")
-      .replace(/karo/gi, "")
-      .replace(/kar/gi, "")
-      .replace(/for/gi, "")
-      .trim();
+  .replace(/^(search|find|look for|where is|locate)\s+/i, "")
+  .replace(/\b(my|a|an|the|mera|meri|mujhe|hai|tha|thi|near|at|in|on|please|lost|missing|found|item|items|dhundna|dhundo|kho gaya|kho gayi)\b/gi, "")
+  .replace(/[.,!?]/g, "")
+  .trim();
 
     if (!term) {
       wfAddMessage(
