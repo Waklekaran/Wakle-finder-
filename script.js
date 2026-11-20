@@ -25,14 +25,32 @@ const searchInput = document.getElementById("searchInput");
 const itemPhoto = document.getElementById("itemPhoto");
 const photoPreview = document.getElementById("photoPreview");
 
+
 let selectedPhotoData = "";
+
 function updateRewardVisibility() {
   const rewardField = document.getElementById("rewardField");
+  const verificationFields = document.getElementById("verificationFields");
+  const verificationQuestion = document.getElementById("verificationQuestion");
+  const verificationAnswer = document.getElementById("verificationAnswer");
 
-  if (!rewardField) return;
+  const isLost = itemType.value === "Lost";
 
-  rewardField.style.display =
-    itemType.value === "Lost" ? "block" : "none";
+  if (rewardField) {
+    rewardField.style.display = isLost ? "block" : "none";
+  }
+
+  if (verificationFields) {
+    verificationFields.style.display = isLost ? "block" : "none";
+  }
+
+  if (verificationQuestion) {
+    verificationQuestion.required = isLost;
+  }
+
+  if (verificationAnswer) {
+    verificationAnswer.required = isLost;
+  }
 }
 
 itemType.addEventListener("change", updateRewardVisibility);
