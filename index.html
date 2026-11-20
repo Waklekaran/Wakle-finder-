@@ -160,6 +160,120 @@
   }
 }
   </style>
+  <style>
+/* KHOJX Premium Chat Upgrade */
+#wf-chatbot {
+  right: 16px !important;
+  bottom: 16px !important;
+  z-index: 999999 !important;
+}
+
+#wf-chat-toggle {
+  padding: 16px 23px !important;
+  font-size: 16px !important;
+  letter-spacing: .3px;
+  border-radius: 50px !important;
+}
+
+#wf-chat-window {
+  width: 390px !important;
+  max-width: calc(100vw - 24px) !important;
+  height: min(620px, 82vh) !important;
+  max-height: 82vh !important;
+  border-radius: 24px !important;
+  display: none;
+  overflow: hidden;
+  box-shadow: 0 20px 70px rgba(15, 23, 42, .28) !important;
+}
+
+#wf-chat-header {
+  padding: 20px !important;
+  min-height: 76px;
+  background: linear-gradient(135deg, #101a36, #245bdb, #6b5cff) !important;
+}
+
+#wf-chat-header strong {
+  font-size: 18px;
+  letter-spacing: .8px;
+}
+
+#wf-chat-header small {
+  font-size: 12px;
+  opacity: .9;
+}
+
+#wf-chat-messages {
+  height: auto !important;
+  flex: 1;
+  min-height: 0;
+  padding: 18px !important;
+  background: #f4f7fc !important;
+}
+
+#wf-chat-window {
+  display: none;
+  flex-direction: column;
+}
+
+#wf-chat-window[style*="display: block"] {
+  display: flex !important;
+}
+
+#wf-chat-messages .wf-msg {
+  font-size: 14px !important;
+  padding: 14px !important;
+  border-radius: 18px !important;
+  line-height: 1.65 !important;
+}
+
+#wf-chat-messages .bot {
+  background: white !important;
+  color: #1e293b !important;
+  border: 1px solid #e5eaf2;
+  box-shadow: 0 3px 12px rgba(0,0,0,.04);
+}
+
+#wf-chat-messages .user {
+  background: linear-gradient(135deg, #2563eb, #635bff) !important;
+  border-radius: 18px 18px 4px 18px !important;
+}
+
+#wf-chat-options {
+  padding: 12px !important;
+  gap: 8px !important;
+}
+
+#wf-chat-options button {
+  padding: 10px 13px !important;
+  font-size: 12px !important;
+  border-radius: 25px !important;
+  background: #f5f8ff !important;
+  border-color: #d8e3ff !important;
+}
+
+#wf-chat-input-area {
+  padding: 14px !important;
+  background: white !important;
+}
+
+#wf-chat-input {
+  padding: 13px 16px !important;
+  border-radius: 30px !important;
+}
+
+@media (max-width: 480px) {
+  #wf-chatbot {
+    right: 12px !important;
+    bottom: 12px !important;
+  }
+
+  #wf-chat-window {
+    width: calc(100vw - 24px) !important;
+    height: 75vh !important;
+    max-height: 75vh !important;
+  }
+}
+  </style>
 </head>
 <body>
 
