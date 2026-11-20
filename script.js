@@ -292,7 +292,76 @@ function dateSimilarity(date1, date2) {
 
   return 0;
 }
+// SMART LOCATION PROXIMITY AGENT
 
+function extractCoordinates(location) {
+  if (!location) return null;
+
+  const match = String(location).match(
+    /^\s*(-?\d{1,3}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)\s*$/
+  );
+
+  if (!match) return null;
+
+  const latitude = Number(match[1]);
+  const longitude = Number(match[2]);
+
+  if (
+    latitude < -90 || latitude > 90 ||
+    longitude < -180 || longitude > 180
+  ) {
+    return null;
+  }
+
+  return { latitude, longitude };
+}
+
+// Distance between two GPS coordinates in KM
+function calculateDistanceKm(location1, location2) {
+  const point1 = extractCoordinates(location1);
+  const point2 = extractCoordinates(location2);
+
+  if (!point1 || !point2) return null;
+
+  const toRadians = degrees => degrees * Math.PI / 180;
+
+  const lat1 = toRadians(point1.latitude);
+  const lat2 = toRadians(point2.latitude);
+
+  const deltaLat = toRadians(
+    point2.latitude - point1.latitude
+  );
+
+  const deltaLon = toRadians(
+    point2.longitude - point1.longitude
+  );
+
+  const a =
+    Math.sin(deltaLat / 2) ** 2 +
+    Math.cos(lat1) *
+    Math.cos(lat2) *
+    Math.sin(deltaLon / 2) ** 2;
+
+  const earthRadius = 6371;
+
+  const c = 2 * Math.atan2(
+    Math.sqrt(a),
+    Math.sqrt(1 - a)
+  );
+
+  return earthRadius * c;
+}
+
+function calculateProximityScore(distanceKm) {
+  if (distanceKm === null) return null;
+
+  if (distanceKm <= 1) return 100;
+  if (distanceKm <= 3) return 80;
+  if (distanceKm <= 5) return 60;
+  if (distanceKm <= 10) return 30;
+
+  return 0;
+}
 function calculateMatchScore(lost, found) {
   const nameScore =
     textSimilarity(lost.name, found.name);
