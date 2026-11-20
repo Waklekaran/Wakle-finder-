@@ -487,6 +487,29 @@ note.textContent =
 
 note.style.fontSize = "13px";
 note.style.color = "#777";
+    // Smart Location Proximity display
+const distance = calculateDistanceKm(
+  match.lost.location,
+  match.found.location
+);
+
+const proximityInfo = document.createElement("p");
+
+if (distance !== null) {
+  proximityInfo.textContent =
+    distance < 1
+      ? "📍 " + Math.round(distance * 1000) + " meters apart"
+      : "📍 " + distance.toFixed(2) + " km apart";
+
+  proximityInfo.style.color = "#16803c";
+  proximityInfo.style.fontWeight = "bold";
+  proximityInfo.style.background = "#e8f5e9";
+  proximityInfo.style.padding = "8px";
+  proximityInfo.style.borderRadius = "8px";
+} else {
+  proximityInfo.textContent =
+    "📍 Distance unavailable — location coordinates missing";
+}
 
     const lostInfo = document.createElement("p");
     lostInfo.textContent =
