@@ -1270,11 +1270,8 @@ async function logoutUser() {
   }
 
   alert("You have logged out successfully!");
-  showHome();
-}
-
-
-async function editMyReport(report) {
+  showHomshowRepor
+    asyns function editMyReport(report) {
   try {
     const { data: authData, error: authError } =
       await supabaseClient.auth.getUser();
