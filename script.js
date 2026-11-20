@@ -1698,3 +1698,41 @@ confirmTaggedPinBtn.addEventListener("click", function () {
 
   alert("📍 Location tagged successfully!");
 });
+// KHOJX - Live Database Search
+window.khojxSearchItems = async function (searchTerm) {
+  const term = searchTerm.trim();
+
+  if (!term) {
+    return {
+      success: false,
+      message: "Please enter an item name."
+    };
+  }
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("reports")
+      .select("name, type")
+      .ilike("name", `%${term}%`)
+      .limit(10);
+
+    if (error) throw error;
+
+    return {
+      success: true,
+      results: data || [],
+      message: data && data.length > 0
+        ? `Found ${data.length} matching reports.`
+        : "No matching reports found."
+    };
+
+  } catch (error) {
+    console.error("KHOJX search error:", error);
+
+    return {
+      success: false,
+      results: [],
+      message: "Database search is temporarily unavailable."
+    };
+  }
+};
