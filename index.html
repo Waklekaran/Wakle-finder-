@@ -643,34 +643,124 @@
   };
 
   // KHOJX response engine (basic prototype)
-  window.wfBotReply = function (text) {
-    const t = text.toLowerCase().trim();
-    let reply;
+  window.wfBotReply = async function (text) {
+  const t = text.toLowerCase().trim();
 
-    if (/^(hi|hello|hey|namaste|hii|hlo)/.test(t)) {
-      reply = "Hey! I'm KHOJX 👋\nYour intelligent Lost & Found companion.\n\nWhat can I help you with today?";
-    }
-    else if (t.includes("lost") || t.includes("khoya")) {
-      reply = "🔍 Lost Item Assistance\n\nOpen Report Lost in Wakle-Finder and enter your item name, last known location and date. I'll help guide you through the process.";
-    }
-    else if (t.includes("found") || t.includes("mila")) {
-      reply = "📦 Found Item Assistance\n\nOpen Report Found and provide the item's details and where you found it, so its owner can try to find it.";
-    }
-    else if (t.includes("search") || t.includes("find") || t.includes("dhund") || t.includes("shodh")) {
-      reply = "🧭 Smart Search\n\nGo to Search Items in Wakle-Finder. Enter the item name or relevant details to look for matching reports.";
-    }
-    else if (t.includes("help") || t.includes("madad")) {
-      reply = "I'm KHOJX, here to help! 🤖\n\nYou can ask me about:\n🔍 Lost items\n📦 Found items\n🧭 Searching for items\n\nChoose a quick action below to begin.";
-    }
-    else if (t.includes("khojx") || t.includes("who are you") || t.includes("your name")) {
-      reply = "I'm KHOJX ✨\nYour smart discovery companion built for Wakle-Finder. My mission is to help people reconnect with their lost belongings.";
-    }
-    else {
-      reply = "I hear you! 💙 I'm KHOJX, the Wakle-Finder assistant.\n\nI can currently guide you with lost reports, found reports and item searches. Choose an option below to get started.";
+  // Live database search
+  if (
+    t.includes("search") ||
+    t.includes("find") ||
+    t.includes("dhund") ||
+    t.includes("shodh")
+  ) {
+    const term = t
+      .replace(/search/gi, "")
+      .replace(/find/gi, "")
+      .replace(/items/gi, "")
+      .replace(/item/gi, "")
+      .replace(/dhundho/gi, "")
+      .replace(/dhund/gi, "")
+      .replace(/shodh/gi, "")
+      .replace(/please/gi, "")
+      .replace(/karo/gi, "")
+      .replace(/kar/gi, "")
+      .replace(/for/gi, "")
+      .trim();
+
+    if (!term) {
+      wfAddMessage(
+        "🔎 Tell me the item name you want to search. For example: Search wallet or Find phone.",
+        "bot"
+      );
+      return;
     }
 
-    wfAddMessage(reply, "bot");
-  };
+    wfAddMessage("🔎 Searching real reports for: " + term + "...", "bot");
+
+    const response = await window.khojxSearchItems(term);
+
+    if (!response.success) {
+      wfAddMessage(response.message, "bot");
+      return;
+    }
+
+    if (!response.results.length) {
+      wfAddMessage(
+        "😕 No matching reports found for '" + term +
+        "'. Try another item name.",
+        "bot"
+      );
+      return;
+    }
+
+    let resultText = "🔍 Found " + response.results.length +
+      " matching report(s):\n\n";
+
+    response.results.forEach((item, index) => {
+      resultText +=
+        (index + 1) + ". " +
+        item.name + " — " +
+        item.type + "\n";
+    });
+
+    resultText += "\n📌 These are reports currently available in the database.";
+
+    wfAddMessage(resultText, "bot");
+    return;
+  }
+
+  // Greetings
+  if (/^(hi|hello|hey|namaste|hii|hlo)/.test(t)) {
+    wfAddMessage(
+      "Hey! 👋 I'm KHOJX. I can search real Lost & Found reports in Wakle-Finder. Try 'Search wallet'!",
+      "bot"
+    );
+  }
+
+  // Lost items
+  else if (t.includes("lost") || t.includes("khoya")) {
+    wfAddMessage(
+      "🔍 Lost Item Assistance\n\nOpen Report Lost in Wakle-Finder and enter your item name, last known location and date.",
+      "bot"
+    );
+  }
+
+  // Found items
+  else if (t.includes("found") || t.includes("mila")) {
+    wfAddMessage(
+      "📦 Found Item Assistance\n\nOpen Report Found and provide the item's details and where you found it.",
+      "bot"
+    );
+  }
+
+  // Help
+  else if (t.includes("help") || t.includes("madad")) {
+    wfAddMessage(
+      "I'm KHOJX 🤖\n\n🔍 Search real reports — type Search + item name\n📦 Report Found — submit an item you found\n🔎 Report Lost — report your missing item",
+      "bot"
+    );
+  }
+
+  // Identity
+  else if (
+    t.includes("khojx") ||
+    t.includes("who are you") ||
+    t.includes("your name")
+  ) {
+    wfAddMessage(
+      "I'm KHOJX ✨ Your intelligent Lost & Found companion for Wakle-Finder. I can now search the reports database for matching items!",
+      "bot"
+    );
+  }
+
+  // Default
+  else {
+    wfAddMessage(
+      "I'm KHOJX 🤖 I can help search actual reports. Try typing:\n\n• Search wallet\n• Find phone\n• Search bag",
+      "bot"
+    );
+  }
+};
 
   // Send message
   window.wfSendMessage = function () {
