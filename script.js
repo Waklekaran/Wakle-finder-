@@ -421,6 +421,22 @@ function getMatchReasons(lost, found) {
   if (dateSimilarity(lost.date, found.date) >= 75) {
     reasons.push("Date");
   }
+  // Smart Location Proximity Reason
+const distance = calculateDistanceKm(
+  lost.location,
+  found.location
+);
+
+if (distance !== null) {
+  if (distance <= 1) {
+    reasons.push("📍 Very close location (within 1 km)");
+  } else if (distance <= 3) {
+    reasons.push("📍 Nearby location (within 3 km)");
+  } else if (distance <= 5) {
+    reasons.push("📍 Location proximity (within 5 km)");
+  }
+}
+  
 
   return reasons;
 }
