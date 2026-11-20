@@ -501,93 +501,104 @@
   </div>
 </div>
   <script>
-function wfToggleChat() {
+(() => {
   const chat = document.getElementById("wf-chat-window");
   const toggle = document.getElementById("wf-chat-toggle");
-
-  const isOpen = chat.style.display !== "none";
-  chat.style.display = isOpen ? "none" : "block";
-  toggle.style.display = isOpen ? "block" : "none";
-}
-
-function wfAddMessage(text, type) {
-  const messages = document.getElementById("wf-chat-messages");
-  const msg = document.createElement("div");
-
-  msg.className = "wf-msg " + type;
-  msg.textContent = text;
-
-  messages.appendChild(msg);
-  messages.scrollTop = messages.scrollHeight;
-}
-
-function wfBotReply(text) {
-  const t = text.toLowerCase();
-  let reply = "";
-
-  if (
-    t.includes("report lost") ||
-    t === "lost" || t === "1" ||
-    t.includes("khoya") || t.includes("lost item")
-  ) {
-    reply = "🔍 Lost Item Report\n\nItem ka naam, last seen location aur approximate date note karo. App mein Report Lost section se apni report submit kar sakte ho.";
-  }
-  else if (
-    t.includes("report found") ||
-    t === "found" || t === "2" ||
-    t.includes("mila") || t.includes("found item")
-  ) {
-    reply = "📦 Found Item Report\n\nItem ka naam, jahan mila aur kab mila, note karo. App ke Report Found section se details submit kar sakte ho.";
-  }
-  else if (
-    t.includes("search") || t.includes("find item") ||
-    t === "3" || t.includes("dhund") ||
-    t.includes("shodh")
-  ) {
-    reply = "🧭 Item Search\n\nSearch section mein item ka naam, category aur location enter karke matching items check karo.";
-  }
-  else if (
-    t.includes("hello") || t.includes("hi") ||
-    t.includes("hey") || t.includes("namaste") ||
-    t.includes("namaskar")
-  ) {
-    reply = "👋 Hello! Welcome to Wakle-Finder.\n\nMain Lost & Found Assistant hoon. Main tumhe lost item report, found item report aur item search mein help kar sakta hoon.";
-  }
-  else if (
-    t.includes("help") || t.includes("madat") ||
-    t.includes("मदद")
-  ) {
-    reply = "Main tumhari 3 cheezon mein help kar sakta hoon:\n\n🔍 Lost item report\n📦 Found item report\n🧭 Item search\n\nNeeche diye buttons select karo!";
-  }
-  else {
-    reply = "Main Wakle-Finder ka Lost & Found Assistant hoon. 😊\n\nLost item report karne, found item report karne ya item search karne ke liye neeche buttons use karo. Abhi main basic automated assistant hoon.";
-  }
-
-  setTimeout(() => wfAddMessage(reply, "bot"), 350);
-}
-
-function wfSendMessage() {
   const input = document.getElementById("wf-chat-input");
-  const text = input.value.trim();
+  const messages = document.getElementById("wf-chat-messages");
 
-  if (!text) return;
+  if (!chat || !toggle || !input || !messages) {
+    console.error("KHOJX: Chat elements missing.");
+    return;
+  }
 
-  wfAddMessage(text, "user");
-  input.value = "";
-  wfBotReply(text);
-}
+  // Open and close
+  window.wfToggleChat = function () {
+    const opening = chat.style.display === "none";
+    chat.style.display = opening ? "block" : "none";
+    toggle.style.display = opening ? "none" : "block";
+  };
 
-function wfSendQuick(text) {
-  wfAddMessage(text, "user");
-  wfBotReply(text);
-}
+  // Add chat message
+  window.wfAddMessage = function (text, type) {
+    const msg = document.createElement("div");
+    msg.className = "wf-msg " + type;
+    msg.textContent = text;
+    messages.appendChild(msg);
+    messages.scrollTop = messages.scrollHeight;
+  };
 
-document.getElementById("wf-chat-input")
-  .addEventListener("keydown", function(event) {
+  // KHOJX response engine (basic prototype)
+  window.wfBotReply = function (text) {
+    const t = text.toLowerCase().trim();
+    let reply;
+
+    if (/^(hi|hello|hey|namaste|hii|hlo)/.test(t)) {
+      reply = "Hey! I'm KHOJX 👋\nYour intelligent Lost & Found companion.\n\nWhat can I help you with today?";
+    }
+    else if (t.includes("lost") || t.includes("khoya")) {
+      reply = "🔍 Lost Item Assistance\n\nOpen Report Lost in Wakle-Finder and enter your item name, last known location and date. I'll help guide you through the process.";
+    }
+    else if (t.includes("found") || t.includes("mila")) {
+      reply = "📦 Found Item Assistance\n\nOpen Report Found and provide the item's details and where you found it, so its owner can try to find it.";
+    }
+    else if (t.includes("search") || t.includes("find") || t.includes("dhund") || t.includes("shodh")) {
+      reply = "🧭 Smart Search\n\nGo to Search Items in Wakle-Finder. Enter the item name or relevant details to look for matching reports.";
+    }
+    else if (t.includes("help") || t.includes("madad")) {
+      reply = "I'm KHOJX, here to help! 🤖\n\nYou can ask me about:\n🔍 Lost items\n📦 Found items\n🧭 Searching for items\n\nChoose a quick action below to begin.";
+    }
+    else if (t.includes("khojx") || t.includes("who are you") || t.includes("your name")) {
+      reply = "I'm KHOJX ✨\nYour smart discovery companion built for Wakle-Finder. My mission is to help people reconnect with their lost belongings.";
+    }
+    else {
+      reply = "I hear you! 💙 I'm KHOJX, the Wakle-Finder assistant.\n\nI can currently guide you with lost reports, found reports and item searches. Choose an option below to get started.";
+    }
+
+    wfAddMessage(reply, "bot");
+  };
+
+  // Send message
+  window.wfSendMessage = function () {
+    const text = input.value.trim();
+    if (!text) return;
+
+    wfAddMessage(text, "user");
+    input.value = "";
+    wfBotReply(text);
+  };
+
+  // Quick action buttons
+  window.wfSendQuick = function (text) {
+    wfAddMessage(text, "user");
+    wfBotReply(text);
+  };
+
+  // Enter key
+  input.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
+      event.preventDefault();
       wfSendMessage();
     }
   });
+
+  // Update branding
+  toggle.textContent = "✦ Meet KHOJX";
+
+  const header = document.querySelector("#wf-chat-header strong");
+  const subtitle = document.querySelector("#wf-chat-header small");
+
+  if (header) header.textContent = "KHOJX ✦";
+  if (subtitle) subtitle.textContent = "Your Intelligent Lost & Found Companion";
+
+  const welcome = messages.querySelector(".wf-msg.bot");
+  if (welcome) {
+    welcome.textContent =
+      "Hey! I'm KHOJX ✨\nLet's bring lost things back home. I can help you report lost items, report found items, or search.";
+  }
+
+  console.log("KHOJX initialized successfully.");
+})();
   </script>
 </body>
 </html>
