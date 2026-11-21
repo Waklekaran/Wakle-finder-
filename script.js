@@ -1498,15 +1498,15 @@ async function updateAuthUI() {
   const welcome = document.getElementById("welcomeUser");
 
   if (user) {
-    panel.style.display = "block";
+    if (panel) panel.style.display = "block";
 
     const name = user.user_metadata?.full_name || user.email;
 
     if (welcome) {
-  welcome.textContent = "Welcome, " + name + "!";
+      welcome.textContent = "Welcome, " + name + "!";
     }
   } else {
-    panel.style.display = "none";
+    if (panel) panel.style.display = "none";
   }
 }
 
