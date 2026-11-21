@@ -2012,6 +2012,8 @@ submitButton.addEventListener("click", async function () {
 // ===== DASHBOARD CATEGORY NAVIGATION =====
 
 let selectedCategory = "";
+let categoryFilterActive = false;
+let selectedReportType = "";
 
 function selectCategory(category) {
   selectedCategory = category;
@@ -2038,4 +2040,12 @@ function selectCategory(category) {
 function backToDashboard() {
   document.getElementById("categoryScreen").style.display = "none";
   document.getElementById("userPanel").style.display = "block";
+}
+// CATEGORY REPORT NAVIGATION
+function openCategoryReports(type) {
+  categoryFilterActive = true;
+  selectedReportType = type;
+
+  showScreen(reportsScreen);
+  displayReports();
 }
