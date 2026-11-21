@@ -1963,14 +1963,15 @@ submitButton.addEventListener("click", async function () {
         const status = document.createElement("p");
         status.textContent = "Pending your verification";
 
-        card.append(
-          title,
-          reportInfo,
-          foundInfo,
-          question,
-          answerInput,
-          status
-        );
+       card.append(
+  title,
+  reportInfo,
+  foundInfo,
+  question,
+  answerInput,
+  submitButton,
+  status
+);
 
         ownerRequestsList.appendChild(card);
       });
