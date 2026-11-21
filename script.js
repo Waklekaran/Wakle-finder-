@@ -1913,6 +1913,52 @@ if (loadOwnerRequestsButton && ownerRequestsList) {
         const submitButton = document.createElement("button");
         submitButton.textContent = "Submit Answer";
         submitButton.disabled = true;
+        submitButton.disabled = false;
+
+submitButton.addEventListener("click", async function () {
+  const answer = answerInput.value.trim();
+
+  if (!answer) {
+    alert("Please enter your secret answer.");
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Verifying...";
+
+  try {
+    const { data, error } =
+      await supabaseClient.functions.invoke(
+        "answer_owner_verification",
+        {
+          body: {
+            requestId: request.requestId,
+            answer: answer
+          }
+        }
+      );
+
+    if (error) throw error;
+    if (!data?.success) {
+      throw new Error(data?.error || "Verification failed");
+    }
+
+    status.textContent =
+      data.status === "verified"
+        ? "✅ Owner verified successfully!"
+        : "❌ Answer did not match.";
+
+    answerInput.value = "";
+    answerInput.disabled = true;
+    submitButton.textContent = "Submitted";
+
+  } catch (error) {
+    console.error(error);
+    alert("Verification error: " + error.message);
+    submitButton.disabled = false;
+    submitButton.textContent = "Submit Answer";
+  }
+});
 
         const status = document.createElement("p");
         status.textContent = "Pending your verification";
