@@ -1233,6 +1233,7 @@ const report = {
   user_id: user.id,
   name: document.getElementById("itemName").value.trim(),
   type: itemType.value,
+  category: document.getElementById("itemCategory").value,
   description: document.getElementById("itemDescription").value.trim(),
   location: document.getElementById("itemLocation").value.trim(),
   date: document.getElementById("itemDate").value || null,
