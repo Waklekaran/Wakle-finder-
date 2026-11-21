@@ -639,7 +639,7 @@ askOwnerButton.addEventListener("click", async function(event) {
   foundInfo,
   lostButton,
   foundButton,
-  askONameButton
+  askOwnerButton
     );
 
     matchesList.appendChild(card);
