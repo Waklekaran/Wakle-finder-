@@ -233,7 +233,8 @@ async function showMyReports() {
 function showLogin() {
   showScreen(loginScreen);
 }
-
+categoryFilterActive = false;
+selectedReportType = "";
 function showReports() {
   displayReports();
   showScreen(reportsScreen);
