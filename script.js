@@ -121,6 +121,8 @@ const reportDetails = document.getElementById("reportDetails");
 let selectedReport = null;
 
 // Screen navigation
+// SCREEN NAVIGATION
+
 function showScreen(screen) {
   homeScreen.style.display = "none";
   reportScreen.style.display = "none";
@@ -129,11 +131,21 @@ function showScreen(screen) {
   loginScreen.style.display = "none";
   myReportsScreen.style.display = "none";
 
+  // New screens also hide
+  document.getElementById("userPanel").style.display = "none";
+  document.getElementById("categoryScreen").style.display = "none";
+
   screen.style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
 
 function showHome() {
+  showScreen(homeScreen);
+}{
   showScreen(homeScreen);
 }
 
