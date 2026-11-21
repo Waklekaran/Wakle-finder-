@@ -1448,7 +1448,7 @@ document.getElementById("signupForm").addEventListener(
   }
 );
 
-
+alert("JavaScript reached Login section!");
 // LOGIN FORM SUBMISSION
 document.getElementById("emailLoginForm").addEventListener(
   "submit",
