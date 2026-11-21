@@ -1187,6 +1187,30 @@ const report = {
   .single();
 
 if (error) throw error;
+    // Save private verification riddle for Lost reports
+if (report.type === "Lost") {
+  const question = document
+    .getElementById("verificationQuestion")
+    .value.trim();
+
+  const answer = document
+    .getElementById("verificationAnswer")
+    .value.trim();
+
+  const { data: riddleData, error: riddleError } =
+    await supabaseClient.functions.invoke("save_report_riddle", {
+      body: {
+        reportId: savedReport.id,
+        question: question,
+        answer: answer
+      }
+    });
+
+  if (riddleError || !riddleData?.success) {
+    console.error("Riddle save failed:", riddleError || riddleData);
+    alert("Report saved, but Verification Riddle could not be saved. Please contact support.");
+  }
+}
 
     alert("Report saved online successfully! 🎉");
 
