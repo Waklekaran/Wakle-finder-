@@ -637,7 +637,8 @@ askOwnerButton.addEventListener("click", async function(event) {
   lostInfo,
   foundInfo,
   lostButton,
-  foundButton
+  foundButton,
+  askOwnerbutton
     );
 
     matchesList.appendChild(card);
