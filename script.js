@@ -628,16 +628,6 @@ askOwnerButton.addEventListener("click", async function(event) {
     askOwnerButton.disabled = false;
   }
 });
-
-  } catch (error) {
-  console.error("Owner requests error:", error);
-
-  ownerRequestsList.textContent =
-    "Verification Error: " +
-    (error.message || "Unknown error");
-  }
-});
-
     card.append(
   heading,
   score,
