@@ -617,6 +617,18 @@ askOwnerButton.addEventListener("click", async function(event) {
     askOwnerButton.textContent = "✅ Request Sent";
     askOwnerButton.disabled = true;
 
+  } catch (error) {
+    console.error("Verification request error:", error);
+
+    alert("Could not send request: " + error.message);
+
+    askOwnerButton.textContent =
+      "🔐 Ask Owner for Verification";
+
+    askOwnerButton.disabled = false;
+  }
+});
+
   } } catch (error) {
   console.error("Owner requests error:", error);
 
