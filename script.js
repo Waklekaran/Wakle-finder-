@@ -763,14 +763,18 @@ async function displayReports() {
     lostReportsList.innerHTML = "";
     foundReportsList.innerHTML = "";
 
-    const filtered = reports.filter(function(report) {
-      return (
-        (report.name || "").toLowerCase().includes(query) ||
-        (report.description || "").toLowerCase().includes(query) ||
-        (report.location || "").toLowerCase().includes(query) ||
-        (report.type || "").toLowerCase().includes(query)
-      );
-    });
+    const categoryFiltered = categoryFilterActive
+  ? reports.filter(r => r.category === selectedCategory)
+  : reports;
+
+const filtered = categoryFiltered.filter(function(report) {
+  return (
+    (report.name || "").toLowerCase().includes(query) ||
+    (report.description || "").toLowerCase().includes(query) ||
+    (report.location || "").toLowerCase().includes(query) ||
+    (report.type || "").toLowerCase().includes(query)
+  );
+});
 
     const lost = filtered.filter(r => r.type === "Lost");
     const found = filtered.filter(r => r.type === "Found");
