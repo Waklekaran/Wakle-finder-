@@ -514,7 +514,50 @@
 
 
 
+<!-- CATEGORY SCREEN -->
+<section id="categoryScreen" style="display:none;" class="category-screen">
 
+  <button class="category-back-btn" onclick="backToDashboard()">
+    ← Back to Dashboard
+  </button>
+
+  <div class="category-screen-header">
+    <div id="selectedCategoryIcon">🔍</div>
+    <h2 id="selectedCategoryTitle">Mobile Reports</h2>
+    <p>Choose the type of report you want to explore</p>
+  </div>
+
+  <div class="category-report-options">
+
+    <button class="category-report-card lost-option"
+      onclick="openCategoryReports('Lost')">
+
+      <span class="category-option-icon">🔍</span>
+
+      <div>
+        <h3>खोने की रिपोर्ट</h3>
+        <p>Lost — खोई हुई चीज़ों की रिपोर्ट</p>
+      </div>
+
+      <span class="category-arrow">→</span>
+    </button>
+
+    <button class="category-report-card found-option"
+      onclick="openCategoryReports('Found')">
+
+      <span class="category-option-icon">📦</span>
+
+      <div>
+        <h3>सामान पाने की रिपोर्ट</h3>
+        <p>Found — मिली हुई चीज़ों की रिपोर्ट</p>
+      </div>
+
+      <span class="category-arrow">→</span>
+    </button>
+
+  </div>
+
+</section>
 
     <!-- REPORT FORM SCREEN -->
     <section id="reportScreen" style="display:none;">
