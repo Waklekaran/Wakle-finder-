@@ -1461,7 +1461,7 @@ document.getElementById("emailLoginForm").addEventListener(
     await updateAuthUI();
 
     document.getElementById("emailLoginForm").reset();
-    showHome();
+    showScreen(document.getElementById("userPanel"));
   }
 );
 async function resendVerificationEmail() {
