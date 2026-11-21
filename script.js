@@ -600,10 +600,13 @@ askOwnerButton.addEventListener("click", async function(event) {
       await supabaseClient.functions.invoke(
         "request_owner_verification",
         {
-          body: {
-            lostReportId: match.lost.id,
-            foundReportId: match.found.id
-          }
+  body: {
+    lostReportId: match.lost.id,
+    foundReportId: match.found.id
+  },
+  headers: {
+    Authorization: `Bearer ${sessionData.session.access_token}`
+  }
         }
       );
 
