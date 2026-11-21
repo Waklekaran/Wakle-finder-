@@ -1180,11 +1180,13 @@ const report = {
 
   return;
     }
-    const { error } = await supabaseClient
-      .from("reports")
-      .insert([report]);
+    const { data: savedReport, error } = await supabaseClient
+  .from("reports")
+  .insert([report])
+  .select("id")
+  .single();
 
-    if (error) throw error;
+if (error) throw error;
 
     alert("Report saved online successfully! 🎉");
 
