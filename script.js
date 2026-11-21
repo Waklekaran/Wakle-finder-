@@ -236,8 +236,11 @@ function showLogin() {
 categoryFilterActive = false;
 selectedReportType = "";
 function showReports() {
-  displayReports();
+  categoryFilterActive = false;
+  selectedReportType = "";
+
   showScreen(reportsScreen);
+  displayReports();
 }
 
 function reportLostItem() {
