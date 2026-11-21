@@ -1990,3 +1990,33 @@ submitButton.addEventListener("click", async function () {
     }
   });
 }
+// ===== DASHBOARD CATEGORY NAVIGATION =====
+
+let selectedCategory = "";
+
+function selectCategory(category) {
+  selectedCategory = category;
+
+  const icons = {
+    Mobile: "📱",
+    Bag: "🎒",
+    Common: "🔑",
+    Other: "✨"
+  };
+
+  document.getElementById("userPanel").style.display = "none";
+
+  const categoryScreen = document.getElementById("categoryScreen");
+  categoryScreen.style.display = "block";
+
+  document.getElementById("selectedCategoryIcon").textContent =
+    icons[category] || "🔍";
+
+  document.getElementById("selectedCategoryTitle").textContent =
+    category + " Reports";
+}
+
+function backToDashboard() {
+  document.getElementById("categoryScreen").style.display = "none";
+  document.getElementById("userPanel").style.display = "block";
+}
