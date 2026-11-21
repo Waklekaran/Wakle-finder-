@@ -776,8 +776,15 @@ const filtered = categoryFiltered.filter(function(report) {
   );
 });
 
-    const lost = filtered.filter(r => r.type === "Lost");
-    const found = filtered.filter(r => r.type === "Found");
+    const lost = filtered.filter(r =>
+  r.type === "Lost" &&
+  (!selectedReportType || r.type === selectedReportType)
+);
+
+const found = filtered.filter(r =>
+  r.type === "Found" &&
+  (!selectedReportType || r.type === selectedReportType)
+);
 
     if (lost.length === 0) {
       lostReportsList.textContent = "No lost reports found.";
