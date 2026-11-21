@@ -349,4 +349,171 @@ button:hover {
   background: transparent;
   color: #475569;
 }
+/* ===== WAKLE-FINDER WELCOME SCREEN ===== */
 
+.welcome-screen {
+  min-height: 100vh;
+  padding: 28px 18px;
+  background: linear-gradient(160deg, #f0f6ff, #ffffff 55%, #e6f0ff);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #142b4d;
+  box-sizing: border-box;
+}
+
+.welcome-brand {
+  margin-bottom: 32px;
+}
+
+.welcome-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 12px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  background: linear-gradient(135deg, #1265e8, #65a4ff);
+  box-shadow: 0 8px 24px rgba(18, 101, 232, 0.22);
+}
+
+.welcome-brand h1 {
+  margin: 8px 0;
+  font-size: 27px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #1556bd;
+}
+
+.welcome-tagline {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #70839f;
+  font-weight: 700;
+}
+
+.welcome-content {
+  max-width: 440px;
+  margin: auto;
+  padding: 26px 20px;
+  border-radius: 26px;
+  background: #ffffff;
+  box-shadow: 0 12px 40px rgba(31, 78, 145, 0.09);
+}
+
+.welcome-illustration {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.welcome-illustration span {
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: #edf5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.welcome-content h2 {
+  font-size: 25px;
+  color: #173965;
+  margin-bottom: 10px;
+}
+
+.welcome-content h3 {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #2167d5;
+  margin: 10px 0 14px;
+}
+
+.welcome-description {
+  color: #6d7f95;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.welcome-register-btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(135deg, #1764df, #3989ff);
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 6px 18px rgba(32, 104, 229, 0.2);
+  cursor: pointer;
+}
+
+.welcome-login-text {
+  margin: 22px 0 8px;
+  color: #8392a8;
+  font-size: 13px;
+}
+
+.welcome-login-btn {
+  border: none;
+  background: transparent;
+  color: #2167d5;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.welcome-secondary-actions {
+  max-width: 440px;
+  margin: 26px auto 0;
+  padding: 18px;
+}
+
+.welcome-secondary-actions p {
+  font-size: 13px;
+  color: #8493a8;
+  margin-bottom: 14px;
+}
+
+.welcome-secondary-actions button {
+  width: 100%;
+  margin: 6px 0;
+  padding: 13px;
+  border: 1px solid #dce8f8;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #24518d;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.welcome-secondary-actions button:hover {
+  background: #edf5ff;
+  border-color: #8bb8ff;
+}
+
+/* Mobile adjustment */
+@media (max-width: 480px) {
+  .welcome-screen {
+    padding: 22px 14px;
+  }
+
+  .welcome-brand h1 {
+    font-size: 23px;
+  }
+
+  .welcome-content {
+    padding: 23px 17px;
+  }
+
+  .welcome-content h2 {
+    font-size: 23px;
+  }
+}
