@@ -145,8 +145,6 @@ function showScreen(screen) {
 
 function showHome() {
   showScreen(homeScreen);
-}{
-  showScreen(homeScreen);
 }
 
 
