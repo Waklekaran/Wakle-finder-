@@ -835,3 +835,54 @@ body:has(#homeScreen:not([style*="display: none"])) main {
     border-radius: 20px !important;
   }
 }
+/* Signup/Login Card - Bigger Premium Layout */
+#loginScreen {
+  width: 100%;
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 14px;
+}
+
+#loginScreen .login-card {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 30px 26px;
+  border-radius: 26px;
+  box-sizing: border-box;
+}
+
+#loginScreen .login-field input {
+  width: 100%;
+  min-height: 48px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+#loginScreen .login-btn,
+#loginScreen .signup-btn,
+#loginScreen .back-btn {
+  min-height: 48px;
+  font-size: 15px;
+}
+
+#loginScreen h2 {
+  font-size: 25px;
+}
+
+#loginScreen .login-subtitle {
+  font-size: 15px;
+}
+
+/* Mobile fit */
+@media (max-width: 480px) {
+  #loginScreen {
+    padding: 8px;
+    margin: 12px auto;
+  }
+
+  #loginScreen .login-card {
+    max-width: 100%;
+    padding: 26px 20px;
+  }
+}
