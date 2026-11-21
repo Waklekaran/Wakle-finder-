@@ -415,8 +415,80 @@
   </div>
 </section>
     
+<!-- LOGGED-IN DASHBOARD -->
+<div id="userPanel" style="display:none;" class="premium-dashboard">
 
-<div id="userPanel" style="display:none;">
+  <div class="dashboard-top">
+    <div class="dashboard-brand">WAKLE-FINDER 🔍</div>
+    <p>Find what matters. Bring it back.</p>
+  </div>
+
+  <div class="dashboard-heading">
+    <h2>अपनी पसंदीदा चीज़ को खोजो ✨</h2>
+    <p>Choose a category to begin your search</p>
+  </div>
+
+  <!-- DIAMOND CATEGORY GRID -->
+  <div class="diamond-grid">
+
+    <button class="diamond-card" onclick="selectCategory('Mobile')">
+      <div class="diamond-shape">
+        <div class="diamond-content">
+          <span>📱</span>
+          <small>MOBILE</small>
+        </div>
+      </div>
+    </button>
+
+    <button class="diamond-card" onclick="selectCategory('Bag')">
+      <div class="diamond-shape">
+        <div class="diamond-content">
+          <span>🎒</span>
+          <small>BAG</small>
+        </div>
+      </div>
+    </button>
+
+    <button class="diamond-card" onclick="selectCategory('Common')">
+      <div class="diamond-shape">
+        <div class="diamond-content">
+          <span>🔑</span>
+          <small>COMMON</small>
+        </div>
+      </div>
+    </button>
+
+    <button class="diamond-card" onclick="selectCategory('Other')">
+      <div class="diamond-shape">
+        <div class="diamond-content">
+          <span>✨</span>
+          <small>OTHER</small>
+        </div>
+      </div>
+    </button>
+
+  </div>
+
+  <!-- RECENT REPORTS -->
+  <button class="dashboard-recent-btn" onclick="showReports()">
+    <span>📋</span>
+    <span>
+      <strong>View Recent Reports</strong>
+      <small>Explore the latest lost & found items</small>
+    </span>
+    <span>→</span>
+  </button>
+
+  <!-- LOGOUT AT BOTTOM -->
+  <div class="dashboard-bottom">
+    <button type="button" onclick="logoutUser()" class="dashboard-logout">
+      ↪ Logout
+    </button>
+  </div>
+
+</div>
+
+
 
   <h3 id="welcomeUser">Welcome!</h3>
   <p>You are logged in to Wakle-Finder.</p>
