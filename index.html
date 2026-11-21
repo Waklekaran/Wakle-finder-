@@ -285,28 +285,73 @@
   <main>
 
     <!-- HOME SCREEN -->
-    <section id="homeScreen">
-      <h2>Welcome to Wakle-Finder</h2>
-      <p>Your Campus Lost & Found Platform.</p>
+    
+<!-- HOME SCREEN -->
+<section id="homeScreen" class="welcome-screen">
 
-      <button onclick="reportLostItem()">
-        Report Lost Item
-      </button>
+  <div class="welcome-brand">
+    <div class="welcome-logo">🔍</div>
+    <h1>WAKLE-FINDER</h1>
+    <p class="welcome-tagline">LOST & FOUND • PRIVACY FIRST</p>
+  </div>
 
-      <button onclick="reportFoundItem()">
-        Report Found Item
-      </button>
-      <button onclick="showReports()">
-        View Recent Reports
-      </button>
-      <button onclick="showMyReports()">
-  📂 My Reports
-      </button>
-      <button onclick="showLogin()">
-        Login / Sign Up
-      </button>
-      
-    </section>
+  <div class="welcome-content">
+    <div class="welcome-illustration">
+      <span>🎒</span>
+      <span>🔑</span>
+      <span>📱</span>
+    </div>
+
+    <h2>Lost Something Valuable?</h2>
+
+    <h3>
+      Find It with Wakle-Finder —
+      Privately & Securely.
+    </h3>
+
+    <p class="welcome-description">
+      Looking for your precious belongings?
+      Register now and begin your search
+      with confidence.
+    </p>
+
+    <button class="welcome-register-btn"
+      onclick="showLogin()">
+      Create Your Account →
+    </button>
+
+    <p class="welcome-login-text">
+      Already have an account?
+    </p>
+
+    <button class="welcome-login-btn"
+      onclick="showLogin()">
+      Login
+    </button>
+  </div>
+
+  <div class="welcome-secondary-actions">
+    <p>Or continue directly</p>
+
+    <button onclick="reportLostItem()">
+      🔍 Report Lost Item
+    </button>
+
+    <button onclick="reportFoundItem()">
+      📦 Report Found Item
+    </button>
+
+    <button onclick="showReports()">
+      View Recent Reports
+    </button>
+
+    <button onclick="showMyReports()">
+      📂 My Reports
+    </button>
+  </div>
+
+</section>
+
     <!-- SIGN UP SCREEN -->
     
 <section id="loginScreen" class="login-screen">
