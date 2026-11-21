@@ -1,4 +1,4 @@
-
+alert("SCRIPT STARTED");
 // Wakle-Finder App
 // Supabase Connection
 const SUPABASE_URL = "https://auzgtqyxgwrdwluayhso.supabase.co";
