@@ -1187,7 +1187,10 @@ const report = {
   .single();
 
 if (error) throw error;
-    // Save private verification riddle for Lost reports
+
+let riddleSaved = true;
+
+// Save private riddle for Lost reports
 if (report.type === "Lost") {
   const question = document
     .getElementById("verificationQuestion")
@@ -1201,18 +1204,26 @@ if (report.type === "Lost") {
     await supabaseClient.functions.invoke("save_report_riddle", {
       body: {
         reportId: savedReport.id,
-        question: question,
-        answer: answer
+        question,
+        answer
       }
     });
 
-  if (riddleError || !riddleData?.success) {
+  riddleSaved = !riddleError && riddleData?.success === true;
+
+  if (!riddleSaved) {
     console.error("Riddle save failed:", riddleError || riddleData);
-    alert("Report saved, but Verification Riddle could not be saved. Please contact support.");
   }
 }
 
-    alert("Report saved online successfully! 🎉");
+// Success messages
+if (report.type === "Lost" && riddleSaved) {
+  alert("Report and Verification Riddle saved successfully! 🎉");
+} else if (report.type === "Lost" && !riddleSaved) {
+  alert("Report saved, but Verification Riddle failed. Please fix before relying on verification.");
+} else {
+  alert("Report saved online successfully! 🎉");
+}
 
     // Keep local copy temporarily
     const localReport = {
