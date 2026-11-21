@@ -2057,6 +2057,31 @@ function openCategoryReports(type) {
   categoryFilterActive = true;
   selectedReportType = type;
 
-  showScreen(reportsScreen);
+  const categoryScreen = document.getElementById("categoryScreen");
+  const reportsScreen = document.getElementById("reportsScreen");
+
+  if (!reportsScreen) {
+    alert("Reports screen not found!");
+    return;
+  }
+
+  if (categoryScreen) {
+    categoryScreen.style.display = "none";
+  }
+
+  reportsScreen.style.display = "block";
+
+  const heading = reportsScreen.querySelector("h2");
+
+  if (heading) {
+    heading.textContent =
+      selectedCategory + " — " + type + " Reports";
+  }
+
   displayReports();
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
