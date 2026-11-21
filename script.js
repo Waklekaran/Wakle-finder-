@@ -1502,7 +1502,9 @@ async function updateAuthUI() {
 
     const name = user.user_metadata?.full_name || user.email;
 
-    welcome.textContent = "Welcome, " + name + "!";
+    if (welcome) {
+  welcome.textContent = "Welcome, " + name + "!";
+    }
   } else {
     panel.style.display = "none";
   }
