@@ -263,7 +263,8 @@ async function getOnlineReports() {
     console.error("Online reports error:", error);
     throw error;
   }
-
+console.log("Logged in user:", (await supabaseClient.auth.getUser()).data.user?.id);
+console.log("Reports received:", data?.length);
   return data || [];
 }
 
