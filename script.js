@@ -1855,3 +1855,87 @@ window.khojxSearchItems = async function (searchTerm) {
     };
   }
 };
+
+const loadOwnerRequestsButton = document.getElementById("loadOwnerRequests");
+const ownerRequestsList = document.getElementById("ownerRequestsList");
+
+if (loadOwnerRequestsButton && ownerRequestsList) {
+  loadOwnerRequestsButton.addEventListener("click", async function () {
+    loadOwnerRequestsButton.disabled = true;
+    loadOwnerRequestsButton.textContent = "Loading Requests...";
+
+    ownerRequestsList.innerHTML = "";
+
+    try {
+      const { data, error } =
+        await supabaseClient.functions.invoke(
+          "get_owner_verification_requests"
+        );
+
+      if (error) throw error;
+      if (!data || !data.success) {
+        throw new Error(data?.error || "Failed to load requests");
+      }
+
+      if (!data.requests || data.requests.length === 0) {
+        ownerRequestsList.textContent =
+          "No pending verification requests found.";
+        return;
+      }
+
+      data.requests.forEach(function (request) {
+        const card = document.createElement("div");
+        card.style.border = "1px solid #ccc";
+        card.style.padding = "15px";
+        card.style.margin = "10px 0";
+        card.style.borderRadius = "10px";
+
+        const title = document.createElement("h3");
+        title.textContent = "🔐 Verification Request";
+
+        const reportInfo = document.createElement("p");
+        reportInfo.textContent =
+          "Lost Report ID: " + request.lostReportId;
+
+        const foundInfo = document.createElement("p");
+        foundInfo.textContent =
+          "Found Report ID: " + request.foundReportId;
+
+        const question = document.createElement("p");
+        question.textContent =
+          "Your private question: " + request.question;
+
+        const answerInput = document.createElement("input");
+        answerInput.type = "password";
+        answerInput.placeholder = "Enter your secret answer";
+        answerInput.autocomplete = "off";
+
+        const submitButton = document.createElement("button");
+        submitButton.textContent = "Submit Answer";
+        submitButton.disabled = true;
+
+        const status = document.createElement("p");
+        status.textContent = "Pending your verification";
+
+        card.append(
+          title,
+          reportInfo,
+          foundInfo,
+          question,
+          answerInput,
+          status
+        );
+
+        ownerRequestsList.appendChild(card);
+      });
+
+    } catch (error) {
+      console.error("Owner requests error:", error);
+      ownerRequestsList.textContent =
+        "Could not load requests. Please login and try again.";
+    } finally {
+      loadOwnerRequestsButton.disabled = false;
+      loadOwnerRequestsButton.textContent = "📩 Check Requests";
+    }
+  });
+}
