@@ -584,6 +584,8 @@ askOwnerButton.addEventListener("click", async function(event) {
     showLogin();
     return;
   }
+  console.log("Session exists:", !!sessionData.session);
+console.log("Access token exists:", !!sessionData.session?.access_token);
 
   const confirmed = confirm(
     "Send a verification request to the Lost item owner?"
