@@ -629,7 +629,7 @@ askOwnerButton.addEventListener("click", async function(event) {
   }
 });
 
-  } } catch (error) {
+  } catch (error) {
   console.error("Owner requests error:", error);
 
   ownerRequestsList.textContent =
