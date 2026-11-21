@@ -598,7 +598,7 @@ askOwnerButton.addEventListener("click", async function(event) {
   try {
     const { data, error } =
       await supabaseClient.functions.invoke(
-        "request_owner_verification",
+        "request_owner_verification_v2",
         {
   body: {
     lostReportId: match.lost.id,
