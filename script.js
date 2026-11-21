@@ -566,6 +566,67 @@ if (distance !== null) {
     foundButton.addEventListener("click", () => {
       showReportDetails(match.found);
     });
+    // Ask Lost Owner for Verification
+const askOwnerButton = document.createElement("button");
+askOwnerButton.textContent = "🔐 Ask Owner for Verification";
+askOwnerButton.style.margin = "6px";
+askOwnerButton.style.padding = "10px";
+
+askOwnerButton.addEventListener("click", async function(event) {
+  event.stopPropagation();
+
+  const { data: sessionData, error: sessionError } =
+    await supabaseClient.auth.getSession();
+
+  if (sessionError || !sessionData.session) {
+    alert("Please login first to request verification.");
+    showLogin();
+    return;
+  }
+
+  const confirmed = confirm(
+    "Send a verification request to the Lost item owner?"
+  );
+
+  if (!confirmed) return;
+
+  askOwnerButton.disabled = true;
+  askOwnerButton.textContent = "Sending Request...";
+
+  try {
+    const { data, error } =
+      await supabaseClient.functions.invoke(
+        "request_owner_verification",
+        {
+          body: {
+            lostReportId: match.lost.id,
+            foundReportId: match.found.id
+          }
+        }
+      );
+
+    if (error) throw error;
+
+    if (!data || !data.success) {
+      throw new Error(data?.error || "Request failed");
+    }
+
+    alert("✅ Verification request sent to the Lost item owner!");
+
+    askOwnerButton.textContent = "✅ Request Sent";
+    askOwnerButton.disabled = true;
+
+  } catch (error) {
+    console.error("Verification request error:", error);
+
+    alert("Could not send request: " + error.message);
+
+    askOwnerButton.textContent =
+      "🔐 Ask Owner for Verification";
+
+    askOwnerButton.disabled = false;
+  }
+});
 
     card.append(
   heading,
