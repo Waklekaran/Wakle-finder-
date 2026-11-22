@@ -419,6 +419,63 @@
 <div id="userPanel" style="display:none;" class="premium-dashboard">
 
   <div class="dashboard-top">
+    <!-- SIDE DRAWER MENU -->
+<div id="drawerOverlay" class="drawer-overlay"
+     onclick="closeSideMenu()"></div>
+
+<aside id="sideDrawer" class="side-drawer">
+
+  <div class="drawer-header">
+    <div>
+      <h2>WAKLE-FINDER 🔍</h2>
+      <p>Your Lost & Found Hub</p>
+    </div>
+
+    <button type="button" class="drawer-close"
+      onclick="closeSideMenu()">✕</button>
+  </div>
+
+  <div class="drawer-menu">
+
+    <button onclick="openDrawerPage('totalFound')">
+      📦 Total Found Items
+    </button>
+
+    <button onclick="openDrawerPage('totalLost')">
+      🔍 Total Lost Items
+    </button>
+
+    <button onclick="openDrawerPage('myReports')">
+      📋 My Reports
+    </button>
+
+    <button onclick="openDrawerPage('possibleMatches')">
+      🤝 All Possible Matches
+    </button>
+
+    <div class="drawer-divider"></div>
+
+    <button onclick="openDrawerPage('credentials')">
+      🔐 Change Credentials
+    </button>
+
+    <button onclick="openDrawerPage('about')">
+      ℹ️ About Us
+    </button>
+
+    <button onclick="openDrawerPage('privacy')">
+      🛡️ Privacy Policy
+    </button>
+
+  </div>
+
+  <div class="drawer-footer">
+    <button type="button" onclick="logoutUser()">
+      ↪ Logout
+    </button>
+  </div>
+
+</aside>
 
   <button type="button" id="menuToggleBtn" class="menu-toggle-btn"
     aria-label="Open menu">
