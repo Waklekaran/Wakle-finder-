@@ -233,6 +233,7 @@ function showLogin() {
 }
 
 function showReports() {
+  reportsBackScreenId = "userPanel";
   categoryFilterActive = false;
   selectedReportType = "";
 
