@@ -2443,3 +2443,86 @@ button:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 12px 25px rgba(25, 45, 75, 0.14);
 }
+
+/* STEP 3 - SEARCH & CATEGORY NAVIGATION */
+
+/* Search bar */
+#searchInput {
+  min-height: 54px;
+  padding: 14px 18px;
+  border: 1.5px solid #dce6ef;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #172b4d;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.25s ease;
+}
+
+#searchInput::placeholder {
+  color: #94a3b8;
+}
+
+#searchInput:focus {
+  border-color: #078b91;
+  box-shadow: 0 0 0 4px rgba(7, 139, 145, 0.10);
+}
+
+/* Reports section headings */
+#reportsScreen h2 {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 22px 0 14px;
+  color: #172b4d;
+}
+
+#reportsScreen h3 {
+  font-weight: 750;
+}
+
+/* Category/filter buttons */
+#reportsScreen button {
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+#reportsScreen button:active {
+  transform: scale(0.96);
+}
+
+/* Filter chip styles where existing filter classes are used */
+#reportsScreen .filter-btn,
+#reportsScreen .category-filter-btn,
+#reportsScreen .filter-chip,
+#reportsScreen .report-filter {
+  padding: 10px 17px;
+  border: 1px solid #dce6ef;
+  background: #ffffff;
+  color: #52647a;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#reportsScreen .filter-btn.active,
+#reportsScreen .category-filter-btn.active,
+#reportsScreen .filter-chip.active,
+#reportsScreen .report-filter.active {
+  background: #087f85;
+  border-color: #087f85;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(8, 127, 133, 0.2);
+}
+
+/* Possible matches section */
+#possibleMatchesSection {
+  margin: 18px 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #e2eaf2;
+  box-shadow: 0 4px 14px rgba(25, 45, 75, 0.06);
+}
