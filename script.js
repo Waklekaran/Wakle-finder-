@@ -120,22 +120,35 @@ const reportDetails = document.getElementById("reportDetails");
 
 let selectedReport = null;
 
-// Screen navigation
-// SCREEN NAVIGATION
+// CENTRAL SCREEN NAVIGATION
 
 function showScreen(screen) {
-  homeScreen.style.display = "none";
-  reportScreen.style.display = "none";
-  reportsScreen.style.display = "none";
-  detailsScreen.style.display = "none";
-  loginScreen.style.display = "none";
-  myReportsScreen.style.display = "none";
+  const screenIds = [
+    "homeScreen",
+    "userPanel",
+    "categoryScreen",
+    "reportScreen",
+    "reportsScreen",
+    "detailsScreen",
+    "loginScreen",
+    "myReportsScreen",
+    "successScreen",
+    "credentialsScreen",
+    "aboutScreen",
+    "privacyScreen"
+  ];
 
-  // New screens also hide
-  document.getElementById("userPanel").style.display = "none";
-  document.getElementById("categoryScreen").style.display = "none";
+  screenIds.forEach(id => {
+    const element = document.getElementById(id);
 
-  screen.style.display = "block";
+    if (element) {
+      element.style.display = "none";
+    }
+  });
+
+  if (screen) {
+    screen.style.display = "block";
+  }
 
   window.scrollTo({
     top: 0,
