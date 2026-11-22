@@ -1894,3 +1894,98 @@ section,
     border-radius: 20px;
   }
 }
+/* STEP 7 — PREMIUM PHOTO & MAP UI */
+
+#reportScreen {
+  padding: 16px;
+  color: #f1f5ff;
+}
+
+#reportScreen input,
+#reportScreen textarea,
+#reportScreen select {
+  width: 100%;
+  background: #111b30;
+  color: #eef3ff;
+  border: 1px solid rgba(120, 150, 255, 0.22);
+  padding: 14px;
+  border-radius: 14px;
+  margin: 8px 0;
+}
+
+#reportScreen label {
+  color: #b9c9ef;
+  font-weight: 600;
+}
+
+#photoPreview {
+  margin-top: 14px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(125, 150, 255, 0.25);
+}
+
+#photoPreview img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+#pinMapSection {
+  margin-top: 20px;
+  padding: 16px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #152440, #10182b);
+  border: 1px solid rgba(125, 150, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+#pinMapSection h3 {
+  color: #c4d3ff;
+  margin-bottom: 12px;
+}
+
+#pinMap {
+  width: 100%;
+  height: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(130, 155, 255, 0.25);
+}
+
+#getTaggedPin,
+#confirmTaggedPin {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(130, 155, 255, 0.2);
+  background: linear-gradient(135deg, #3b65ef, #7050e8);
+  color: white;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+#reportScreen button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#reportScreen button:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 480px) {
+  #reportScreen {
+    padding: 12px;
+  }
+
+  #pinMap {
+    height: 260px;
+  }
+
+  #pinMapSection {
+    padding: 12px;
+  }
+}
