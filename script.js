@@ -2226,16 +2226,19 @@ document.addEventListener("keydown", function(event) {
 });
 // ===== INFO PAGES & DRAWER NAVIGATION =====
 
+
 function openInfoScreen(screenId) {
   closeSideMenu();
 
   const screenIds = [
-    "userPanel",
     "homeScreen",
+    "userPanel",
     "categoryScreen",
     "reportScreen",
     "reportsScreen",
     "detailsScreen",
+    "myReportsScreen",
+    "successScreen",
     "loginScreen",
     "credentialsScreen",
     "aboutScreen",
@@ -2244,16 +2247,22 @@ function openInfoScreen(screenId) {
 
   screenIds.forEach(id => {
     const screen = document.getElementById(id);
-    if (screen) screen.style.display = "none";
+    if (screen) {
+      screen.style.display = "none";
+    }
   });
 
   const target = document.getElementById(screenId);
 
   if (target) {
     target.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
 }
+
 
 
 // ===== DRAWER NAVIGATION =====
