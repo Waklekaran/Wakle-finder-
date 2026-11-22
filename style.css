@@ -2585,3 +2585,77 @@ button:focus-visible {
     padding-bottom: 90px;
   }
 }
+
+/* STEP 5 - FINAL PROFESSIONAL POLISH */
+
+/* Smooth screen appearance */
+#reportsScreen {
+  animation: reportsScreenEnter 0.35s ease;
+}
+
+@keyframes reportsScreenEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Report card consistency */
+#lostReportsList > div,
+#foundReportsList > div {
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+/* Better image presentation */
+#lostReportsList img,
+#foundReportsList img {
+  background: #eaf0f6;
+}
+
+/* Empty state */
+#lostReportsList:empty::after,
+#foundReportsList:empty::after {
+  content: "No reports available yet";
+  display: block;
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 28px 12px;
+  color: #8291a5;
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+/* Tablet and mobile */
+@media (max-width: 600px) {
+  #reportsScreen {
+    padding: 14px;
+  }
+
+  #lostReportsList,
+  #foundReportsList {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 340px) {
+  #lostReportsList,
+  #foundReportsList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Accessibility */
+#reportsScreen button:focus-visible,
+#reportsScreen input:focus-visible {
+  outline: 3px solid rgba(8, 127, 133, 0.35);
+  outline-offset: 3px;
+}
