@@ -1596,18 +1596,30 @@ supabaseClient.auth.onAuthStateChange(() => {
 // Check existing session on page load
 updateAuthUI();
 
-// LOGOUT
+// ===== SECURE LOGOUT =====
+
 async function logoutUser() {
-  const { error } = await supabaseClient.auth.signOut();
+  closeSideMenu();
 
-  if (error) {
-    alert("Logout failed: " + error.message);
-    return;
+  try {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+      throw error;
+    }
+
+    categoryFilterActive = false;
+    selectedCategory = "";
+    selectedReportType = "";
+    searchInput.value = "";
+
+    showScreen(loginScreen);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+  } catch (error) {
+    console.error("Logout error:", error);
+    alert("Logout failed. Please try again.");
   }
-
-  alert("You have logged out successfully!");
-  await updateAuthUI();
-  showHome();
 }
     async function editMyReport(report) {
   try {
