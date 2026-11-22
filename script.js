@@ -818,33 +818,54 @@ const found = filtered.filter(r =>
 
 
 // Show individual report details
+
+// Show individual report details
 function showReportDetails(report) {
   selectedReport = report;
   reportDetails.innerHTML = "";
 
-  // Main card styling
-  reportDetails.style.padding = "20px";
-  reportDetails.style.borderRadius = "18px";
-  reportDetails.style.background = "#ffffff";
+  showScreen(detailsScreen);
+
+  reportDetails.style.padding = "16px";
+  reportDetails.style.borderRadius = "22px";
+  reportDetails.style.background =
+    "linear-gradient(145deg, #101a35, #17264a)";
+  reportDetails.style.color = "#ffffff";
   reportDetails.style.boxShadow =
-    "0 4px 18px rgba(0,0,0,0.10)";
+    "0 12px 35px rgba(0,0,0,0.25)";
 
-  // Item Name
-  const title = document.createElement("h2");
-  title.textContent = report.name;
-  title.style.marginBottom = "12px";
-  reportDetails.appendChild(title);
+  // Header
+  const header = document.createElement("div");
+  header.style.display = "flex";
+  header.style.justifyContent = "space-between";
+  header.style.alignItems = "center";
+  header.style.flexWrap = "wrap";
+  header.style.gap = "10px";
 
-  // Lost / Found Badge
+  const heading = document.createElement("h2");
+  heading.textContent = "Report Details";
+  heading.style.color = "#ffffff";
+  heading.style.margin = "0";
+
   const badge = document.createElement("span");
-  badge.textContent = report.type;
-  badge.style.padding = "7px 16px";
-  badge.style.borderRadius = "20px";
+  badge.textContent = report.type || "Report";
+  badge.style.padding = "8px 16px";
+  badge.style.borderRadius = "30px";
+  badge.style.fontWeight = "bold";
   badge.style.color = "#ffffff";
   badge.style.background =
-    report.type === "Lost" ? "#e74c3c" : "#27ae60";
+    report.type === "Lost" ? "#e74c5e" : "#16a779";
 
-  reportDetails.appendChild(badge);
+  header.append(heading, badge);
+  reportDetails.appendChild(header);
+
+  // Item Name
+  const title = document.createElement("h1");
+  title.textContent = report.name || "Unnamed Item";
+  title.style.color = "#ffffff";
+  title.style.fontSize = "25px";
+  title.style.margin = "22px 0 16px";
+  reportDetails.appendChild(title);
 
   // Item Photo
   const photoSource = report.photo_url || report.photo;
@@ -854,48 +875,68 @@ function showReportDetails(report) {
     image.src = photoSource;
     image.alt = "Reported item";
     image.style.width = "100%";
-    image.style.maxHeight = "260px";
+    image.style.maxHeight = "280px";
     image.style.objectFit = "contain";
-    image.style.borderRadius = "14px";
-    image.style.marginTop = "18px";
+    image.style.borderRadius = "18px";
+    image.style.background = "#0b1429";
+    image.style.padding = "8px";
+    image.style.boxSizing = "border-box";
+    image.style.marginBottom = "20px";
 
     reportDetails.appendChild(image);
   }
 
-  // Report Information
+  // Information Card
+  const infoCard = document.createElement("div");
+  infoCard.style.background = "rgba(255,255,255,0.07)";
+  infoCard.style.border = "1px solid rgba(255,255,255,0.10)";
+  infoCard.style.borderRadius = "18px";
+  infoCard.style.padding = "16px";
+
   const fields = [
-    ["Description", report.description],
-    ["Location", report.location],
-    ["Date", report.date]
+    ["📝", "Description", report.description],
+    ["📍", "Location", report.location],
+    ["📅", "Date", report.date]
   ];
 
   fields.forEach(function(field) {
     const row = document.createElement("div");
-    row.style.padding = "12px 0";
-    row.style.borderBottom = "1px solid #eeeeee";
+    row.style.padding = "13px 0";
+    row.style.borderBottom =
+      "1px solid rgba(255,255,255,0.12)";
 
     const label = document.createElement("h4");
-    label.textContent = field[0];
-    label.style.margin = "0 0 5px";
-    label.style.color = "#777777";
+    label.textContent = field[0] + "  " + field[1];
+    label.style.color = "#8db8ff";
+    label.style.margin = "0 0 8px";
+    label.style.fontSize = "14px";
 
     const value = document.createElement("p");
-    value.textContent = field[1] || "Not provided";
+    value.textContent = field[2] || "Not provided";
+    value.style.color = "#ffffff";
     value.style.margin = "0";
+    value.style.fontSize = "15px";
+    value.style.lineHeight = "1.6";
+    value.style.overflowWrap = "anywhere";
 
     row.append(label, value);
-    reportDetails.appendChild(row);
+    infoCard.appendChild(row);
   });
+
+  reportDetails.appendChild(infoCard);
 
   // 360 Degree Street View
   const streetViewBtn = document.createElement("button");
-  streetViewBtn.textContent = "🌎 Explore 360° Street View";
+  streetViewBtn.textContent =
+    "🌎 Explore 360° Street View";
+
   streetViewBtn.style.width = "100%";
-  streetViewBtn.style.padding = "14px";
-  streetViewBtn.style.marginTop = "16px";
+  streetViewBtn.style.padding = "16px";
+  streetViewBtn.style.marginTop = "20px";
   streetViewBtn.style.border = "none";
-  streetViewBtn.style.borderRadius = "12px";
-  streetViewBtn.style.background = "#2878e8";
+  streetViewBtn.style.borderRadius = "14px";
+  streetViewBtn.style.background =
+    "linear-gradient(100deg, #2878e8, #7654e8)";
   streetViewBtn.style.color = "#ffffff";
   streetViewBtn.style.fontSize = "16px";
   streetViewBtn.style.fontWeight = "bold";
@@ -904,7 +945,11 @@ function showReportDetails(report) {
   streetViewBtn.addEventListener("click", function() {
     const location = (report.location || "").trim();
 
-    // Check if location contains latitude and longitude
+    if (!location) {
+      alert("Location is not available for this report.");
+      return;
+    }
+
     const coordinates = location.match(
       /(-?\d{1,3}\.\d+)\s*,\s*(-?\d{1,3}\.\d+)/
     );
@@ -917,16 +962,15 @@ function showReportDetails(report) {
         latitude >= -90 && latitude <= 90 &&
         longitude >= -180 && longitude <= 180
       ) {
-        const streetViewUrl =
+        const url =
           "https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=" +
           latitude + "," + longitude;
 
-        window.open(streetViewUrl, "_blank");
+        window.open(url, "_blank");
         return;
       }
     }
 
-    // Fallback for text-based locations
     const searchUrl =
       "https://www.google.com/maps/search/?api=1&query=" +
       encodeURIComponent(location);
@@ -935,9 +979,8 @@ function showReportDetails(report) {
   });
 
   reportDetails.appendChild(streetViewBtn);
-
-  showScreen(detailsScreen);
 }
+
 // OFFLINE REPORT STORAGE
 
 function openOfflineDB() {
