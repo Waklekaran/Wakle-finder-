@@ -759,7 +759,7 @@ async function displayReports() {
 
   try {
     const reports = await getOnlineReports();
-    displayPossibleMatches(reports);
+    
 
     lostReportsList.innerHTML = "";
     foundReportsList.innerHTML = "";
@@ -776,6 +776,7 @@ const filtered = categoryFiltered.filter(function(report) {
     (report.type || "").toLowerCase().includes(query)
   );
 });
+    displayPossibleMatches(filtered);
 
     const lost = filtered.filter(r =>
   r.type === "Lost" &&
