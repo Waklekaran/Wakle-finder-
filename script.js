@@ -2155,3 +2155,7 @@ function openCategoryReports(type) {
     behavior: "smooth"
   });
 }
+// ===== QUICK REPORT BUTTON =====
+document.getElementById("quickReportBtn").addEventListener("click", function () {
+  showScreen(reportScreen);
+});
