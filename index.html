@@ -531,6 +531,46 @@
     <p>Choose a category to begin your search</p>
 
   </div>
+  <!-- DASHBOARD STATISTICS -->
+<div class="dashboard-stats">
+
+  <button type="button" class="stat-card"
+    onclick="openDrawerPage('totalLost')">
+
+    <div class="stat-icon lost-icon">🔍</div>
+
+    <div class="stat-info">
+      <span class="stat-number" id="totalLostCount">0</span>
+      <span class="stat-label">Total Lost Items</span>
+    </div>
+
+  </button>
+
+  <button type="button" class="stat-card"
+    onclick="openDrawerPage('totalFound')">
+
+    <div class="stat-icon found-icon">📦</div>
+
+    <div class="stat-info">
+      <span class="stat-number" id="totalFoundCount">0</span>
+      <span class="stat-label">Total Found Items</span>
+    </div>
+
+  </button>
+
+  <button type="button" class="stat-card"
+    onclick="openDrawerPage('myReports')">
+
+    <div class="stat-icon reports-icon">📋</div>
+
+    <div class="stat-info">
+      <span class="stat-number" id="totalMyReportsCount">0</span>
+      <span class="stat-label">My Reports</span>
+    </div>
+
+  </button>
+
+</div>
 
   <!-- DIAMOND CATEGORY GRID -->
   <div class="diamond-grid">
