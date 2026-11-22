@@ -417,94 +417,27 @@
     
 <!-- LOGGED-IN DASHBOARD -->
 <div id="userPanel" style="display:none;" class="premium-dashboard">
-  <!-- CHANGE CREDENTIALS SCREEN -->
-<div id="credentialsScreen" class="app-screen" style="display:none;">
+  
 
-  <div class="info-page-card">
+  <!-- DASHBOARD HEADER -->
+  <div class="dashboard-top">
 
-    <button class="info-back-btn" onclick="backToDashboard()">← Back</button>
+    <button type="button"
+      id="menuToggleBtn"
+      class="menu-toggle-btn"
+      aria-label="Open menu">
 
-    <div class="info-page-icon">🔐</div>
+      <span></span>
+      <span></span>
+      <span></span>
 
-    <h2>Change Credentials</h2>
-    <p>Update your account password securely.</p>
+    </button>
 
-    <form id="changePasswordForm">
-
-      <div class="credential-field">
-        <label for="newPassword">New Password</label>
-        <input
-          type="password"
-          id="newPassword"
-          placeholder="Enter new password"
-          minlength="6"
-          required>
-      </div>
-
-      <div class="credential-field">
-        <label for="confirmNewPassword">Confirm New Password</label>
-        <input
-          type="password"
-          id="confirmNewPassword"
-          placeholder="Confirm your new password"
-          minlength="6"
-          required>
-      </div>
-
-      <button type="submit" class="info-primary-btn">
-        Update Password
-      </button>
-
-    </form>
+    <div class="dashboard-brand">WAKLE-FINDER 🔍</div>
+    <p>Find what matters. Bring it back.</p>
 
   </div>
-
-</div>
-
-
-<!-- ABOUT US SCREEN -->
-<div id="aboutScreen" class="app-screen" style="display:none;">
-
-  <div class="info-page-card">
-
-    <button class="info-back-btn" onclick="backToDashboard()">← Back</button>
-
-    <div class="info-page-icon">🔍</div>
-
-    <h2>About Wakle-Finder</h2>
-
-    <p>
-      Wakle-Finder is a Lost & Found platform designed to help people
-      reconnect with their lost belongings and return items to their
-      rightful owners.
-    </p>
-
-    <div class="about-feature">
-      <span>📱</span>
-      <div>
-        <strong>Easy Reporting</strong>
-        <p>Report lost or found belongings with useful information.</p>
-      </div>
-    </div>
-
-    <div class="about-feature">
-      <span>🤝</span>
-      <div>
-        <strong>Smart Matching</strong>
-        <p>Discover possible matches between lost and found reports.</p>
-      </div>
-    </div>
-
-    <div class="about-feature">
-      <span>🌍</span>
-      <div>
-        <strong>Community Support</strong>
-        <p>Help people in your community find their belongings.</p>
-      </div>
-    </div>
-
-    <div class="about-footer">
-      <strong>WAKLE-FINDER 🔍</strong>
+        <strong>WAKLE-FINDER 🔍</strong>
       <p>Find what matters. Bring it back.</p>
     </div>
 
@@ -577,25 +510,6 @@
   </div>
 
 </div>
-
-  <!-- DASHBOARD HEADER -->
-  <div class="dashboard-top">
-
-    <button type="button"
-      id="menuToggleBtn"
-      class="menu-toggle-btn"
-      aria-label="Open menu">
-
-      <span></span>
-      <span></span>
-      <span></span>
-
-    </button>
-
-    <div class="dashboard-brand">WAKLE-FINDER 🔍</div>
-    <p>Find what matters. Bring it back.</p>
-
-  </div>
 
   <!-- SIDE DRAWER MENU -->
   <div id="drawerOverlay"
