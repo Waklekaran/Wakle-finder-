@@ -2111,8 +2111,16 @@ function selectCategory(category) {
 }
 
 function backToDashboard() {
+  categoryFilterActive = false;
+  selectedReportType = "";
+  selectedCategory = "";
+
   document.getElementById("categoryScreen").style.display = "none";
+  document.getElementById("reportsScreen").style.display = "none";
   document.getElementById("userPanel").style.display = "block";
+
+  searchInput.value = "";
+  displayReports();
 }
 // CATEGORY REPORT NAVIGATION
 function openCategoryReports(type) {
