@@ -2325,7 +2325,7 @@ if (changePasswordForm) {
       alert("Password updated successfully!");
 
       changePasswordForm.reset();
-      openInfoScreen("userPanel");
+      backToDashboard();
 
     } catch (error) {
       alert(error.message || "Unable to update password.");
