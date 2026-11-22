@@ -1226,3 +1226,71 @@ body:has(#homeScreen:not([style*="display: none"])) main {
   font-size: 32px;
   margin-bottom: 10px;
 }
+/* STEP 1 — PREMIUM LOST & FOUND CARDS */
+
+.category-report-options {
+  gap: 18px;
+}
+
+.category-report-card {
+  position: relative;
+  width: 100%;
+  min-height: 115px;
+  padding: 22px;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(130, 150, 255, 0.25);
+  background: linear-gradient(135deg, #101a35, #1d2c55, #29205d);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(20, 35, 90, 0.18);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category-report-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(79, 70, 229, 0.3);
+}
+
+.category-report-card:active {
+  transform: scale(0.98);
+}
+
+.category-report-card h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.category-report-card p {
+  color: #cbd5f5;
+  font-size: 13px;
+}
+
+.category-option-icon {
+  min-width: 55px;
+  height: 55px;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 26px;
+}
+
+.category-arrow {
+  margin-left: auto;
+  font-size: 23px;
+  color: #a5b4fc;
+}
+
+.lost-option {
+  border-left: 4px solid #818cf8;
+}
+
+.found-option {
+  border-left: 4px solid #34d399;
+}
