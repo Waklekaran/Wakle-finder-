@@ -2219,3 +2219,41 @@ select {
     transform: translateY(0);
   }
 }
+
+/* FINAL MOBILE RESPONSIVE POLISH */
+@media (max-width: 600px) {
+  #reportDetails {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px !important;
+  }
+
+  #reportDetails h1 {
+    font-size: 22px !important;
+    overflow-wrap: anywhere;
+  }
+
+  #reportDetails img {
+    max-height: 230px !important;
+  }
+
+  #reportDetails button {
+    min-height: 50px;
+  }
+
+  #lostReportsList,
+  #foundReportsList {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* SMOOTH BUTTON INTERACTIONS */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+  outline: 2px solid #75aaff;
+  outline-offset: 3px;
+}
