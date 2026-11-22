@@ -2187,3 +2187,51 @@ document.addEventListener("keydown", function(event) {
     closeSideMenu();
   }
 });
+// ===== DRAWER MENU NAVIGATION =====
+
+function openDrawerPage(page) {
+  closeSideMenu();
+
+  // Reset category filters
+  categoryFilterActive = false;
+  selectedCategory = "";
+  searchInput.value = "";
+
+  if (page === "totalFound") {
+    selectedReportType = "Found";
+    showScreen(reportsScreen);
+    displayReports();
+  }
+
+  else if (page === "totalLost") {
+    selectedReportType = "Lost";
+    showScreen(reportsScreen);
+    displayReports();
+  }
+
+  else if (page === "myReports") {
+    selectedReportType = "";
+    showMyReports();
+  }
+
+  else if (page === "possibleMatches") {
+    selectedReportType = "";
+    showScreen(reportsScreen);
+    displayReports();
+    document.getElementById("possibleMatchesSection").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+  else if (page === "credentials") {
+    alert("Change Credentials section will be added in Step 5.");
+  }
+
+  else if (page === "about") {
+    alert("About Us page will be added in Step 5.");
+  }
+
+  else if (page === "privacy") {
+    alert("Privacy Policy page will be added in Step 5.");
+  }
+}
