@@ -2159,3 +2159,31 @@ function openCategoryReports(type) {
 document.getElementById("quickReportBtn").addEventListener("click", function () {
   showScreen(reportScreen);
 });
+// ===== SIDE DRAWER CONTROLS =====
+
+const menuToggleBtn = document.getElementById("menuToggleBtn");
+const sideDrawer = document.getElementById("sideDrawer");
+const drawerOverlay = document.getElementById("drawerOverlay");
+
+function openSideMenu() {
+  sideDrawer.classList.add("active");
+  drawerOverlay.classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeSideMenu() {
+  sideDrawer.classList.remove("active");
+  drawerOverlay.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+if (menuToggleBtn) {
+  menuToggleBtn.addEventListener("click", openSideMenu);
+}
+
+// Escape key closes drawer
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    closeSideMenu();
+  }
+});
