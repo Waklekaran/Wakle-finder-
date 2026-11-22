@@ -1187,3 +1187,42 @@ body:has(#homeScreen:not([style*="display: none"])) main {
     gap: 14px 2px;
   }
 }
+/* STEP 1 - LOST / FOUND PREMIUM UI */
+
+.lost-found-btn {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(120, 140, 255, 0.35);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #101a35, #202c58, #31246a);
+  color: #ffffff;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(38, 54, 130, 0.25);
+  transition: all 0.3s ease;
+}
+
+.lost-found-btn:hover {
+  transform: translateY(-4px);
+  border-color: #8d9dff;
+  box-shadow: 0 12px 30px rgba(92, 105, 255, 0.35);
+}
+
+.lost-found-btn:active {
+  transform: scale(0.97);
+}
+
+.lost-found-btn h2 {
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.lost-found-btn p {
+  color: #c5cde9;
+  font-size: 13px;
+}
+
+.lost-found-btn .btn-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
