@@ -2267,6 +2267,7 @@ function openInfoScreen(screenId) {
 
 // ===== DRAWER NAVIGATION =====
 
+
 function openDrawerPage(page) {
   closeSideMenu();
 
@@ -2277,12 +2278,14 @@ function openDrawerPage(page) {
   if (page === "totalFound") {
     selectedReportType = "Found";
     showScreen(reportsScreen);
+    reportsBackScreenId = "userPanel";
     displayReports();
   }
 
   else if (page === "totalLost") {
     selectedReportType = "Lost";
     showScreen(reportsScreen);
+    reportsBackScreenId = "userPanel";
     displayReports();
   }
 
@@ -2293,6 +2296,7 @@ function openDrawerPage(page) {
 
   else if (page === "possibleMatches") {
     selectedReportType = "";
+    reportsBackScreenId = "userPanel";
     showScreen(reportsScreen);
     displayReports();
 
@@ -2321,6 +2325,7 @@ function openDrawerPage(page) {
     openInfoScreen("privacyScreen");
   }
 }
+
 
 
 // ===== CHANGE PASSWORD =====
