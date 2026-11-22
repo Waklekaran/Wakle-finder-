@@ -1533,3 +1533,56 @@ section,
   scrollbar-width: thin;
   scrollbar-color: #34466f #080d1b;
 }
+/* STEP 3B — PREMIUM DASHBOARD HERO */
+
+.dashboard-top {
+  position: relative;
+  overflow: hidden;
+  padding: 26px 22px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #111b36, #1d3470, #34256d);
+  border: 1px solid rgba(130, 150, 255, 0.25);
+  box-shadow: 0 12px 35px rgba(35, 55, 130, 0.2);
+}
+
+.dashboard-top::after {
+  content: "✦";
+  position: absolute;
+  right: 20px;
+  top: 8px;
+  font-size: 80px;
+  color: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.dashboard-brand {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.dashboard-top p {
+  color: #c5d3ff;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.dashboard-heading {
+  text-align: center;
+  padding: 28px 12px 12px;
+}
+
+.dashboard-heading h2 {
+  font-size: clamp(21px, 5vw, 28px);
+  line-height: 1.5;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffffff, #b9c8ff, #d5baff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-heading p {
+  color: #aab8d6;
+  font-size: 14px;
+  margin-top: 8px;
+}
