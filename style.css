@@ -1820,3 +1820,77 @@ section,
     border-radius: 17px;
   }
 }
+/* STEP 6 — PREMIUM REPORT DETAILS */
+
+#detailsScreen {
+  padding: 18px;
+  animation: wfScreenFade 0.3s ease;
+}
+
+#detailsScreen > h2 {
+  font-size: 26px;
+  font-weight: 850;
+  margin-bottom: 20px;
+  color: #f3f6ff;
+}
+
+#reportDetails {
+  padding: 22px;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #162440, #10182b);
+  border: 1px solid rgba(130, 155, 255, 0.22);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+  color: #e8efff;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+#reportDetails img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 18px;
+  margin: 15px auto;
+  border: 1px solid rgba(130, 155, 255, 0.2);
+}
+
+#reportDetails h3 {
+  color: #c3d1ff;
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+#reportDetails p {
+  color: #c0cbe2;
+  margin: 8px 0;
+}
+
+#reportDetails strong {
+  color: #ffffff;
+}
+
+#detailsScreen > button {
+  width: 100%;
+  margin-top: 14px;
+  padding: 15px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #315fe8, #6851df);
+  color: #ffffff;
+  font-weight: 700;
+  border: 1px solid rgba(140, 160, 255, 0.25);
+}
+
+#detailsScreen > button:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 480px) {
+  #detailsScreen {
+    padding: 13px;
+  }
+
+  #reportDetails {
+    padding: 17px;
+    border-radius: 20px;
+  }
+}
