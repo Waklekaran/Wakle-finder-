@@ -2896,3 +2896,105 @@ button:focus-visible {
     font-size: 13px;
   }
 }
+/* ===== DASHBOARD STATISTICS CARDS ===== */
+
+.dashboard-stats {
+  width: 100%;
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 0 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stat-card {
+  min-width: 0;
+  padding: 16px 8px;
+  border: 1px solid #e5eaf3;
+  border-radius: 18px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(20, 40, 80, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 24px rgba(20, 40, 80, 0.12);
+}
+
+.stat-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 21px;
+}
+
+.lost-icon {
+  background: #fff0f0;
+}
+
+.found-icon {
+  background: #eafaf1;
+}
+
+.reports-icon {
+  background: #eef2ff;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-number {
+  font-size: 23px;
+  font-weight: 800;
+  color: #17233d;
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 380px) {
+  .dashboard-stats {
+    gap: 8px;
+    padding: 0 12px;
+  }
+
+  .stat-card {
+    padding: 13px 5px;
+    border-radius: 14px;
+  }
+
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .stat-number {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+}
