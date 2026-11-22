@@ -1989,3 +1989,99 @@ section,
     padding: 12px;
   }
 }
+/* STEP 8 — FINAL UI POLISH */
+
+/* Consistent spacing and sizing */
+#homeScreen,
+#userPanel,
+#categoryScreen,
+#reportScreen,
+#reportsScreen,
+#detailsScreen,
+#myReportsScreen {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+#homeScreen *,
+#userPanel *,
+#categoryScreen *,
+#reportScreen *,
+#reportsScreen *,
+#detailsScreen *,
+#myReportsScreen * {
+  box-sizing: border-box;
+}
+
+/* Lost & Found cards — actual HTML classes */
+.category-report-card {
+  border-radius: 22px;
+  padding: 22px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(140, 160, 255, 0.2);
+}
+
+.category-report-card.lost-option {
+  background: linear-gradient(145deg, #39202d, #201725);
+}
+
+.category-report-card.found-option {
+  background: linear-gradient(145deg, #17352f, #10251f);
+}
+
+.category-report-card:active {
+  transform: scale(0.97);
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  max-width: 100%;
+}
+
+/* Mobile layout */
+@media (max-width: 480px) {
+  .premium-dashboard,
+  .category-screen,
+  #reportScreen,
+  #reportsScreen,
+  #detailsScreen {
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .dashboard-top,
+  .welcome-content,
+  #reportDetails,
+  #pinMapSection {
+    border-radius: 20px;
+  }
+
+  button {
+    min-height: 44px;
+  }
+}
+
+/* Reduce animation for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
