@@ -2085,3 +2085,98 @@ select {
     scroll-behavior: auto !important;
   }
 }
+/* WAKLE-FINDER — REPORT DETAILS REDESIGN */
+
+#detailsScreen {
+  background: linear-gradient(160deg, #101a32, #080d1b) !important;
+  color: #f1f5ff !important;
+  max-width: 600px;
+  margin: 20px auto !important;
+  padding: 24px 18px !important;
+  border: 1px solid rgba(116, 145, 255, 0.22) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35) !important;
+}
+
+#detailsScreen h2 {
+  color: #f1f5ff !important;
+  font-size: 25px !important;
+  font-weight: 850 !important;
+  margin-bottom: 20px !important;
+}
+
+#reportDetails {
+  background: linear-gradient(160deg, #182642, #111a2d) !important;
+  color: #eaf0ff !important;
+  padding: 22px !important;
+  border: 1px solid rgba(125, 150, 255, 0.2) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2) !important;
+  line-height: 1.8 !important;
+  overflow-wrap: anywhere;
+}
+
+/* Text readability */
+#reportDetails h3,
+#reportDetails h4 {
+  color: #c5d4ff !important;
+}
+
+#reportDetails p,
+#reportDetails span {
+  color: #c1cce4 !important;
+  line-height: 1.8 !important;
+}
+
+#reportDetails strong,
+#reportDetails b {
+  color: #ffffff !important;
+}
+
+/* Report image */
+#reportDetails img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  max-height: 380px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 16px auto !important;
+  background: #0b1222 !important;
+  padding: 8px !important;
+  border: 1px solid rgba(125, 150, 255, 0.18) !important;
+  border-radius: 18px !important;
+}
+
+/* Explore Street View */
+#detailsScreen button {
+  width: 100% !important;
+  min-height: 48px !important;
+  margin-top: 16px !important;
+  padding: 14px !important;
+  border-radius: 15px !important;
+  border: 1px solid rgba(160, 175, 255, 0.2) !important;
+  background: linear-gradient(135deg, #3267ed, #674de0) !important;
+  color: white !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  box-shadow: 0 7px 22px rgba(60, 80, 220, 0.2) !important;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  #detailsScreen {
+    margin: 12px auto !important;
+    padding: 18px 13px !important;
+    border-radius: 22px !important;
+  }
+
+  #reportDetails {
+    padding: 16px !important;
+    border-radius: 18px !important;
+  }
+
+  #reportDetails img {
+    max-height: 300px !important;
+  }
+}
