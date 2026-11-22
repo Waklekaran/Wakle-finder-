@@ -2134,7 +2134,27 @@ function backToDashboard() {
   searchInput.value = "";
   displayReports();
 }
-// CATEGORY REPORT NAVIGATION
+
+// ===== REPORTS BACK NAVIGATION =====
+
+// Default: Reports screen से Dashboard पर वापस जाना
+let reportsBackScreenId = "userPanel";
+
+// Reports screen से सही पिछली screen पर जाना
+function backFromReports() {
+  if (reportsBackScreenId === "categoryScreen") {
+    showScreen(categoryScreen);
+  } else {
+    backToDashboard();
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+// ===== CATEGORY REPORT NAVIGATION =====
 function openCategoryReports(type) {
   categoryFilterActive = true;
   selectedReportType = type;
@@ -2146,6 +2166,9 @@ function openCategoryReports(type) {
     alert("Reports screen not found!");
     return;
   }
+
+  // याद रखेंगे कि वापस Category Selection पर जाना है
+  reportsBackScreenId = "categoryScreen";
 
   if (categoryScreen) {
     categoryScreen.style.display = "none";
@@ -2167,6 +2190,7 @@ function openCategoryReports(type) {
     behavior: "smooth"
   });
 }
+
 // ===== QUICK REPORT BUTTON =====
 document.getElementById("quickReportBtn").addEventListener("click", function () {
   showScreen(reportScreen);
