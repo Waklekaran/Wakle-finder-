@@ -2235,3 +2235,34 @@ function openDrawerPage(page) {
     alert("Privacy Policy page will be added in Step 5.");
   }
 }
+// ===== LIVE DASHBOARD STATISTICS =====
+
+async function refreshDashboardStats() {
+  try {
+    const reports = await getOnlineReports();
+
+    const lostCount = reports.filter(r => r.type === "Lost").length;
+    const foundCount = reports.filter(r => r.type === "Found").length;
+
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    const myCount = user
+      ? reports.filter(r => r.user_id === user.id).length
+      : 0;
+
+    document.getElementById("totalLostCount").textContent = lostCount;
+    document.getElementById("totalFoundCount").textContent = foundCount;
+    document.getElementById("totalMyReportsCount").textContent = myCount;
+
+  } catch (error) {
+    console.error("Dashboard statistics error:", error);
+  }
+}
+
+// Refresh counts whenever authentication state changes
+supabaseClient.auth.onAuthStateChange(() => {
+  refreshDashboardStats();
+});
+
+// Initial load
+refreshDashboardStats();
