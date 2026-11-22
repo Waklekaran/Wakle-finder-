@@ -1294,3 +1294,84 @@ body:has(#homeScreen:not([style*="display: none"])) main {
 .found-option {
   border-left: 4px solid #34d399;
 }
+/* STEP 2 — PREMIUM DIAMOND DASHBOARD */
+
+.diamond-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding: 25px 12px;
+  justify-items: center;
+}
+
+.diamond-card {
+  width: 145px;
+  height: 145px;
+  border: none;
+  background: transparent;
+  overflow: visible;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diamond-shape {
+  width: 108px;
+  height: 108px;
+  transform: rotate(45deg);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #172447, #263d78, #35266d);
+  border: 1px solid rgba(130, 160, 255, 0.45);
+  box-shadow: 0 0 18px rgba(75, 110, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.diamond-card:hover .diamond-shape {
+  transform: rotate(45deg) scale(1.08);
+  box-shadow: 0 0 28px rgba(105, 125, 255, 0.4);
+  border-color: #9baaff;
+}
+
+.diamond-content {
+  transform: rotate(-45deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.diamond-content span {
+  font-size: 30px;
+}
+
+.diamond-content small {
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.diamond-card:active .diamond-shape {
+  transform: rotate(45deg) scale(0.95);
+}
+
+@media (max-width: 380px) {
+  .diamond-grid {
+    gap: 15px;
+  }
+
+  .diamond-card {
+    width: 125px;
+    height: 125px;
+  }
+
+  .diamond-shape {
+    width: 95px;
+    height: 95px;
+  }
+}
