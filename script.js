@@ -1454,6 +1454,7 @@ document.getElementById("emailLoginForm").addEventListener(
   "submit",
   async function(event) {
     event.preventDefault();
+    alert("Login button clicked!");
 
     const email = document.getElementById("emailLogin").value.trim();
     const password = document.getElementById("passwordLogin").value;
