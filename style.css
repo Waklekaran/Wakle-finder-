@@ -2180,3 +2180,42 @@ select {
     max-height: 300px !important;
   }
 }
+
+/* PREMIUM REPORT DETAILS */
+#reportDetails {
+  color: #ffffff;
+  animation: reportFadeIn 0.35s ease;
+}
+
+#reportDetails h1,
+#reportDetails h2,
+#reportDetails h3,
+#reportDetails h4,
+#reportDetails p {
+  color: inherit;
+}
+
+#reportDetails img {
+  display: block;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+#reportDetails button {
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+#reportDetails button:active {
+  transform: scale(0.97);
+  filter: brightness(1.15);
+}
+
+@keyframes reportFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
