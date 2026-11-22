@@ -1,6 +1,4 @@
-window.onerror = function(message, source, line, column) {
-  alert("JS ERROR at line " + line + ": " + message);
-};
+
 // Wakle-Finder App
 // Supabase Connection
 const SUPABASE_URL = "https://auzgtqyxgwrdwluayhso.supabase.co";
