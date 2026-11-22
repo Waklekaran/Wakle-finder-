@@ -2187,7 +2187,39 @@ document.addEventListener("keydown", function(event) {
     closeSideMenu();
   }
 });
-// ===== DRAWER MENU NAVIGATION =====
+// ===== INFO PAGES & DRAWER NAVIGATION =====
+
+function openInfoScreen(screenId) {
+  closeSideMenu();
+
+  const screenIds = [
+    "userPanel",
+    "homeScreen",
+    "categoryScreen",
+    "reportScreen",
+    "reportsScreen",
+    "detailsScreen",
+    "loginScreen",
+    "credentialsScreen",
+    "aboutScreen",
+    "privacyScreen"
+  ];
+
+  screenIds.forEach(id => {
+    const screen = document.getElementById(id);
+    if (screen) screen.style.display = "none";
+  });
+
+  const target = document.getElementById(screenId);
+
+  if (target) {
+    target.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+
+// ===== DRAWER NAVIGATION =====
 
 function openDrawerPage(page) {
   closeSideMenu();
@@ -2219,11 +2251,11 @@ function openDrawerPage(page) {
     displayReports();
 
     setTimeout(() => {
-      const matchesSection =
+      const section =
         document.getElementById("possibleMatchesSection");
 
-      if (matchesSection) {
-        matchesSection.scrollIntoView({
+      if (section) {
+        section.scrollIntoView({
           behavior: "smooth",
           block: "start"
         });
@@ -2232,16 +2264,77 @@ function openDrawerPage(page) {
   }
 
   else if (page === "credentials") {
-    alert("Change Credentials will be available in Step 5.");
+    openInfoScreen("credentialsScreen");
   }
 
   else if (page === "about") {
-    alert("About Us will be available in Step 5.");
+    openInfoScreen("aboutScreen");
   }
 
   else if (page === "privacy") {
-    alert("Privacy Policy will be available in Step 5.");
+    openInfoScreen("privacyScreen");
   }
+}
+
+
+// ===== CHANGE PASSWORD =====
+
+const changePasswordForm =
+  document.getElementById("changePasswordForm");
+
+if (changePasswordForm) {
+  changePasswordForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const newPassword =
+      document.getElementById("newPassword").value;
+
+    const confirmPassword =
+      document.getElementById("confirmNewPassword").value;
+
+    if (newPassword !== confirmPassword) {
+      alert("New passwords do not match!");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
+
+    const submitButton =
+      changePasswordForm.querySelector('button[type="submit"]');
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Updating...";
+
+    try {
+      const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+      if (userError || !user) {
+        throw new Error("Please log in again.");
+      }
+
+      const { error } = await supabaseClient.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) throw error;
+
+      alert("Password updated successfully!");
+
+      changePasswordForm.reset();
+      openInfoScreen("userPanel");
+
+    } catch (error) {
+      alert(error.message || "Unable to update password.");
+
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Update Password";
+    }
+  });
 }
 // ===== LIVE DASHBOARD STATISTICS =====
 
