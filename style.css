@@ -1729,3 +1729,94 @@ section,
     font-size: 25px;
   }
 }
+/* STEP 5A — PREMIUM REPORT CARDS */
+
+#reportsScreen {
+  padding: 18px;
+}
+
+#reportsScreen > h2 {
+  font-size: 27px;
+  font-weight: 850;
+  color: #f4f7ff;
+  margin-bottom: 20px;
+}
+
+#reportsScreen > h3 {
+  margin: 22px 0 14px;
+  color: #b8c8ff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+#lostReportsList,
+#foundReportsList,
+#possibleMatchesList {
+  display: grid;
+  gap: 14px;
+}
+
+#lostReportsList > div,
+#foundReportsList > div,
+#possibleMatchesList > div {
+  padding: 17px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #131f39, #10182c);
+  border: 1px solid rgba(125, 150, 255, 0.19);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  color: #e9efff;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#lostReportsList > div:hover,
+#foundReportsList > div:hover,
+#possibleMatchesList > div:hover {
+  transform: translateY(-2px);
+  border-color: rgba(120, 150, 255, 0.45);
+}
+
+#possibleMatchesSection {
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #172747, #151d36);
+  border: 1px solid rgba(130, 160, 255, 0.2);
+}
+
+#possibleMatchesSection h3 {
+  color: #c8d5ff;
+  margin-bottom: 8px;
+}
+
+#possibleMatchesSection p {
+  color: #a8b8d7;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 15px;
+  margin: 12px 0 20px;
+  border-radius: 16px;
+  background: #121d33;
+  border: 1px solid rgba(125, 150, 255, 0.22);
+  color: #ffffff;
+}
+
+#searchInput::placeholder {
+  color: #8798ba;
+}
+
+@media (max-width: 480px) {
+  #reportsScreen {
+    padding: 13px;
+  }
+
+  #lostReportsList > div,
+  #foundReportsList > div,
+  #possibleMatchesList > div {
+    padding: 14px;
+    border-radius: 17px;
+  }
+}
