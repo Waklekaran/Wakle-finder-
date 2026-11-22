@@ -2140,12 +2140,11 @@ function backToDashboard() {
   categoryFilterActive = false;
   selectedReportType = "";
   selectedCategory = "";
-
-  document.getElementById("categoryScreen").style.display = "none";
-  document.getElementById("reportsScreen").style.display = "none";
-  document.getElementById("userPanel").style.display = "block";
+  reportsBackScreenId = "userPanel";
 
   searchInput.value = "";
+
+  showScreen(document.getElementById("userPanel"));
   displayReports();
 }
 
