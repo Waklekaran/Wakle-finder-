@@ -2192,7 +2192,6 @@ document.addEventListener("keydown", function(event) {
 function openDrawerPage(page) {
   closeSideMenu();
 
-  // Reset category filters
   categoryFilterActive = false;
   selectedCategory = "";
   searchInput.value = "";
@@ -2218,21 +2217,30 @@ function openDrawerPage(page) {
     selectedReportType = "";
     showScreen(reportsScreen);
     displayReports();
-    document.getElementById("possibleMatchesSection").scrollIntoView({
-      behavior: "smooth"
-    });
+
+    setTimeout(() => {
+      const matchesSection =
+        document.getElementById("possibleMatchesSection");
+
+      if (matchesSection) {
+        matchesSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }, 300);
   }
 
   else if (page === "credentials") {
-    alert("Change Credentials section will be added in Step 5.");
+    alert("Change Credentials will be available in Step 5.");
   }
 
   else if (page === "about") {
-    alert("About Us page will be added in Step 5.");
+    alert("About Us will be available in Step 5.");
   }
 
   else if (page === "privacy") {
-    alert("Privacy Policy page will be added in Step 5.");
+    alert("Privacy Policy will be available in Step 5.");
   }
 }
 // ===== LIVE DASHBOARD STATISTICS =====
