@@ -1450,6 +1450,7 @@ document.getElementById("signupForm").addEventListener(
 
 alert("JavaScript reached Login section!");
 // LOGIN FORM SUBMISSION
+alert("LOGIN FORM FOUND: " + document.getElementById("emailLoginForm"));
 document.getElementById("emailLoginForm").addEventListener(
   "submit",
   async function(event) {
