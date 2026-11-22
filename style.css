@@ -1438,3 +1438,98 @@ body:has(#homeScreen:not([style*="display: none"])) main {
     transform: translateY(0);
   }
 }
+/* STEP 3 — WAKLE FINDER PREMIUM THEME */
+
+:root {
+  --wf-bg: #080d1b;
+  --wf-surface: #111a2e;
+  --wf-surface-2: #172440;
+  --wf-primary: #527cff;
+  --wf-violet: #7957ff;
+  --wf-text: #f4f7ff;
+  --wf-muted: #a6b4d0;
+  --wf-border: rgba(135, 160, 255, 0.18);
+}
+
+/* Main background */
+body {
+  background: var(--wf-bg);
+  color: var(--wf-text);
+}
+
+/* Main headings */
+header h1,
+.welcome-brand h1,
+.dashboard-brand {
+  color: var(--wf-text);
+  letter-spacing: 1.2px;
+}
+
+/* Screens */
+.welcome-screen,
+.premium-dashboard,
+.category-screen,
+#reportScreen,
+#reportsScreen,
+#successScreen,
+#detailsScreen,
+#myReportsScreen,
+.login-screen {
+  color: var(--wf-text);
+}
+
+/* Surface cards */
+.login-card,
+.category-report-card,
+.dashboard-recent-btn,
+.welcome-content,
+#possibleMatchesSection {
+  border: 1px solid var(--wf-border);
+  border-radius: 22px;
+}
+
+/* Premium buttons */
+button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Inputs */
+input,
+textarea,
+select {
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--wf-primary);
+  box-shadow: 0 0 0 3px rgba(82, 124, 255, 0.13);
+  outline: none;
+}
+
+/* Smooth screen feel */
+section,
+.premium-dashboard {
+  animation: wfScreenFade 0.35s ease;
+}
+
+@keyframes wfScreenFade {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #34466f #080d1b;
+}
