@@ -2526,3 +2526,62 @@ button:focus-visible {
   border: 1px solid #e2eaf2;
   box-shadow: 0 4px 14px rgba(25, 45, 75, 0.06);
 }
+
+/* STEP 4 - PREMIUM CREATE REPORT BUTTON */
+
+/* Main create report button */
+#reportsScreen .create-report-btn,
+#reportsScreen #createReportBtn,
+#reportsScreen .add-report-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 25px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 23px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(120deg, #087f85, #1764c0);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  box-shadow: 0 9px 25px rgba(8, 105, 145, 0.30);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#reportsScreen .create-report-btn:hover,
+#reportsScreen #createReportBtn:hover,
+#reportsScreen .add-report-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 13px 30px rgba(8, 105, 145, 0.38);
+}
+
+#reportsScreen .create-report-btn:active,
+#reportsScreen #createReportBtn:active,
+#reportsScreen .add-report-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mobile position */
+@media (max-width: 600px) {
+  #reportsScreen .create-report-btn,
+  #reportsScreen #createReportBtn,
+  #reportsScreen .add-report-btn {
+    right: 16px;
+    bottom: 20px;
+    min-height: 52px;
+    padding: 0 19px;
+    border-radius: 16px;
+    font-size: 14px;
+  }
+
+  #reportsScreen {
+    padding-bottom: 90px;
+  }
+}
