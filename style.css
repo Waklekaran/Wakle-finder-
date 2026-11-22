@@ -2703,3 +2703,38 @@ button:focus-visible {
   font-size: 25px;
   font-weight: 500;
 }
+/* ===== DASHBOARD HAMBURGER BUTTON ===== */
+.dashboard-top {
+  position: relative;
+}
+
+.menu-toggle-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.menu-toggle-btn span {
+  display: block;
+  width: 21px;
+  height: 2.5px;
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+.menu-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
