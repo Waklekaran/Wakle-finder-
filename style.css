@@ -1586,3 +1586,146 @@ section,
   font-size: 14px;
   margin-top: 8px;
 }
+/* STEP 4 — CINEMATIC WELCOME SCREEN */
+
+.welcome-screen {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 16px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(78, 104, 255, 0.18), transparent 45%),
+    #080d1b;
+}
+
+.welcome-brand {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.welcome-logo {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  font-size: 36px;
+  background: linear-gradient(135deg, #1c3470, #5136a5);
+  border: 1px solid rgba(164, 179, 255, 0.35);
+  box-shadow: 0 0 30px rgba(83, 105, 255, 0.22);
+}
+
+.welcome-brand h1 {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, #ffffff, #9db5ff, #c7aaff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-tagline {
+  color: #8fa9e9;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 9px;
+}
+
+.welcome-content {
+  padding: 28px 20px;
+  text-align: center;
+  background: linear-gradient(
+    160deg,
+    rgba(21, 32, 58, 0.96),
+    rgba(13, 19, 37, 0.98)
+  );
+  border: 1px solid rgba(125, 150, 255, 0.18);
+  border-radius: 28px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+.welcome-illustration {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.welcome-illustration span {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 29px;
+  border-radius: 20px;
+  background: rgba(85, 110, 210, 0.12);
+  border: 1px solid rgba(132, 157, 255, 0.17);
+}
+
+.welcome-content h2 {
+  font-size: 25px;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.welcome-content h3 {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #b8c8ff;
+}
+
+.welcome-description {
+  color: #9eacc8;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 18px 0 24px;
+}
+
+.welcome-register-btn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #456ff5, #7354ef);
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(75, 91, 235, 0.25);
+}
+
+.welcome-login-text {
+  color: #98a8c9;
+  margin: 22px 0 10px;
+  font-size: 13px;
+}
+
+.welcome-login-btn {
+  padding: 12px 28px;
+  border: 1px solid rgba(135, 160, 255, 0.35);
+  border-radius: 13px;
+  background: rgba(91, 112, 220, 0.1);
+  color: #dce5ff;
+  font-weight: 700;
+}
+
+.welcome-register-btn:active,
+.welcome-login-btn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 380px) {
+  .welcome-content {
+    padding: 24px 15px;
+  }
+
+  .welcome-content h2 {
+    font-size: 22px;
+  }
+
+  .welcome-brand h1 {
+    font-size: 25px;
+  }
+}
