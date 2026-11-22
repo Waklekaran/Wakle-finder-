@@ -1,4 +1,4 @@
-alert("WAKLE SCRIPT RUNNING");
+
 // Wakle-Finder App
 // Supabase Connection
 const SUPABASE_URL = "https://auzgtqyxgwrdwluayhso.supabase.co";
@@ -1450,36 +1450,55 @@ document.getElementById("signupForm").addEventListener(
 
 alert("JavaScript reached Login section!");
 // LOGIN FORM SUBMISSION
-alert("LOGIN FORM FOUND: " + document.getElementById("emailLoginForm"));
-document.getElementById("emailLoginForm").addEventListener(
-  "submit",
-  async function(event) {
+const loginForm = document.getElementById("emailLoginForm");
+
+if (!loginForm) {
+  console.error("Login form not found!");
+} else {
+  console.log("Login form found successfully!");
+
+  loginForm.addEventListener("submit", async function(event) {
     event.preventDefault();
-    alert("Login button clicked!");
+
+    alert("LOGIN BUTTON WORKING");
 
     const email = document.getElementById("emailLogin").value.trim();
     const password = document.getElementById("passwordLogin").value;
     const message = document.getElementById("authMessage");
 
-    message.textContent = "Logging in...";
-
-    const { data, error } = await supabaseClient.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
-
-    if (error) {
-      message.textContent = "Login failed: " + error.message;
+    if (!email || !password) {
+      message.textContent = "Please enter email and password.";
       return;
     }
 
-    alert("Login successful! Welcome to Wakle-Finder.");
-    await updateAuthUI();
+    message.textContent = "Logging in...";
 
-    document.getElementById("emailLoginForm").reset();
-    showScreen(document.getElementById("userPanel"));
-  }
-);
+    try {
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+      if (error) {
+        message.textContent = "Login failed: " + error.message;
+        return;
+      }
+
+      message.textContent = "Login successful!";
+
+      await updateAuthUI();
+
+      loginForm.reset();
+
+      showScreen(document.getElementById("userPanel"));
+
+    } catch (err) {
+      console.error("Login error:", err);
+      message.textContent = "Error: " + err.message;
+    }
+  });
+}
 async function resendVerificationEmail() {
   const email = document.getElementById("signupEmail").value.trim();
   const message = document.getElementById("authMessage");
