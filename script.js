@@ -9,7 +9,35 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
+// ===== WAKLE-FINDER SHIELD FUNCTIONS =====
 
+function openShield() {
+  const shieldScreen = document.getElementById("shieldScreen");
+
+  if (shieldScreen) {
+    shieldScreen.style.display = "block";
+  }
+
+  const userPanel = document.getElementById("userPanel");
+
+  if (userPanel) {
+    userPanel.style.display = "none";
+  }
+}
+
+function selectShieldItem(item) {
+  const message = document.getElementById("shieldSelectionMessage");
+
+  if (message) {
+    message.innerHTML = `
+      <div class="shield-selected-item">
+        <h3>${item} Protection</h3>
+        <p>Selected item: ${item}</p>
+        <p>Protection guidance will be available here.</p>
+      </div>
+    `;
+  }
+}
 const homeScreen = document.getElementById("homeScreen");
 const reportScreen = document.getElementById("reportScreen");
 const reportsScreen = document.getElementById("reportsScreen");
