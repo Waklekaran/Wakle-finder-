@@ -3189,3 +3189,109 @@ button:focus-visible {
     font-size: 22px;
   }
 }
+
+/* ===== WAKLE-FINDER SHIELD ===== */
+
+.shield-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    #101b35,
+    #172d55,
+    #102443
+  );
+  border: 1px solid rgba(90, 160, 255, 0.35);
+  box-shadow: 0 8px 28px rgba(20, 80, 180, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.shield-icon {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: rgba(80, 145, 255, 0.14);
+  border: 1px solid rgba(100, 170, 255, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 0 18px rgba(70, 140, 255, 0.15);
+}
+
+.shield-content {
+  flex: 1;
+}
+
+.shield-content h3 {
+  color: #ffffff;
+  font-size: 18px;
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.shield-content p {
+  color: #b9cbe8;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.shield-open-btn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(135deg, #3988ff, #6555f5);
+  box-shadow: 0 4px 15px rgba(65, 115, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shield-open-btn:active {
+  transform: scale(0.96);
+}
+
+.shield-open-btn:hover {
+  box-shadow: 0 6px 20px rgba(65, 115, 255, 0.45);
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 480px) {
+  .shield-card {
+    padding: 16px;
+    gap: 12px;
+    border-radius: 17px;
+  }
+
+  .shield-icon {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    font-size: 28px;
+    border-radius: 15px;
+  }
+
+  .shield-content h3 {
+    font-size: 16px;
+  }
+
+  .shield-content p {
+    font-size: 11px;
+  }
+
+  .shield-open-btn {
+    padding: 9px 13px;
+    font-size: 12px;
+  }
+}
