@@ -1141,7 +1141,7 @@ async function syncOfflineReports() {
     if (sessionError) throw sessionError;
 
     const currentUser = sessionData.session?.user;
-    alert("Logged in ID: " + currentUser?.id);
+    
 
     if (!currentUser) {
       console.log("Please login to sync offline reports.");
