@@ -1193,6 +1193,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
         }
 
         // Prepare report
+        syncStage = "Inserting report into database";
         const syncedReport = {
           user_id: report.user_id,
           name: report.name,
