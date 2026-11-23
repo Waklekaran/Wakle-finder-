@@ -1226,7 +1226,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
           report.localId,
           error
         );
-        alert("Sync Error: " + error.message);
+        alert("Failed at: " + syncStage + "\nError: " + error.message);
       }
     }
 
