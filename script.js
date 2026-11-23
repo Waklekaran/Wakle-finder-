@@ -1221,6 +1221,7 @@ async function syncOfflineReports() {
           report.localId,
           error
         );
+        alert("Sync failed: " + error.message);
       }
     }
 
