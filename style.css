@@ -3295,3 +3295,99 @@ button:focus-visible {
     font-size: 12px;
   }
 }
+
+/* ===== SHIELD PROTECTION SCREEN ===== */
+
+#shieldScreen {
+  display: none;
+  padding: 18px;
+  color: #ffffff;
+}
+
+.shield-screen-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.shield-screen-header button {
+  background: #1d2c48;
+  color: white;
+  border: 1px solid #344a6c;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.shield-screen-header h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.shield-welcome {
+  background: linear-gradient(135deg, #172b4d, #243f70);
+  border: 1px solid #365c91;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.shield-welcome h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.shield-welcome p {
+  color: #c3d5f0;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.shield-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.shield-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  padding: 17px;
+  background: #111c30;
+  color: white;
+  border: 1px solid #2a3d5d;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.shield-option:hover {
+  background: #1b2d4a;
+  border-color: #5595ff;
+  transform: translateY(-1px);
+}
+
+.shield-selected-item {
+  margin-top: 18px;
+  padding: 18px;
+  background: #12243e;
+  border: 1px solid #3b65a0;
+  border-radius: 16px;
+}
+
+.shield-selected-item h3 {
+  margin-top: 0;
+  color: #78aaff;
+}
+
+.shield-selected-item p {
+  color: #c9d8ec;
+  font-size: 13px;
+  line-height: 1.6;
+}
