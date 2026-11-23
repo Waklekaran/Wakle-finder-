@@ -1153,6 +1153,8 @@ async function syncOfflineReports() {
 
     for (const report of pendingReports) {
       alert("User ID Match: " + (report.user_id === currentUser.id));
+      console.log("SYNC LOOP STARTED", report.localId);
+console.log("ID MATCH:", report.user_id === currentUser.id);
       if (report.user_id !== currentUser.id) {
         console.log("Skipping report from another user:", report.localId);
         continue;
