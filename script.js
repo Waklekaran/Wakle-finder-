@@ -1178,7 +1178,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
             await supabaseClient.storage
               .from("report-photos")
               .upload(photoPath, photoBlob, {
-                upsert: true,
+                upsert: false,
                 contentType: "image/jpeg"
               });
 
