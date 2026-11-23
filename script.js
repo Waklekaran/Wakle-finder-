@@ -1147,6 +1147,7 @@ async function syncOfflineReports() {
       console.log("Please login to sync offline reports.");
       return;
     }
+    alert("User ID Match: " + (report.user_id === currentUser.id));
 
     console.log("Syncing offline reports:", pendingReports.length);
 
