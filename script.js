@@ -25,19 +25,82 @@ function openShield() {
   }
 }
 
+
 function selectShieldItem(item) {
   const message = document.getElementById("shieldSelectionMessage");
 
-  if (message) {
-    message.innerHTML = `
-      <div class="shield-selected-item">
-        <h3>${item} Protection</h3>
-        <p>Selected item: ${item}</p>
-        <p>Protection guidance will be available here.</p>
-      </div>
-    `;
-  }
+  const protectionGuides = {
+    "Mobile Phone": {
+      title: "📱 Mobile Phone Protection",
+      steps: [
+        "Contact police and report the lost or stolen phone.",
+        "Use your phone maker's official Find or Lock service, if available.",
+        "Contact your telecom operator to suspend your SIM.",
+        "Use India's official CEIR portal to request IMEI blocking.",
+        "Secure your important accounts and contact your bank if needed."
+      ]
+    },
+
+    "Laptop": {
+      title: "💻 Laptop Protection",
+      steps: [
+        "Report the loss to police.",
+        "Use the manufacturer's official device recovery or remote lock service, if available.",
+        "Change passwords for important accounts.",
+        "Sign out of active sessions on accounts used on the laptop.",
+        "Keep the serial number and proof of ownership ready."
+      ]
+    },
+
+    "SIM Card": {
+      title: "📶 SIM Card Protection",
+      steps: [
+        "Contact your mobile network operator immediately.",
+        "Request suspension of the lost SIM.",
+        "Get a replacement SIM after identity verification.",
+        "Secure accounts that use your mobile number for OTPs.",
+        "Report suspicious account activity to the relevant service provider."
+      ]
+    },
+
+    "Bank Card": {
+      title: "💳 Bank Card Protection",
+      steps: [
+        "Contact your bank through its official app or helpline.",
+        "Request an immediate card block.",
+        "Check recent transactions for unfamiliar activity.",
+        "Report unauthorized transactions to the bank immediately.",
+        "Request a replacement card if required."
+      ]
+    },
+
+    "Other Belongings": {
+      title: "🎒 Belongings Protection",
+      steps: [
+        "Report the missing or stolen item to the police, where appropriate.",
+        "Keep a photo and proof of ownership ready.",
+        "Record the item's identifying details or serial number.",
+        "If the item has a tracking feature, use its official recovery service.",
+        "Share safe contact information for recovery."
+      ]
+    }
+  };
+
+  const guide = protectionGuides[item];
+
+  if (!message || !guide) return;
+
+  message.innerHTML = `
+    <div class="shield-selected-item">
+      <h3>${guide.title}</h3>
+      <p><strong>Recommended actions:</strong></p>
+      <ol>
+        ${guide.steps.map(step => `<li>${step}</li>`).join("")}
+      </ol>
+    </div>
+  `;
 }
+
 const homeScreen = document.getElementById("homeScreen");
 const reportScreen = document.getElementById("reportScreen");
 const reportsScreen = document.getElementById("reportsScreen");
