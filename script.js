@@ -1215,6 +1215,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
             });
 
         if (insertError) throw insertError;
+        alert("DATABASE SAVE SUCCESS\nStatus: 2xx");
 
         // Remove from local queue only after successful save
         await deleteOfflineReport(report.localId);
@@ -1281,6 +1282,7 @@ itemForm.addEventListener("submit", async function(event) {
           });
 
       if (uploadError) throw uploadError;
+      alert("PHOTO UPLOAD SUCCESS\nStatus: 2xx");
 
       const { data: photoData } =
         supabaseClient.storage
