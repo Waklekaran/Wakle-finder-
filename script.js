@@ -1149,6 +1149,7 @@ async function syncOfflineReports() {
     }
 
     console.log("Syncing offline reports:", pendingReports.length);
+    alert("Pending: " + pendingReports.length + " | ID Match: " + (pendingReports[0].user_id === currentUser.id));
 
     for (const report of pendingReports) {
       console.log("SYNC LOOP STARTED", report.localId);
