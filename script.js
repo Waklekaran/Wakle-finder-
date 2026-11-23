@@ -1157,6 +1157,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
         console.log("Skipping report from another user:", report.localId);
         continue;
       }
+      let syncStage = "Starting sync";
 
       try {
         let photoUrl = null;
@@ -1171,6 +1172,7 @@ console.log("ID MATCH:", report.user_id === currentUser.id);
             "offline-" +
             report.localId.replace(/[^a-zA-Z0-9-]/g, "") +
             ".jpg";
+          syncStage = "Uploading photo";
 
           const { error: uploadError } =
             await supabaseClient.storage
