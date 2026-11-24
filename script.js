@@ -226,7 +226,8 @@ function showScreen(screen) {
     "successScreen",
     "credentialsScreen",
     "aboutScreen",
-    "privacyScreen"
+    "privacyScreen",
+    "shieldScreen"
   ];
 
   screenIds.forEach(id => {
