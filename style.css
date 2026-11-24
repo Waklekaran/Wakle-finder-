@@ -3391,3 +3391,61 @@ button:focus-visible {
   font-size: 13px;
   line-height: 1.6;
 }
+/* ===== SHIELD FULL SCREEN FIX ===== */
+
+#shieldScreen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100dvh !important;
+  max-height: 100dvh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+  z-index: 9999 !important;
+  background: #07111f !important;
+  margin: 0 !important;
+  padding: 20px 16px 40px !important;
+}
+
+/* Prevent dashboard mixing behind Shield */
+#shieldScreen * {
+  box-sizing: border-box;
+}
+
+/* Shield header layout */
+.shield-screen-header {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* Shield items full width */
+.shield-options {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  width: 100% !important;
+  gap: 12px !important;
+}
+
+.shield-option {
+  width: 100% !important;
+  min-height: 55px !important;
+}
+
+/* Protection guidance */
+#shieldSelectionMessage {
+  width: 100% !important;
+  margin-top: 20px !important;
+}
+
+/* Remove white strip */
+#shieldScreen,
+#shieldScreen .shield-welcome,
+#shieldScreen .shield-selected-item {
+  background-color: #07111f;
+}
